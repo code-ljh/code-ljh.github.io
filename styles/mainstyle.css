@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(34, 34, 34);
+}
+
+p {
+    font-family: 'Fira Code';
+}
+
+.leftbar {
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(27, 27, 27);
+}
+
+.lefttopbar {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    background-color: rgb(17, 17, 17);
+}
+
+.iconbar {
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    position: absolute;
+}
+
+.icon {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.titlebar {
+    top: 0;
+    left: 50px;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 50px);
+}
+
+.title {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.rightsizer {
+    top: 0;
+    left: 300px;
+    height: 100%;
+    position: absolute;
+    width: calc(100% - 300px);
+}
+
+.righttopbar {
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    background-color: rgb(27, 27, 27);
+}
+
+.righttoptext {
+    right: 15px;
+    text-align: right;
+    position: absolute;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.lefttoptext {
+    left: 15px;
+    text-align: left;
+    position: absolute;
+    color: rgba(255, 255, 255, 0.6);
+}
