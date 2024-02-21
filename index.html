@@ -2,35 +2,53 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>code-ljh.github.io</title>
+
+    <title>
+        Homepage
+    </title>
+
     <link rel="icon"       type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" type="text/css"  href="styles/mainstyle.css">
 </head>
 
-<body>
-    <div class="leftbar">
-        <div class="lefttopbar">
-            <div class="iconbar">
-                <a href="https://github.com/code-ljh">
-                    <img class="icon" src="assets/favicon.svg">
+<body class="colblack3">
+    <div class="fixed colblack2" style="top: 0; bottom: 0; left: 0; right: 75vw">
+        <div class="fixed colblack1" style="top: 0; bottom: 94vh; left: 0; right: 75vw">
+            <div class="fixed" style="top: 0; bottom: 94vh; left: 0; width: 6vh">
+                <a href="https://www.github.com/code-ljh">
+                    <img src="assets/favicon.svg" style="top: 0; bottom: 94vh; left: 0; width: 6vh">
                 </a>
             </div>
 
-            <div class="titlebar">
-                <p class="title">
+            <div class="fixed" style="top: 0; bottom: 94vh; left: 6vh; right: 75vw">
+                <p style="text-align: center">
                     code-ljh.github.io
                 </p>
             </div>
         </div>
-    </div>
 
-    <div class="rightsizer">
-        <div class="righttopbar">
-            <p class="lefttoptext">${title}</p>
-            <p class="righttoptext">code-ljh</p>
-        </div>
-
-        <div>
+        <div class="absolute" style="top: 6vh; bottom: 0; left: 0; right: 0;">
+            <div class="card colblack4 absolute" style="top: 2vw; bottom: 2vw; left: 2vw; right: 2vw;">
+            </div>
         </div>
     </div>
+
+    <div class="absolute" style="top: 0; bottom: 0; left: 25vw; right: 0">
+        <div class="fixed colblack2" style="top: 0; bottom: 94vh; left: 25vw; right: 0;">
+            <p class="absolute set-title" style="text-align: left; left: 1vw;">
+                ${title}
+            </p>
+
+            <p class="absolute" style="text-align: right; right: 1vw">
+                code-ljh
+            </p>
+        </div>
+
+        <div class="absolute" style="top: 6vh; bottom: 0; left: 0; right: 0;">
+            <div class="absolute colblack4 card" style="top: 2vw; min-height: calc(100% - 6vw); left: 2vw; right: 2vw" id="article-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/loadtitle.js"></script>
 </body>
