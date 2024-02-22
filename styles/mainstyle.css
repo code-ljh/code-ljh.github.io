@@ -5,7 +5,6 @@
 .colwhite  {background-color: #FFFFFF;}
 .fixed     {position: fixed; z-index: 1919810;}
 .absolute  {position: absolute; z-index: 114514;}
-.huge      {font-size: xx-large}
 
 .card {
     border: 2px solid white;
@@ -18,7 +17,19 @@ body::-webkit-scrollbar {
     width: 0;
 }
 
-p {
-    color: rgb(255, 255, 255, 0.6);
+p, h1, h2, h3, h4, h5, h6 {
+    color: #ffffff;
     font-family: 'Fira Code';
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+hr {
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
 }
