@@ -1,3 +1,4 @@
+console.log("loadtemplate.js loaded.")
 var xhr = new XMLHttpRequest();
 xhr.open('GET', '../blogs/template.html', true);
 xhr.onreadystatechange = function () {
@@ -11,3 +12,12 @@ xhr.onreadystatechange = function () {
     }
 };
 xhr.send();
+
+setTimeout(function() {
+    var loadappsjs = document.createElement("script");
+    var loadtitles = document.createElement("script");
+    loadappsjs.src = "../scripts/loadapps.js";
+    loadtitles.src = "../scripts/loadtitle.js";
+    document.body.appendChild(loadappsjs);
+    document.body.appendChild(loadtitles);
+}, 200);

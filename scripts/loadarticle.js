@@ -1,36 +1,50 @@
+console.log("loadarticle.js loaded.");
 //Datas
-var articles = [
-    {
-        "name"       : "2048 online",
-        "url"        : "2048-online",
-        "description": "Let you play 2048 online."
-    },
-    {
-        "name"       : "Article test",
-        "url"        : "test",
-        "description": "Article test 1.0.0"
-    }
-]
+var articles;
+fetch("../data/articles.json")
+    .then(response => response.json())
+    .then(data => {
+        articles = data;
+        CreateCards();
+    });
 
 var articleperpage = 4;
 var page = 0;
 var main = document.getElementById("article-list");
 
-for (var idx = page * articleperpage; idx < (page + 1) * articleperpage; idx++) {
-    if (idx >= articles.length) break;
-    var link = document.createElement("a");
-    var create = document.createElement("div");
-    link.href = `blogs/${articles[idx].url}.html`
-    create.className = "card"
-    create.style.margin = "5px";
-    var titlebar = document.createElement("h1");
-    titlebar.innerHTML = articles[idx].name;
-    var description = document.createElement("p");
-    description.innerHTML = articles[idx].description;
-    var spitbar = document.createElement("hr");
-    create.appendChild(titlebar);
-    create.appendChild(spitbar);
-    create.appendChild(description);
-    link.appendChild(create);
-    main.appendChild(link);
+function CreateCards() {
+    for (var idx = page * articleperpage; idx < (page + 1) * articleperpage; idx++) {
+        if (idx >= articles.length) break;
+        var link = document.createElement("a");
+        var create = document.createElement("div");
+        var titlebar = document.createElement("h1");
+        var description = document.createElement("p");
+        var under = document.createElement("div");
+        var undertxt = document.createElement("p");
+        var catagory = document.createElement("div");
+        var spitbar = document.createElement("hr");
+        link.href = `${articles[idx].url}.html`
+        create.className = "card"
+        create.style.margin = "5px";
+        titlebar.innerHTML = articles[idx].name;
+        description.innerHTML = articles[idx].description;
+        under.appendChild(undertxt);
+        under.appendChild(catagory);
+        catagory.innerHTML = `<a href="catagory/${articles[idx].catagory}"><p>${articles[idx].catagory}</p></a>`;
+        catagory.className = "card-catagory";
+        catagory.style.background = "cornflowerblue";
+        undertxt.innerHTML = "under";
+        under.style.display = "flex";
+        under.style.flexDirection = "row";
+        under.style.width = "100%";
+        under.style.alignItems = "center";
+        under.style.justifyContent = "center";
+        undertxt.style.flex = "0 0 auto";
+        create.appendChild(titlebar);
+        create.appendChild(under);
+        create.appendChild(spitbar);
+        create.appendChild(description);
+        link.appendChild(create);
+        main.appendChild(link);
+    }
 }

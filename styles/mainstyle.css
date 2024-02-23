@@ -2,15 +2,41 @@
 .colblack3 {background-color: #303030;}
 .colblack2 {background-color: #202020;}
 .colblack1 {background-color: #101010;}
-.colwhite  {background-color: #FFFFFF;}
+.colcyan   {background-color: cornflowerblue;}
 .fixed     {position: fixed; z-index: 1919810;}
 .absolute  {position: absolute; z-index: 114514;}
+.aligntext {display: flex; justify-content: center; align-items: center;}
 
 .card {
-    border: 2px solid white;
-    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    background: linear-gradient(to bottom right, #222222, #333333);
     padding: 15px;
-    overflow: auto;
+    border-radius: 15px;
+    filter: brightness(1.2) contrast(1.2) saturate(1.2);
+}
+
+.card-catagory {
+    padding: 5px;
+    border-radius: 15px;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-catagory>* {
+    color: rgb(92, 92, 92);
+    font-size: small;
+}
+
+.card-catagory>*>* {
+    color: rgb(92, 91, 91);
+    font-size: small;
+}
+
+hr {
+    color: rgb(89, 89, 89);
 }
 
 body::-webkit-scrollbar {
@@ -18,16 +44,13 @@ body::-webkit-scrollbar {
 }
 
 p, h1, h2, h3, h4, h5, h6 {
-    color: #ffffff;
+    color: #b4b4b4;
     font-family: 'Fira Code';
+    margin: 10px;
 }
 
 h1, h2, h3, h4, h5, h6 {
     text-align: center;
-}
-
-hr {
-    color: #ffffff;
 }
 
 a {
