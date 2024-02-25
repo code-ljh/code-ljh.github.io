@@ -17,9 +17,28 @@ function Timer(card) {
     card.appendChild(paragraph);
 }
 
-function ProblemSetHelper(card) {
+async function ProblemSetHelper(card) {
     var paragraph = document.createElement("p");
-    paragraph.innerHTML = `一共 ${problems.length} 道题目。`;
+    const main = document.getElementById("main-problemset").childNodes;
+    paragraph.innerHTML = `0/0/0`;
+    setInterval(function() {
+        var full = 0;
+        var wrong = 0;
+        var correct = 0;
+        for (var element of main) {
+            if (element.className === "problem-container") {
+                var subcontain = element.childNodes[0];
+                var id = subcontain.childNodes[0].id;
+                var problemid = id.slice(3);
+                if (localStorage.getItem(id) == 2) correct += 1;
+                if (localStorage.getItem(id) == 3) wrong += 1;
+                full += 1;
+            }
+        }
+        paragraph.innerHTML = `${full} Total<br>${correct} Accepted<br>${wrong} Unaccepted`;
+    }, 200);
+    card.appendChild(paragraph);
+    card.appendChild(document.createElement("hr"));
 }
 
 //Datas

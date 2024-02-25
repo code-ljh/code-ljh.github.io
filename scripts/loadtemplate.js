@@ -14,10 +14,10 @@ xhr.onreadystatechange = function () {
 xhr.send();
 
 setTimeout(function() {
-    var loadappsjs = document.createElement("script");
-    var loadtitles = document.createElement("script");
-    loadappsjs.src = "../scripts/loadapps.js";
-    loadtitles.src = "../scripts/loadtitle.js";
-    document.body.appendChild(loadappsjs);
-    document.body.appendChild(loadtitles);
+    var srcs = ["../scripts/loadapps.js", "../scripts/loadtitle.js"];
+    for (var src of srcs) {
+        var ele = document.createElement("script");
+        ele.src = src;
+        document.body.appendChild(ele);
+    }
 }, 200);

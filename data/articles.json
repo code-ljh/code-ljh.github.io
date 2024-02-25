@@ -1,11 +1,5 @@
 [
     {
-        "name"       : "Article test",
-        "url"        : "blogs/test",
-        "catagory"   : "test",
-        "description": "Article test, 中午吃什么, made with bullshit generator, used to test multi-line-scrolling compatibilities."
-    },
-    {
         "name"       : "洛谷模板题大全",
         "url"        : "problemsets/luogu-templates",
         "catagory"   : "problemset",
