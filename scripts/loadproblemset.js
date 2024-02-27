@@ -5,8 +5,8 @@ function changeinterface(event) {
     var tar = event.target;
     var raw = tar.src;
     var idx = raw.indexOf("interface") + 9;
-    tar.src = raw.slice(0, idx) + (parseInt(raw[idx]) % 3 + 1).toString() + raw.slice(idx + 1);
-    localStorage.setItem(tar.id, (parseInt(raw[idx]) % 3 + 1));
+    tar.src = raw.slice(0, idx) + (parseInt(raw[idx]) % 2 + 1).toString() + raw.slice(idx + 1);
+    localStorage.setItem(tar.id, (parseInt(raw[idx]) % 2 + 1));
 }
 
 function CreateProblems() {
@@ -28,7 +28,17 @@ function CreateProblems() {
     </div>
 </div>`;
 
-    problems = problems.sort((a, b) => a[2] - b[2]);
+    problems.sort((a, b) => {
+        if (a[2] != b[2]) {
+            return a[2] - b[2];
+        } else {
+            if (a[0] > b[0])
+                return 1;
+            if (a[0] < b[0])
+                return -1;
+            return 0;
+        }
+    });
 
     for (let idx = 0; idx < problems.length; idx++) {
         const problem = problems[idx];

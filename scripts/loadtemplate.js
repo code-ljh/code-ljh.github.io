@@ -1,6 +1,8 @@
 console.log("loadtemplate.js loaded.")
+var prev = "..";
+if (!document.URL.includes("catagory")) prev = "..";
 var xhr = new XMLHttpRequest();
-xhr.open('GET', '../blogs/template.html', true);
+xhr.open('GET', `${prev}/blogs/template.html`, true);
 xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
         var fileContent = xhr.responseText;
@@ -14,7 +16,8 @@ xhr.onreadystatechange = function () {
 xhr.send();
 
 setTimeout(function() {
-    var srcs = ["../scripts/loadapps.js", "../scripts/loadtitle.js"];
+    if (!document.URL.includes("catagory")) prev = "../..";
+    var srcs = [`${prev}/scripts/loadapps.js`, `${prev}/scripts/loadtitle.js`];
     for (var src of srcs) {
         var ele = document.createElement("script");
         ele.src = src;
