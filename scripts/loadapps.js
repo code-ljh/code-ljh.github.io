@@ -1,19 +1,11 @@
 console.log("loadapps.js loaded.");
 
-function Timer(card) {
+function Introduction(card) {
     var paragraph = document.createElement("p");
-    paragraph.innerHTML = "0000/00/00 00:00:00.00";
-    setInterval(function() {
-        var date = new Date();
-        var year = ("000" + date.getFullYear()).slice(-4);
-        var month = ("000" + (date.getMonth() + 1)).slice(-2);
-        var day = ("000" + (date.getDay())).slice(-2);
-        var hours = ("00" + date.getHours()).slice(-2);
-        var minutes = ("00" + date.getMinutes()).slice(-2);
-        var seconds = ("00" + date.getSeconds()).slice(-2);
-        var miliseconds = (date.getMilliseconds() + "000").slice(0, 3);
-        paragraph.innerHTML = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}.${miliseconds}`;
-    }, 20);
+    paragraph.id = "p114514";
+    setInterval(() => {
+        paragraph.innerHTML = articleintro;
+    }, 200);
     card.appendChild(paragraph);
 }
 
@@ -95,14 +87,14 @@ function ProblemSetHelper(card) {
 //Datas
 var applications = [
     {
-        "name": "时间",
-        "func": Timer,
-        "type": "all"
-    },
-    {
         "name": "题单助手",
         "func": ProblemSetHelper,
         "type": "problemsets"
+    },
+    {
+        "name": "简介",
+        "func": Introduction,
+        "type": "intro"
     }
 ]
 
@@ -116,7 +108,7 @@ function GetArticleType() {
 
 var maincard = document.getElementById("main-apps");
 for (var i = 0; i < applications.length; i++) {
-    if (applications[i].type === "all" || GetArticleType() === applications[i].type) {
+    if (applications[i].type === "all" || GetArticleType().includes(applications[i].type)) {
         var card = document.createElement("div");
         var titlebar = document.createElement("h2");
         var spitbar = document.createElement("hr");

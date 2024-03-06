@@ -1,15 +1,75 @@
-.colblack4 {background-color: #404040;}
-.colblack3 {background-color: #303030;}
-.colblack2 {background-color: #202020;}
-.colblack1 {background-color: #101010;}
-.colcyan   {background-color: cornflowerblue;}
-.fixed     {position: fixed; z-index: 1919810;}
-.absolute  {position: absolute; z-index: 114514;}
-.aligntext {display: flex; justify-content: center; align-items: center;}
+.colblack4 {
+    background-color: #404040;
+}
+
+.colblack3 {
+    background-color: #303030;
+}
+
+.colblack2 {
+    background-color: #202020;
+}
+
+.colblack1 {
+    background-color: #101010;
+}
+
+.colcyan {
+    background-color: cornflowerblue;
+}
+
+.fixed {
+    position: fixed;
+    z-index: 1919810;
+}
+
+.absolute {
+    position: absolute;
+    z-index: 114514;
+}
+
+.aligntext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.colortest {
+    color: rgb(141, 0, 136);
+}
+
+/* CSS */
+.loader {
+
+    /* Set the size of the loader */
+    width: 40px;
+    height: 40px;
+
+    /* Create a circular shape with border */
+    border: 4px solid #f3f3f3;
+    /* Light grey */
+    border-top: 4px solid #3498db00;
+    /* Blue */
+    border-radius: 50%;
+
+    /* Add animation to make the loader spin */
+    animation: spin 2s linear infinite;
+}
+
+/* Define the animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
     background: linear-gradient(to bottom right, #222222, #333333);
     padding: 15px;
     border-radius: 15px;
@@ -43,13 +103,24 @@ body::-webkit-scrollbar {
     width: 0;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: #b4b4b4;
     font-family: 'Fira Code';
     margin: 10px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     text-align: center;
 }
 
