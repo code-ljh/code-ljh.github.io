@@ -84,6 +84,7 @@
 }
 
 .card-catagory {
+    margin: 15px;
     padding: 5px;
     border-radius: 15px;
     height: 10px;
@@ -107,7 +108,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #b4b4b4;
+    color: #ffffff;
     font-family: 'Fira Code';
     margin: 10px;
 }
