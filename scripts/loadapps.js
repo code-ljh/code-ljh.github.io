@@ -3,10 +3,13 @@ console.log("loadapps.js loaded.");
 function Introduction(card) {
     var paragraph = document.createElement("p");
     paragraph.id = "p114514";
-    setInterval(() => {
-        paragraph.innerHTML = articleintro;
-    }, 200);
+    paragraph.innerHTML = articleintro;
     card.appendChild(paragraph);
+}
+
+function UpdateIntroduction() {
+    var paragraph = document.getElementById("p114514");
+    paragraph.innerHTML = articleintro;
 }
 
 function ProblemSetHelper(card) {

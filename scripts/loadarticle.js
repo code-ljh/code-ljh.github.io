@@ -42,7 +42,7 @@ function CreateCards() {
         under.appendChild(catagory);
         cataurl = (document.URL.includes("catagory") ? `${articles[idx].catagory}.html` : `catagory/${articles[idx].catagory}.html`);
         catagory.innerHTML = `<a href="${cataurl}"><p>${articles[idx].catagory}</p></a>`;
-        catagory.className = "card-catagory";
+        catagory.className = "card-catagory aligntext";
         catagory.style.background = "cornflowerblue";
         undertxt.innerHTML = "under";
         under.style.display = "flex";

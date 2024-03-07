@@ -38,6 +38,13 @@
     color: rgb(141, 0, 136);
 }
 
+.centered {
+    position: absolute; /* 绝对定位 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 向左和向上移动元素的一半宽度和高度 */
+}  
+
 /* CSS */
 .loader {
 
@@ -80,23 +87,13 @@
     padding: 5px;
     border-radius: 15px;
     height: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-catagory>* {
-    color: rgb(92, 92, 92);
-    font-size: small;
-}
-
-.card-catagory>*>* {
-    color: rgb(92, 91, 91);
-    font-size: small;
+    filter: brightness(1.2) contrast(1.2) saturate(1.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 hr {
-    color: rgb(89, 89, 89);
+    color: white;
 }
 
 body::-webkit-scrollbar {
@@ -126,4 +123,8 @@ h6 {
 
 a {
     text-decoration: none;
+}
+
+.flex-item {
+    margin: 5px;
 }
