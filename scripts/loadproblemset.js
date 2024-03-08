@@ -64,7 +64,7 @@ function CreateProblems() {
         subcontain1.innerHTML = `<img src="../assets/interface${localStorage.getItem("img" + problem[0])}.svg" onclick="changeinterface(event)" id="img${problem[0]}">`;
         subcontain2.innerHTML = `<p>${problem[0]}</p>`;
         subcontain3.innerHTML = `<a href="https://www.luogu.com.cn/problem/${problem[0]}"><p>${problem[1]}</p></a>`;
-        subcontain4.innerHTML = `<div style="display: inline-block"><div class="card-catagory aligntext" style="background-color: ${color[problem[2]]};"><p>${difficulties[problem[2]]}</p></div>`;
+        subcontain4.innerHTML = `<div style="display: inline-block"><div class="difficulties aligntext" style="background-color: ${color[problem[2]]};"><p>${difficulties[problem[2]]}</p></div>`;
 
         container.appendChild(subcontain1);
         container.appendChild(subcontain2);
