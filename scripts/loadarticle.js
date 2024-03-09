@@ -25,7 +25,7 @@ function CreateCards() {
         checked = true;
         for (var idx = 0; idx < articles.length; idx++) {
             if (idx >= articles.length) break;
-            if (articles[idx].catagory != cata && document.URL.includes("catagory") || !articles[i].shown) continue;
+            if (articles[idx].catagory != cata && document.URL.includes("catagory") || !articles[idx].shown) continue;
             var link = document.createElement("a");
             var create = document.createElement("div");
             var titlebar = document.createElement("h1");

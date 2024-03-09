@@ -12,5 +12,19 @@
         "catagory"   : "others",
         "description": "2048 - AK IOI 版。",
         "shown"      : true
+    },
+    {
+        "name"       : "矩阵模板",
+        "url"        : "template-matrix",
+        "catagory"   : "templates",
+        "description": "class Matrix 矩阵模板",
+        "shown"      : true
+    },
+    {
+        "name"       : "高精度模板",
+        "url"        : "template-bigint",
+        "catagory"   : "templates",
+        "description": "class Int 大整数模板",
+        "shown"      : true
     }
 ]
