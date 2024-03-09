@@ -1,0 +1,17 @@
+[
+    {
+        "name"       : "others",
+        "intro"      : "其他",
+        "description": "一些不好分类的东西。"
+    },
+    {
+        "name"       : "problemsets",
+        "intro"      : "题单",
+        "description": "一些包含题目的题单。"
+    },
+    {
+        "name"       : "templates",
+        "intro"      : "模板",
+        "description": "一些包含代码的模板。"
+    }
+]
