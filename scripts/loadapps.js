@@ -1,5 +1,3 @@
-console.log("loadapps.js loaded.");
-
 function Introduction(card) {
     var paragraph = document.createElement("p");
     paragraph.id = "p114514";
@@ -87,10 +85,80 @@ function ProblemSetHelper(card) {
     card.appendChild(canvas);
 }
 
+function CatagoryList(card) {
+    var catas;
+    fetch('data/catagories.json')
+        .then(response => response.json())
+        .then(data => {
+            catas = data;
+            setInterval(CreateApp(card), 200);
+        });
+
+    function CreateApp(card) {
+        var div = document.createElement("div");
+        for (var cata of catas) {
+            var name = cata.name;
+            var intro = cata.intro;
+            var description = cata.description;
+            var subdiv = document.createElement("div");
+            subdiv.style.display = "flex";
+            subdiv.innerHTML = `
+                <a href="/catagory/${name}.html">
+                    <div style="display: inline-block; flex: 1">
+                        <p> 
+                            ${intro}
+                        </p>
+                    </div>
+
+                    <div style="display: inline-block; flex: 1">
+                        <p> 
+                            ${description}
+                        </p>
+                    </div>
+                </a>
+            `;
+            div.appendChild(subdiv);
+        }
+        card.appendChild(div);
+    }
+}
+
+function ArticleList(card) {
+    var datas;
+    fetch('../data/articles.json')
+        .then(response => response.json())
+        .then(data => {
+            datas = data;
+            setInterval(CreateApp(card), 200);
+        });
+    added = false;
+
+    function CreateApp(card) {
+        var div = document.createElement("div");
+        for (var data of datas) {
+            if (data.catagory == cata) {
+                var subdiv = document.createElement("div");
+                subdiv.style.display = "flex";
+                subdiv.innerHTML = `
+                    <a href="/catagory/${data.url}.html">
+                        <div style="display: inline-block; flex: 1">
+                            <p> 
+                                ${data.name}
+                            </p>
+                        </div>
+                    </a>
+                `;
+                div.appendChild(subdiv);
+            }
+        }
+        card.appendChild(div);
+    }
+}
+
 //Datas
 var applications = [
     {
-        "name": "题单助手",
+        "name": "题单信息",
         "func": ProblemSetHelper,
         "type": "problemsets"
     },
@@ -98,6 +166,16 @@ var applications = [
         "name": "简介",
         "func": Introduction,
         "type": "intro"
+    },
+    {
+        "name": "分类列表",
+        "func": CatagoryList,
+        "type": "index"
+    },
+    {
+        "name": "博客列表",
+        "func": ArticleList,
+        "type": "catagories"
     }
 ]
 
@@ -109,19 +187,21 @@ function GetArticleType() {
     }
 }
 
-var maincard = document.getElementById("main-apps");
-for (var i = 0; i < applications.length; i++) {
-    if (applications[i].type === "all" || GetArticleType().includes(applications[i].type)) {
-        var card = document.createElement("div");
-        var titlebar = document.createElement("h2");
-        var spitbar = document.createElement("hr");
-        spitbar.style.color = "rgb(89, 89, 89)";
-        card.className = "card"
-        card.style.margin = "5px";
-        titlebar.innerHTML = applications[i].name;
-        card.appendChild(titlebar);
-        card.appendChild(spitbar);
-        applications[i].func(card);
-        maincard.appendChild(card);
+setTimeout(() => {
+    var maincard = document.getElementById("main-apps");
+    for (var i = 0; i < applications.length; i++) {
+        if (applications[i].type === "all" || GetArticleType().includes(applications[i].type)) {
+            var card = document.createElement("div");
+            var titlebar = document.createElement("h2");
+            var spitbar = document.createElement("hr");
+            spitbar.style.color = "rgb(89, 89, 89)";
+            card.className = "card"
+            card.style.margin = "5px";
+            titlebar.innerHTML = applications[i].name;
+            card.appendChild(titlebar);
+            card.appendChild(spitbar);
+            applications[i].func(card);
+            maincard.appendChild(card);
+        }
     }
-}
+}, 200);

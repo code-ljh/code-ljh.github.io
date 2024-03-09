@@ -3,12 +3,14 @@
         "name"       : "洛谷模板题大全",
         "url"        : "luogu-templates",
         "catagory"   : "problemsets",
-        "description": "洛谷所有难度（橙题~黑题）模板题大全。"
+        "description": "洛谷所有难度（橙题~黑题）模板题大全。",
+        "shown"      : true
     },
     {
         "name"       : "AK IOI 2048 在线",
         "url"        : "2048-online",
         "catagory"   : "others",
-        "description": "2048 - AK IOI 版。"
+        "description": "2048 - AK IOI 版。",
+        "shown"      : true
     }
 ]

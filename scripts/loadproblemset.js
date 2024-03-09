@@ -1,5 +1,3 @@
-console.log("loadproblemset.js", "loaded.");
-
 function changeinterface(event) {
     console.log("Changing interface of", event.target);
     var tar = event.target;

@@ -1,4 +1,3 @@
-console.log("loadtemplate.js loaded.")
 var prev = "..";
 if (!document.URL.includes("catagory")) prev = "..";
 var xhr = new XMLHttpRequest();

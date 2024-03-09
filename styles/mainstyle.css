@@ -28,6 +28,19 @@
     z-index: 114514;
 }
 
+input {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    background: #e9ecef;
+    box-shadow:
+        7px 7px 12px rgba(0, 0, 0, .4),
+        inset -7px -7px 12px rgba(255, 255, 255, .9),
+        inset 7px 7px 12px rgba(0, 0, 0, .4);
+    margin: 15px;
+}
+
+
 .aligntext {
     display: flex;
     justify-content: center;
@@ -39,11 +52,13 @@
 }
 
 .centered {
-    position: absolute; /* 绝对定位 */
+    position: absolute;
+    /* 绝对定位 */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* 向左和向上移动元素的一半宽度和高度 */
-}  
+    transform: translate(-50%, -50%);
+    /* 向左和向上移动元素的一半宽度和高度 */
+}
 
 /* CSS */
 .loader {
