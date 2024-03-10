@@ -16,11 +16,14 @@ xhr.onreadystatechange = function () {
 xhr.send();
 
 setTimeout(function() {
+    var idx = document.URL.indexOf("blogs/");
+    var name = document.URL.slice(idx + 6, -5);
+
     if (!document.URL.includes("catagory")) prev = "../..";
-    var srcs = [`${prev}/scripts/loadapps.js`, `${prev}/scripts/loadtitle.js`];
+    var srcs = [`${prev}/scripts/loadapps.js`, `${prev}/scripts/loadtitle.js`, `../blogs/scripts/${name}.js`];
     for (var src of srcs) {
         var ele = document.createElement("script");
         ele.src = src;
         document.body.appendChild(ele);
     }
-}, 1000);
+}, 300);
