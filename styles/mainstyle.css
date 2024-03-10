@@ -152,3 +152,43 @@ a {
 .flex-item {
     margin: 5px;
 }
+
+.stretch {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+
+button {
+    box-shadow: -6px 6px 8px inset rgba(255, 255, 255, 0.6), 6px -6px 8px inset rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    box-shadow: -6px 6px 8px inset rgba(0, 0, 0, 0.2), 6px -6px 8px inset rgba(255, 255, 255, 0.6);
+}
+
+button:hover {
+    filter: brightness(0.8);
+}
+
+.hljs {
+    background: rgba(0, 0, 0, 0);
+    color: white;
+}
+
+.code-block {
+    background-color: #6b6b6b;
+    /* 设置背景色 */
+    border-left: 5px solid #f79d00;
+    /* 添加左边框 */
+    padding: 10px;
+    /* 添加内边距 */
+    margin: 10px 0;
+    /* 添加外边距 */
+    overflow: auto;
+    /* 如果代码超出容器宽度，则显示滚动条 */
+    font-family: 'Fira Code';
+    /* 设置字体 */
+}

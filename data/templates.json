@@ -1,0 +1,17 @@
+[
+    {
+        "name": "class Int",
+        "id": "cls-int",
+        "description": "一个高精度类模板，支持高精度四则运算。"
+    },
+    {
+        "name": "code default",
+        "id": "cde-default",
+        "description": "缺省源，包含 iostream 加速。"
+    },
+    {
+        "name": "class Matrix",
+        "id": "cls-matrix",
+        "description": "一个矩阵类模板，支持矩阵乘法、矩阵快速幂。"
+    }
+]

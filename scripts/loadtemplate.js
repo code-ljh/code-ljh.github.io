@@ -7,8 +7,9 @@ xhr.onreadystatechange = function () {
         var fileContent = xhr.responseText;
         var ele = document.getElementById("loadme");
         var body = document.getElementsByTagName("body")[0];
-        ele.style.display = "block";
         body.innerHTML = fileContent;
+        ele.className = 'stretch';
+        ele.style.margin = '15px';
         document.getElementById("main-article").appendChild(ele);
     }
 };
@@ -22,4 +23,4 @@ setTimeout(function() {
         ele.src = src;
         document.body.appendChild(ele);
     }
-}, 200);
+}, 1000);

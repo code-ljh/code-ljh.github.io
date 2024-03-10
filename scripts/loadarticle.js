@@ -5,7 +5,7 @@ fetch(url)
     .then(response => response.json())
     .then(data => {
         articles = data;
-        setInterval(CreateCards(), 200);
+        setInterval(CreateCards(), 1000);
     });
 
 var page = 0;
@@ -20,44 +20,85 @@ if (document.URL.includes("catagory")) {
 var checked = false;
 
 function CreateCards() {
+    function Create(idx) {
+        var link = document.createElement("a");
+        var create = document.createElement("div");
+        var titlebar = document.createElement("h1");
+        var description = document.createElement("p");
+        var under = document.createElement("div");
+        var undertxt = document.createElement("p");
+        var catagory = document.createElement("div");
+
+        if (idx < articles.length) {
+            var name = articles[idx].name;
+            var url = articles[idx].url;
+            var descr = articles[idx].description;
+            var cata = articles[idx].catagory;
+        } else {
+            var name = '114514';
+            var url = '114514';
+            var descr = '1919810';
+            var cata = '1919';
+        }
+
+        create.className = "card"
+        create.style.margin = "5px";
+        create.style.flex = "1";
+
+        link.href = (document.URL.includes("catagory") ? `../blogs/${url}.html` : `blogs/${url}.html`);
+
+        titlebar.innerHTML = name;
+        titlebar.style.margin = '5px';
+        description.innerHTML = descr;
+
+        cataurl = (document.URL.includes("catagory") ? `${cata}.html` : `catagory/${cata}.html`);
+        catagory.innerHTML = `<a href="${cataurl}"><p>${cata}</p></a>`;
+        catagory.className = "card-catagory aligntext";
+        catagory.style.background = "cornflowerblue";
+        undertxt.innerHTML = "under";
+        under.style.display = "flex";
+        under.style.flexDirection = "row";
+        under.style.width = "100%";
+        under.style.alignItems = "center";
+        under.style.justifyContent = "center";
+        undertxt.style.flex = "0 0 auto";
+        under.appendChild(undertxt);
+        under.appendChild(catagory);
+
+        link.appendChild(titlebar);
+        link.appendChild(under);
+        link.appendChild(document.createElement("hr"));
+        link.appendChild(description);
+
+        create.appendChild(link);
+
+        if (idx >= articles.length) create.style.visibility = 'hidden';
+
+        return create;
+    }
+
     var main = document.getElementById(mainid);
     if (main && !checked) {
+        main.style.display = 'flex';
+        main.style.flexDirection = 'column';
         checked = true;
-        for (var idx = 0; idx < articles.length; idx++) {
-            if (idx >= articles.length) break;
-            if (articles[idx].catagory != cata && document.URL.includes("catagory") || !articles[idx].shown) continue;
-            var link = document.createElement("a");
-            var create = document.createElement("div");
-            var titlebar = document.createElement("h1");
-            var description = document.createElement("p");
-            var under = document.createElement("div");
-            var undertxt = document.createElement("p");
-            var catagory = document.createElement("div");
-            var spitbar = document.createElement("hr");
-            link.href = (document.URL.includes("catagory") ? `../blogs/${articles[idx].url}.html` : `blogs/${articles[idx].url}.html`)
-            create.className = "card"
-            create.style.margin = "5px";
-            titlebar.innerHTML = articles[idx].name;
-            description.innerHTML = articles[idx].description;
-            under.appendChild(undertxt);
-            under.appendChild(catagory);
-            cataurl = (document.URL.includes("catagory") ? `${articles[idx].catagory}.html` : `catagory/${articles[idx].catagory}.html`);
-            catagory.innerHTML = `<a href="${cataurl}"><p>${articles[idx].catagory}</p></a>`;
-            catagory.className = "card-catagory aligntext";
-            catagory.style.background = "cornflowerblue";
-            undertxt.innerHTML = "under";
-            under.style.display = "flex";
-            under.style.flexDirection = "row";
-            under.style.width = "100%";
-            under.style.alignItems = "center";
-            under.style.justifyContent = "center";
-            undertxt.style.flex = "0 0 auto";
-            create.appendChild(titlebar);
-            create.appendChild(under);
-            create.appendChild(spitbar);
-            create.appendChild(description);
-            link.appendChild(create);
-            main.appendChild(link);
+        var art = [];
+        for (var idx of articles) {
+            if ((idx.catagory == cata || !document.URL.includes("catagory")) && idx.shown) {
+                art.push(idx);
+            }
+        }
+        articles = art;
+        for (var idx = 0; idx < 6; idx += 2) {
+            var subdiv = document.createElement("div");
+            subdiv.style.display = "flex";
+            subdiv.style.width = "100%";
+            subdiv.appendChild(Create(idx));
+            subdiv.appendChild(Create(idx + 1));
+            subdiv.style.flex = '1';
+            subdiv.style.alignItems = 'stretch';
+            
+            main.appendChild(subdiv);
         }
     }
 }

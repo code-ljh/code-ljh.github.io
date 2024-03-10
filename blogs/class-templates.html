@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>
+            模板列表
+        </title>
+
+        <link rel="icon" type="image/png" href="../assets/favicon.svg">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+        <link rel="stylesheet" type="text/css" href="../styles/mainstyle.css">
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+
+        <script>
+            articletype = ["others", "intro"];
+            articleintro = "模板列表";
+        </script>
+    </head>
+
+    <body class="colblack3">
+        <script src="../scripts/loadtemplate.js"></script>
+        <script>
+            var templates;
+
+            fetch('../data/templates.json')
+                .then(response => response.json())
+                .then(data => {
+                    templates = data;
+                    CreateMainList();
+                });
+
+            function OnClick(event) {
+                var tar = event.target;
+                if (tar.tagName === 'BUTTON')
+                    tar = tar.children[0];
+                var text = (tar.id.slice(4));
+
+                fetch(`../data/templates/${text}.cpp`)
+                    .then(async function (response) {
+                        txt = await response.text();
+                        txt = txt.replace('<', '&lt;').replace('>', '&gt;');
+                        console.log(txt);
+                        LoadCodes(txt);
+                    });
+                
+                function LoadCodes(codes) {
+                    var ele = document.getElementById('main-code');
+                    ele.style.overflow = 'auto';
+                    ele.innerHTML = `
+                        <pre class="code-block"><code class="language-cpp" style="font-size: 16px">${codes}
+                        </pre></code>
+                    `;
+                    hljs.highlightAll();
+                }
+            }
+
+            function CreateMainList() {
+                var main = document.getElementById('main-list');
+
+                for (var idx in templates) {
+                    var div = document.createElement('div');
+                    var name = templates[idx].name;
+                    var desc = templates[idx].description;
+                    var id = templates[idx].id;
+                    var namebox = document.createElement('div');
+                    var descbox = document.createElement('div');
+                    var buttbox = document.createElement('div');
+                    var button = document.createElement('button');
+
+                    div.style.display = 'flex';
+                    div.style.alignItems = 'center';
+                    div.style.justifyContent = 'center';
+                    
+                    buttbox.style.flex = '2';
+                    namebox.style.flex = '4';
+                    descbox.style.flex = '10';
+                    namebox.style.display = 'inline-block';
+                    descbox.style.display = 'inline-block';
+                    buttbox.style.display = 'inline-block';
+                    namebox.innerHTML = `<p>${name}</p>`;
+                    descbox.innerHTML = `<p>${desc}</p>`;
+                    button.onclick = OnClick;
+                    button.innerHTML = `<p id="btn ${id}">显示</p>`;
+
+                    button.style.backgroundColor = 'grey';
+                    button.style.margin = '5px';
+                    buttbox.appendChild(button);
+
+                    div.appendChild(buttbox);
+                    div.appendChild(namebox);
+                    main.appendChild(div);
+                }
+            }
+        </script>
+    </body>
+</html>
+
+<div id="loadme">
+    <div style="display: flex; align-items: stretch;" class="stretch">
+        <div id="main-list" class="card" style="flex: 2; top: 0; bottom: 0; left: 0; margin: 5px">
+    
+        </div>
+    
+        <div id="main-code" class="card" style="flex: 8; top: 0; bottom: 0; right: 0; margin: 5px">
+    
+        </div>
+    </div>
+</div>
