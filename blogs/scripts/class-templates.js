@@ -48,8 +48,8 @@ function CreateMainList() {
         div.style.alignItems = 'center';
         div.style.justifyContent = 'center';
         
-        buttbox.style.flex = '2';
-        namebox.style.flex = '4';
+        buttbox.style.flex = '1';
+        namebox.style.flex = '3';
         descbox.style.flex = '10';
         namebox.style.display = 'inline-block';
         descbox.style.display = 'inline-block';
@@ -57,7 +57,7 @@ function CreateMainList() {
         namebox.innerHTML = `<p>${name}</p>`;
         descbox.innerHTML = `<p>${desc}</p>`;
         button.onclick = OnClick;
-        button.innerHTML = `<p id="btn ${id}">显示</p>`;
+        button.innerHTML = `<p id="btn ${id}" style="margin: 0; color: black">显示</p>`;
 
         button.style.backgroundColor = 'grey';
         button.style.margin = '5px';

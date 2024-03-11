@@ -86,24 +86,26 @@ function ProblemSetHelper(card) {
 }
 
 function CatagoryList(card) {
-    var catas;
-    fetch('data/catagories.json')
+    var cates;
+    var prev = (document.URL.includes("blogs") ? ".." : "");
+    fetch(`${prev}/data/categories.json`)
         .then(response => response.json())
         .then(data => {
-            catas = data;
+            cates = data;
             setInterval(CreateApp(card), 200);
         });
 
     function CreateApp(card) {
+
         var div = document.createElement("div");
-        for (var cata of catas) {
-            var name = cata.name;
-            var intro = cata.intro;
-            var description = cata.description;
+        for (var cate of cates) {
+            var name = cate.name;
+            var intro = cate.intro;
+            var description = cate.description;
             var subdiv = document.createElement("div");
             subdiv.style.display = "flex";
             subdiv.innerHTML = `
-                <a href="/catagory/${name}.html">
+                <a href="${prev}/category/${name}.html">
                     <div style="display: inline-block; flex: 1">
                         <p> 
                             ${intro}
@@ -136,11 +138,11 @@ function ArticleList(card) {
     function CreateApp(card) {
         var div = document.createElement("div");
         for (var data of datas) {
-            if (data.catagory == cata) {
+            if (data.category == cate || cate == 'all') {
                 var subdiv = document.createElement("div");
                 subdiv.style.display = "flex";
                 subdiv.innerHTML = `
-                    <a href="/catagory/${data.url}.html">
+                    <a href="../blogs/${data.url}.html">
                         <div style="display: inline-block; flex: 1">
                             <p> 
                                 ${data.name}
@@ -175,7 +177,7 @@ var applications = [
     {
         "name": "博客列表",
         "func": ArticleList,
-        "type": "catagories"
+        "type": "categories"
     }
 ]
 

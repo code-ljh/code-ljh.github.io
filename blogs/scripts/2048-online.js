@@ -116,22 +116,22 @@ function MainLoopScore() {
     articleintro = `在线玩 2048 小游戏。<br>
     规则：通过 wasd 移动方块，相等的方块会被合成成下一级方块。<br>
     <div style="display: flex; left: 1vw; right: 1vw">
-        <div class="card-catagory flex-item" style="flex: 1; height: 64px; background-color: #555555; display: flex; flex-direction: column; align-items: center">
+        <div class="card-category flex-item" style="flex: 1; height: 64px; background-color: #555555; display: flex; flex-direction: column; align-items: center">
             <h2 style="color: white; text-align: center; margin: 0">分数</h2>
             <p>${score}</p>
         </div>
-        <div class="card-catagory flex-item" style="flex: 1; height: 64px; background-color: #555555; display: flex; flex-direction: column; align-items: center">
+        <div class="card-category flex-item" style="flex: 1; height: 64px; background-color: #555555; display: flex; flex-direction: column; align-items: center">
             <h2 style="color: white; text-align: center; margin: 0">历史</h2>
             <p>${localStorage.getItem("maxscore")}</p> 
         </div>
     </div>
     <div style="display: flex; left: 1vw; right: 1vw">
-        <div class="card-catagory flex-item aligntext" style="flex: 1; height: 32px; background-color: blue" onclick="OnRestart()">
+        <div class="card-category flex-item aligntext" style="flex: 1; height: 32px; background-color: blue" onclick="OnRestart()">
             <p style="color: white">重开</p>    
         </div>
     </div>
     <div style="display: flex; left: 1vw; right: 1vw">
-        <div class="card-catagory flex-item aligntext" style="flex: 1; height: 32px; background-color: red" onclick="OnRestartData()">
+        <div class="card-category flex-item aligntext" style="flex: 1; height: 32px; background-color: red" onclick="OnRestartData()">
             <p style="color: white">重置数据</p>    
         </div>
     </div>`;

@@ -1,0 +1,22 @@
+[
+    {
+        "name": "house",
+        "link": "",
+        "type": "normal"
+    },
+    {
+        "name": "source",
+        "link": "https://www.github.com/code-ljh/code-ljh.github.io",
+        "type": "newtab"
+    },
+    {
+        "name": "list",
+        "link": "category/all.html",
+        "type": "normal"
+    },
+    {
+        "name": "category",
+        "link": "blogs/all-categories.html",
+        "type": "normal"
+    }
+]

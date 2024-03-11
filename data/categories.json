@@ -8,5 +8,15 @@
         "name"       : "problemsets",
         "intro"      : "题单",
         "description": "一些包含题目的题单。"
+    },
+    {
+        "name"       : "apps",
+        "intro"      : "应用",
+        "description": "一些可以使用的应用。"
+    },
+    {
+        "name"       : "articles",
+        "intro"      : "文章",
+        "description": "一些只有内容的文章。"
     }
 ]

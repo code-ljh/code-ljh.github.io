@@ -2,21 +2,21 @@
     {
         "name"       : "洛谷模板题大全",
         "url"        : "luogu-templates",
-        "catagory"   : "problemsets",
+        "category"   : "problemsets",
         "description": "洛谷所有难度（橙题~黑题）模板题大全。",
         "shown"      : true
     },
     {
         "name"       : "AK IOI 2048 在线",
         "url"        : "2048-online",
-        "catagory"   : "others",
+        "category"   : "apps",
         "description": "2048 - AK IOI 版。",
         "shown"      : true
     },
     {
         "name"       : "模板列表",
         "url"        : "class-templates",
-        "catagory"   : "others",
+        "category"   : "others",
         "description": "所有的模板",
         "shown"      : true
     }
