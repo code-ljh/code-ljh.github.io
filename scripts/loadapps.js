@@ -126,6 +126,11 @@ function CatagoryList(card) {
 }
 
 function ArticleList(card) {
+    var cate = "";
+    if (document.URL.includes("category")) {
+        var i = document.URL.indexOf("category") + 9;
+        cate = document.URL.slice(i, -5);
+    }
     var datas;
     fetch('../data/articles.json')
         .then(response => response.json())
