@@ -98,7 +98,7 @@ input {
     filter: brightness(1.2) contrast(1.2) saturate(1.2);
 }
 
-.card-catagory {
+.card-category {
     margin: 15px;
     padding: 5px;
     border-radius: 15px;

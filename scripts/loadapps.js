@@ -125,29 +125,38 @@ function CatagoryList(card) {
     }
 }
 
-function ArticleList(card) {
-    var cate = "";
+
+function GetCate() {
+    var cate = 'all';
     if (document.URL.includes("category")) {
         var i = document.URL.indexOf("category") + 9;
         cate = document.URL.slice(i, -5);
+    } else if (HasDefined()) {
+        cate = __cate;
     }
+    return cate;
+}
+
+function ArticleList(card) {
+    var cate = GetCate();
     var datas;
-    fetch('../data/articles.json')
+    fetch(`${prev}/data/articles.json`)
         .then(response => response.json())
         .then(data => {
             datas = data;
             setInterval(CreateApp(card), 200);
         });
-    added = false;
+    var added = false;
 
     function CreateApp(card) {
         var div = document.createElement("div");
         for (var data of datas) {
             if (data.category == cate || cate == 'all') {
+                added = true;
                 var subdiv = document.createElement("div");
                 subdiv.style.display = "flex";
                 subdiv.innerHTML = `
-                    <a href="../blogs/${data.url}.html">
+                    <a href="${prev}/blogs/${data.url}.html">
                         <div style="display: inline-block; flex: 1">
                             <p> 
                                 ${data.name}
@@ -157,6 +166,10 @@ function ArticleList(card) {
                 `;
                 div.appendChild(subdiv);
             }
+        }
+        if (!added) {
+            div.innerHTML = `<p>暂无文章</p>`;
+            console.log(div);
         }
         card.appendChild(div);
     }
@@ -193,6 +206,18 @@ function GetArticleType() {
         return "114514";
     }
 }
+
+function CountOf(string, char) {
+    var count = 0;
+    for (var i of string)
+        if (i == char) 
+            count += 1;
+    return count;
+}
+
+var prev = "";
+for (var i = 0; i < CountOf(document.URL, '/') - 2; i++)
+    prev += ".";
 
 setTimeout(() => {
     var maincard = document.getElementById("main-apps");

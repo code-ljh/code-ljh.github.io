@@ -28,15 +28,29 @@ function CreateProblems() {
 </div>`;
 
     problems.sort((a, b) => {
-        if (a[2] != b[2]) {
-            return a[2] - b[2];
-        } else {
-            if (a[0] > b[0])
-                return 1;
-            if (a[0] < b[0])
-                return -1;
-            return 0;
+        for (var ele of sortedby) {
+            var srt = ele[0];
+            var rule = ele[1];
+            var A, B;
+            if (srt == 'difficulty') {
+                A = a[2];
+                B = b[2];
+            } else if (srt == 'problemid') {
+                A = a[0];
+                B = b[0];
+            } else if (srt == 'custom') {
+                A = a[3];
+                B = b[3];
+            }
+            if (A != B) {
+                if ((rule == 'raising' && A > B) || (rule == 'lowering' && A < B)) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
         }
+        return 0;
     });
 
     for (let idx = 0; idx < problems.length; idx++) {

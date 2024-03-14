@@ -7,6 +7,13 @@
         "shown"      : true
     },
     {
+        "name"       : "CSP-J 题库",
+        "url"        : "csp-j-problems",
+        "category"   : "problemsets",
+        "description": "CSP-J 真题",
+        "shown"      : true
+    },
+    {
         "name"       : "AK IOI 2048 在线",
         "url"        : "2048-online",
         "category"   : "apps",

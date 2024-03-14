@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>
+            分类列表
+        </title>
+
+        <link rel="icon" type="image/png" href="../assets/favicon.svg">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+        <link rel="stylesheet" type="text/css" href="../styles/mainstyle.css">
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+
+        <script>
+            articletype = ["intro", "index"];
+            articleintro = "所有的分类";
+        </script>
+    </head>
+
+    <body class="colblack3">
+        <script src="../scripts/loadtemplate.js"></script>
+        <script>
+            var categories;
+
+            fetch("data/categories.json")
+                .then(response => (response.json()))
+                .then(data => {
+                    categories = data;
+                    setTimeout(CreateMainList, 200);
+                });
+
+            var checked = false;
+            function CreateMainList() {
+                function Create(cate) {
+                    var element = document.createElement('div');
+                    element.style.margin = '5px';
+                    element.className = 'card';
+                    element.innerHTML = `
+                    <div style="display: flex; align-items: center;">
+                        <div style="display: inline-block">
+                            <a href="category/${cate.name}.html">
+                                <img src="assets/${cate.name}.svg" style="width: 3vw; height: 3vw">
+                            </a>
+                        </div>
+
+                        <div style="display: inline-block">
+                            <p>
+                                ${cate.intro}
+                            </p>
+                        </div>
+
+                        <div style="display: inline-block">
+                            <p>
+                                ${cate.description}包含 ${cate.cnt} 文章。
+                            </p>
+                        </div>
+                    </div>
+                    `;
+                    return element;
+                }
+
+                var main = document.getElementById('loadme');
+                if (!checked && main) {
+                    checked = true;
+
+                    for (var cate of categories) {
+                        main.appendChild(Create(cate));
+                        console.log('appended');
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
+
+<div id="loadme">
+</div>

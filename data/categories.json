@@ -2,21 +2,25 @@
     {
         "name"       : "others",
         "intro"      : "其他",
-        "description": "一些不好分类的东西。"
+        "description": "不好分类的东西。",
+        "cnt": 1
     },
     {
         "name"       : "problemsets",
         "intro"      : "题单",
-        "description": "一些包含题目的题单。"
+        "description": "包含题目的题单。",
+        "cnt": 2
     },
     {
         "name"       : "apps",
         "intro"      : "应用",
-        "description": "一些可以使用的应用。"
+        "description": "可以使用的应用。",
+        "cnt": 1
     },
     {
         "name"       : "articles",
         "intro"      : "文章",
-        "description": "一些只有内容的文章。"
+        "description": "只有内容的文章。",
+        "cnt": 0
     }
 ]

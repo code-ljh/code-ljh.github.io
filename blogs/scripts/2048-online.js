@@ -88,6 +88,7 @@ function OnConfirm() {
     var dialog = document.getElementById("rd-checker");
     dialog.style.display = "none";
     var inputbox = document.getElementById("inputboxchecker");
+    console.log(inputbox, inputbox.value);
     if (inputbox.value === "确认重置") {
         OnRestart();
         localStorage.setItem("maxscore", score);
@@ -162,6 +163,9 @@ function Create2048() {
     for (var i = 0; i < 2 * SPAWNS; i++) CreateBlock();
     SetData();
     addEventListener('keydown', (event) => {ChangeBlocks(event)});
+    document.getElementById('confirm').onclick = OnConfirm;
+    document.getElementById('close')  .onclick = OnClose;
+    document.getElementById('restart').onclick = OnRestart;
 }
 
 var checked = false;

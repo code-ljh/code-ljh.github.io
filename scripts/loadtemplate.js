@@ -1,5 +1,5 @@
-var prev = "..";
-if (!document.URL.includes("category")) prev = "..";
+var prev = "";
+if (document.URL.includes("category")) prev = "..";
 var xhr = new XMLHttpRequest();
 xhr.open('GET', `${prev}/blogs/template.html`, true);
 xhr.onreadystatechange = function () {
@@ -20,7 +20,7 @@ setTimeout(function() {
     var name = document.URL.slice(idx + 6, -5);
 
     var srcs = [`${prev}/scripts/loadapps.js`, `${prev}/scripts/loadtitle.js`, `${prev}/scripts/loadicons.js`];
-    if (!document.URL.includes("category")) srcs.push(`../blogs/scripts/${name}.js`);
+    if (document.URL.includes("blogs")) srcs.push(`../blogs/scripts/${name}.js`);
 
     for (var src of srcs) {
         var ele = document.createElement("script");

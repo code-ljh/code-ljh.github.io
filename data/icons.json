@@ -11,12 +11,12 @@
     },
     {
         "name": "list",
-        "link": "category/all.html",
+        "link": "blog-list.html",
         "type": "normal"
     },
     {
         "name": "category",
-        "link": "blogs/all-categories.html",
+        "link": "categories.html",
         "type": "normal"
     }
 ]

@@ -17,66 +17,7 @@
 </head>
 
 <body class="colblack3">
-    <div class="fixed colblack2" style="top: 0; bottom: 0; left: 0; right: 75vw">
-        <div class="fixed colblack1" style="top: 0; bottom: 94vh; left: 0; right: 75vw">
-            <div class="fixed" style="top: 0; bottom: 94vh; left: 0; width: 6vh">
-                <a class="aligntext" href="https://www.github.com/code-ljh" target="_blank" style="top: 0; bottom: 0; height: 6vh; width: 6vh; position: absolute;">
-                    <img src="assets/github.svg" style="width: 5vh; height: 5vh">
-                </a>
-            </div>
-
-            <div class="fixed aligntext" style="top: 0; bottom: 94vh; left: 6vh; right: 75vw">
-                <a href="/">
-                    <p style="text-align: center">
-                        code-ljh.github.io
-                    </p>
-                </a>
-            </div>
-        </div>
-
-        <div class="fixed colblack1" style="top: 6vh; bottom: 0; left: 0; right: calc(100vw - 6vh)" id="main-icons">
-
-        </div>
-
-        <div class="absolute" style="top: 6vh; bottom: 0; left: 6vh; right: 0;">
-            <div class="card colblack4 absolute" style="top: 0.5vw; bottom: 0.5vw; left: 0.5vw; right: 0.5vw;" id="main-apps">
-                <div class="absolute" style="bottom: 0; left: 0; right: 0">
-                    <a href="https://pages.github.com/" target="_blank">
-                        <p style="text-align: center; font-size: small">
-                            Made with github pages
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="absolute" style="top: 0; bottom: 0; left: 25vw; right: 0">
-        <div class="fixed colblack2 aligntext" style="top: 0; bottom: 94vh; left: 25vw; right: 0;">
-            <p class="absolute set-title" style="text-align: left; left: 1vw">
-                ${title}
-            </p>
-        </div>
-
-        <div class="absolute" style="top: 6vh; bottom: 0; left: 0; right: 0;">
-            <div class="absolute colblack4 card" style="top: 0.5vw; min-height: calc(100% - 3vw); left: 0.5vw; right: 0.5vw" id="main-article">
-                <div class="centered" style="display: flex; flex-direction: column; align-items: center;">
-                    <input id="centered-input" style="width: 60vw; height: 10%; font-size: 32px; font-family: 'Fira Code'; text-align: center;">
-
-                    <div style="display: flex">
-                        <button onclick="OnSearch()" style="width: 10vw; height: 5vh; font-size: 16px; font-family: 'Fira Code'">搜索</button>
-                        <button onclick="OnReplace()" style="width: 10vw; height: 5vh; font-size: 16px; font-family: 'Fira Code'">跳转</button>
-                    </div>
-
-                    <p>声明: 使用 Google 搜索, 可能无法登入.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="scripts/loadapps.js"></script>
-    <script src="scripts/loadicons.js"></script>
-    <script src="scripts/loadtitle.js"></script>
+    <script src="scripts/loadtemplate.js"></script>
     <script>
         function OnSearch() {
             window.location = `https://www.google.com/search?q=${document.getElementById('centered-input').value}`;
@@ -86,3 +27,16 @@
         }
     </script>
 </body>
+
+<div id="loadme">
+    <div class="centered" style="display: flex; flex-direction: column; align-items: center;">
+        <input id="centered-input" style="width: 60vw; height: 10%; font-size: 32px; font-family: 'Fira Code'; text-align: center;">
+
+        <div style="display: flex">
+            <button onclick="OnSearch()" style="width: 10vw; height: 5vh; font-size: 16px; font-family: 'Fira Code'">搜索</button>
+            <button onclick="OnReplace()" style="width: 10vw; height: 5vh; font-size: 16px; font-family: 'Fira Code'">跳转</button>
+        </div>
+
+        <p>声明: 使用 Google 搜索, 可能无法登入.</p>
+    </div>
+</div>

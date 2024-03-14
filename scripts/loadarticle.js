@@ -1,6 +1,17 @@
+function CountOf(string, char) {
+    var count = 0;
+    for (var i of string)
+        if (i == char) 
+            count += 1;
+    return count;
+}
+
+var prev = "";
+for (var i = 0; i < CountOf(document.URL, '/') - 2; i++)
+    prev += ".";
+
 var articles;
-var url = "../data/articles.json";
-if (!document.URL.includes("category")) url = "data/articles.json";
+var url = `${prev}/data/articles.json`;
 fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -11,12 +22,26 @@ fetch(url)
 var page = 0;
 var mainid = "main-article";
 
-var cate = "";
-if (document.URL.includes("category")) {
-    var i = document.URL.indexOf("category") + 9;
-    cate = document.URL.slice(i, -5);
+function HasDefined() {
+    try {
+        return __cate;
+    } catch {
+        return 0;
+    }
 }
 
+function GetCate() {
+    var cate = 'all';
+    if (document.URL.includes("category")) {
+        var i = document.URL.indexOf("category") + 9;
+        cate = document.URL.slice(i, -5);
+    } else if (HasDefined()) {
+        cate = __cate;
+    }
+    return cate;
+}
+
+var cate = GetCate();
 var checked = false;
 
 function CreateCards() {
@@ -45,14 +70,14 @@ function CreateCards() {
         create.style.display = "flex";
         create.style.flex = "1";
 
-        var cateurl = (document.URL.includes("category") ? `${cate}.html` : `category/${cate}.html`);
-        var asseturl = (document.URL.includes("category") ? `../assets/${cate}.svg` : `assets/${cate}.svg`);
+        var cateurl = (`${prev}/category/${cate}.html`);
+        var asseturl = (`${prev}/assets/${cate}.svg`);
 
         cat2.href = cateurl;
         cat2.className = 'aligntext';
         if (idx < articles.length)
             cat2.innerHTML = `<img src="${asseturl}" height="64" width="64">`;
-        link.href = (document.URL.includes("category") ? `../blogs/${url}.html` : `blogs/${url}.html`);
+        link.href = (`${prev}/blogs/${url}.html`);
         link.style.flex = "4";
         cat2.style.flex = "1";
 
