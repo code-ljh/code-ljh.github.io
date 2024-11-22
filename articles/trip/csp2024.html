@@ -1,0 +1,269 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <title>游记：CSP2024</title>
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="icon" href="../../resources/icon.svg">
+    <script> 
+        var pre = "../../";
+        var title = "游记：CSP2024";
+        var under = "文章";
+    </script>
+
+    <script src="../../scripts/database.js"></script>
+</head>
+
+<body>
+    <div id="passage" style="margin-left: 5px">
+        <h2 style="margin: 2px"> CSP-S 2024 </h2>
+
+        <p> 又到了一年一度的 CSP 啦！ <br> 坐标：SN 陕西，弱省。</p>
+
+        <h3> Day 初赛 </h3>
+
+        <p> 众所周知，弱省的初赛存在的意义就是在选手的游记里面加上“初赛”这一段。<br>因为分数线只有 30，真的乱填都能过。</p><p>省流：全国分数线：56，我的分数：62.5。 </p>
+
+        <h3> Day 复赛 </h3>
+
+        <p> 省流：我是脑瘫。 </p>
+
+        <p> 
+            00:00| 进场啦！<br>
+            00:01| 开 T1 <br>
+            00:10| T1 简单贪心 秒了 <br>
+            00:11| 开 T2 <br>
+            00:15| T2 大概口胡出来了 <br>
+            01:15| T2 发现是将每一辆车的超速区间求出来再加一个贪心 写完了 <br>
+            01:15| T2 测样例 大样例挂了 <br>
+            01:30| T2 没瞪出来错误 开始重构 <br>
+            02:15| T2 重构完了 测样例 挂的一模一样（重构了个寂寞） <br>
+            03:00| T2 终于看出来错误了 <br>
+            03:10| T2 写完了 <br>
+            03:10| 开 T3 <br>
+            03:10| 想 T3，想出一个四次方的区间 DP 做法 <br>
+            03:30| T3 打出了一个指数级的 20pts 骗分代码 <br>
+            03:45| T3 打出了四次方的区间 DP，但是没过样例 <br>
+            04:00| 结束考试，最终估分 100 + 100 + 20 + 0 = 220    
+        </p>
+
+        <p>
+            最终成绩：100 + 100 + 20 + 0 = 220 一分不差。<br>
+            六级线：160，七级线：225。
+        </p>
+
+        <p>
+            可惜了，但凡 T2 少调一点时间估计 T3 就能想出来。<br>
+            T3 就是个简单线性 DP 结果我看着 n 小于等于 100 的点写了个区间。。。<br>
+            NOIP 加油！<br>
+        </p>
+
+        <h3> 后记 </h3>
+
+        <p>
+            CSP-S 2022 我：45(40) + 100 + 40 + 0 = 165(160), 六级分数线 163。<br>T1 莫名其妙多的 5 分让我得了六级蓝勾。<br>
+        </p>
+        <p>
+            CSP-S 2024 我：100 + 100 + 20 + 0 = 220，七级分数线 225。<br>刚好少了 5 分七级。<br>
+        </p>
+        <p>
+            就当是还债了吧。 
+        </p>
+
+        <h3> 代码 </h3>
+        
+        <p> duel.cpp</p>
+
+        <pre><code>#include &lt;bits/stdc++.h&gt;
+#define int long long
+
+constexpr int maxn = 100010;
+constexpr int inf = 1145141919810ll;
+
+int n, a[maxn];
+
+signed main() {
+    freopen("duel.in", "r", stdin);
+    freopen("duel.out", "w", stdout);
+    
+    std::cin &gt;&gt; n;
+    
+    for (int i = 1; i &lt;= n; i++) std::cin &gt;&gt; a[i];
+    
+    std::sort(a + 1, a + n + 1);
+    
+    int front = 1;
+    for (int i = 2; i &lt;= n; i++) {
+        if (a[front] &lt; a[i]) front += 1;
+    }
+    
+    std::cout &lt;&lt; n - front + 1;
+    return 0;
+}
+</code></pre>
+
+        <p> detect.cpp </p>
+
+        <pre><code>#include &lt;bits/stdc++.h&gt;
+#define int long long
+
+constexpr int maxn = 100010;
+constexpr double eps = 1e-8;
+
+int T, n, m, l, v;
+int start[maxn], v0[maxn], acc[maxn];
+int detect[maxn];
+std::pair&lt;int, int&gt; ranges[maxn];
+
+auto VALID = [] (std::pair&lt;int, int&gt; range) {
+    if (range.first &gt; range.second) return false;
+    return (range.first &lt;= m) && (range.second &gt; 0);
+};
+
+std::pair&lt;int, int&gt; solve() {
+    for (int i = 1; i &lt;= n; i++) {
+        if (acc[i] == 0) {
+            if (v0[i] &lt;= v) {
+                ranges[i].first = m + 1;
+                ranges[i].second = m + 1;
+            } else {
+                ranges[i].first = std::lower_bound(detect + 1, detect + m + 1, start[i]) - detect;
+                ranges[i].second = m;
+            }
+        } else if (acc[i] &gt; 0) {
+            if (v0[i] &gt; v) {
+                ranges[i].first = std::lower_bound(detect + 1, detect + m + 1, start[i]) - detect;
+                ranges[i].second = m;
+            } else if (v0[i] == v) {
+                ranges[i].first = std::upper_bound(detect + 1, detect + m + 1, start[i]) - detect;
+                ranges[i].second = m;
+            } else {
+                double sover = start[i] + (v * v - v0[i] * v0[i]) / 2.0 / acc[i];
+                ranges[i].first = std::upper_bound(detect + 1, detect + m + 1, (sover)) - detect;
+                ranges[i].second = m;
+            }
+        } else {
+            if (v0[i] &lt;= v) {
+                ranges[i].first = m + 1;
+                ranges[i].second = m + 1;
+            } else {
+                double sover = start[i] + (v * v - v0[i] * v0[i]) / 2.0 / acc[i];
+                ranges[i].first = std::lower_bound(detect + 1, detect + m + 1, start[i]) - detect;
+                ranges[i].second = std::lower_bound(detect + 1, detect + m + 1, sover) - detect - 1;
+            }			
+        }
+    }
+    std::vector&lt;std::pair&lt;int, int&gt;&gt; negatives;
+    int overspeed = 0;
+    for (int i = 1; i &lt;= n; i++)
+        if (VALID(ranges[i])) {
+            overspeed += 1;
+            negatives.emplace_back(ranges[i]);			
+        }
+    std::sort(negatives.begin(), negatives.end(), [] (std::pair&lt;int, int&gt; a, std::pair&lt;int, int&gt; b) {
+        return a.second &lt; b.second;
+    });
+    std::vector&lt;int&gt; detectors;
+    for (auto i : negatives) {
+        int l = i.first, r = i.second;
+        int ls = std::lower_bound(detectors.begin(), detectors.end(), l) - detectors.begin();
+        int rs = std::upper_bound(detectors.begin(), detectors.end(), r) - 1 - detectors.begin();
+        if (rs - ls &lt; 0) {
+            int join = r;
+            detectors.push_back(join);
+        }
+    }
+    return std::make_pair(overspeed, m - detectors.size());
+}
+
+signed main() {
+    freopen("detect.in", "r", stdin);
+    freopen("detect.out", "w", stdout);
+    
+    std::cin &gt;&gt; T;
+    
+    while (T -- ) {
+        std::cin &gt;&gt; n &gt;&gt; m &gt;&gt; l &gt;&gt; v;
+        for (int i = 1; i &lt;= n; i++) std::cin &gt;&gt; start[i] &gt;&gt; v0[i] &gt;&gt; acc[i];
+        for (int i = 1; i &lt;= m; i++) std::cin &gt;&gt; detect[i];
+        std::pair&lt;int, int&gt; answer = solve();
+        std::cout &lt;&lt; answer.first &lt;&lt; " " &lt;&lt; answer.second &lt;&lt; std::endl;
+    }
+    return 0;
+}
+            </code></pre>
+
+            <p> color.cpp </p>
+
+            <pre><code>#include &lt;bits/stdc++.h&gt;
+#define int long long
+
+constexpr int maxn = 210;
+
+int t, n, a[maxn];
+bool color[maxn];
+int c[maxn], dp[maxn][maxn], pre[maxn][maxn];
+
+signed main() {
+    freopen("color.in", "r", stdin);
+    freopen("color.out", "w", stdout);
+    
+    std::cin &gt;&gt; t;
+    
+    while (t -- ) {
+        std::cin &gt;&gt; n;
+        for (int i = 1; i &lt;= n; i++) std::cin &gt;&gt; a[i];
+        if (n &lt;= 15) {
+            int maxans = 0;
+            for (int i = 0; i &lt; (1 &lt;&lt; n); i++) {
+                for (int j = 0; j &lt; n; j++) color[j] = ((i &gt;&gt; j) & 1);
+                int last[2], answer = 0; last[0] = last[1] = -1;
+                for (int j = 0; j &lt; n; j++) {
+                    if (last[color[j]] != -1 && a[last[color[j]] + 1] == a[j + 1]) answer += a[j + 1];
+                    last[color[j]] = j;
+                }
+                maxans = std::max(maxans, answer);
+            }
+            std::cout &lt;&lt; maxans &lt;&lt; "\n";	
+        } else {
+            for (int len = 1; len &lt;= n; len++) 
+                for (int x = 1; x + len - 1 &lt;= n; x++) {
+                    int y = x + len - 1;
+                    if (a[x] == a[y]) {
+                        pre[x][y] = a[x];
+                        for (int i = x + 2; i &lt; y; i++) 
+                            if (a[i] == a[i - 1]) 
+                                pre[x][y] += a[i];
+                    }
+                }
+            for (int len = 1; len &lt;= n; len++) {
+                for (int l = 1; l + len - 1 &lt;= n; l++) {
+                    int r = l + len - 1;
+                    dp[l][r] = 0;
+                    for (int x = l; x &lt;= r; x++) {
+                        for (int y = x + 1; y &lt;= r; y++) {
+                            if (a[x] == a[y]) {
+                                if (x == y - 1) {
+                                    dp[l][r] = std::max(dp[l][r], dp[l][x] + dp[y][r] + a[x]);
+                                } else {
+                                    dp[l][r] = std::max(dp[l][r], dp[l][x + 1] + dp[y - 1][r] + pre[x][y]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            std::cout &lt;&lt; dp[1][n] &lt;&lt; "\n";
+        }		
+    }
+    return 0;
+}
+                </code></pre>
+    </div> 
+
+    <script src="../../scripts/nav.js"></script>
+    <script src="../../scripts/apps.js"></script>
+</body>
+
+</html>

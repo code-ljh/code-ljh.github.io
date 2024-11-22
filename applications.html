@@ -1,0 +1,53 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="icon" href="resources/icon.svg">
+
+    <script>
+        var title = "应用";
+        var pre = "./";
+        var under = "应用";
+    </script>
+    
+    <script src="scripts/database.js"></script>
+</head>
+
+<body>
+    <div id="passage">
+        <p style="text-align:center">
+            点击右边的按钮来查看具体的应用
+        </p>
+    </div>
+
+    <script src="scripts/nav.js"></script>
+    <script src="scripts/apps.js"></script>
+
+    <script>
+        function ShowApp(ele) {
+            console.log(ele);
+            var element = ele.srcElement.parentNode;
+            for (var i = 0; i < appfunction.length; i++) {
+                if (aapplist.children[i] == element) {
+                    document.getElementById("main-body").innerHTML = "";
+                    document.getElementById("main-title").innerHTML = appicons[i] + `<b style="margin-left:5px">${applist[i]}</b>`;
+                    console.log(i);
+                    appfunction[i](document.getElementById("main-body"), document.getElementById("main-title"));
+                }
+            }
+        }
+
+        var aapplist = document.getElementById("body-right");
+        for (var i = 0; i < appfunction.length; i++) {
+            var element = aapplist.children[i].children[1];
+            aapplist.children[i].children[0].onclick = ShowApp;
+            element.style.display = "none";
+            element.innerHTML += `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            element.children[element.children.length - 1].onclick = ShowApp;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <title>主页</title>
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="icon" href="../resources/icon.svg">
+    <script> 
+        var pre = "../";
+        var title = "分类：模板";
+        var under = "分类";
+        var cate = "template";
+    </script>
+
+    <script src="../scripts/database.js"></script>
+</head>
+
+<body>
+    <div id="passage">
+        <p style="text-align:center" id="set-introduction"></p>
+    </div>
+
+    <script>
+        var main = document.getElementById("passage");
+        for (var i in categories) 
+            if (categories[i][0] == cate) 
+                document.getElementById("set-introduction").innerHTML = categories[i][3];
+        for (var i in articles) {
+            if (articles[i][0] == cate) {
+                main.innerHTML += `
+                    <div class="card">
+                        <a href="../articles/${articles[i][0]}/${articles[i][1]}" style="text-decoration:none;color:rgba(0, 0, 0, 0.75)"><div class="card-title">
+                            ${articles[i][2]}
+                        </div></a>
+                    </div>   
+                `; 
+            }
+        }
+        if (main.children.length == 1) {
+            main.innerHTML += `<p style="text-align:center">挖坑ing 正在填坑</p>`;
+        }
+    </script>
+
+    <script src="../scripts/nav.js"></script>
+    <script src="../scripts/apps.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+body {
+    padding: 0;
+    background-color: rgba(0, 0, 0, .02);
+}
+
+.shadowborder {
+    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, .15);
+    border: 1px solid rgba(34, 36, 38, .15);
+}
+
+.card {
+    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, .15);
+    border: 1px solid rgba(34, 36, 38, .15);
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.card-title {
+    height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(34, 36, 38, .15);
+    background-color: rgba(0, 0, 0, .05);
+}
+
+.darkover:hover {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+.card-body {
+    padding: 5px;
+}
+
+#headbar {
+    position: fixed;
+    left: 0; top: 0; right: 0; height: 7%;
+    background-color: rgba(0, 0, 0, .05);
+    z-index: 9999
+}
+
+#headbar-title {
+    position: absolute;
+    left: 7%; top: 0; bottom: 0; width: 14%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(34, 36, 38, .15);
+}
+
+#headbar-title-text {
+    margin-left: 5px;
+}
+
+#headbar-user {
+    position: absolute;
+    top: 0; bottom: 0; width: 14%; right: 7%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(34, 36, 38, .15); 
+}
+
+#headbar-expand {
+    position: absolute;
+    top: 0; bottom: 0; width: 7%; right: 0;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(34, 36, 38, .15);
+}
+
+#headbar-titlebar {
+    position: absolute;
+    left: 21%; right: 21%; top: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(34, 36, 38, .15);
+}
+
+#navigation {
+    position: fixed;
+    top: 7%; left: 0; bottom: 0; width: 7%;
+    background-color: rgba(0, 0, 0, .03);
+    z-index: 9999
+}
+
+#body {
+    position: absolute;
+    left: 7%; right: 0; top: 7%;
+    min-height: 93vh;
+    display: flex;
+}
+
+pre {
+    border: 1px solid rgb(0, 0, 0, .15);
+    background-color:  rgb(0, 0, 0, .02);
+    padding: 5px; 
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+#body-left {
+    position: absolute;
+    right: 35%; top: 0; left: 0;
+    min-height: 90vh;
+    display: flex;
+    padding: 5px;
+}
+
+#body-right {
+    position: absolute;
+    left: 65%; top: 0; right: 0;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+::selection {
+    color: rgba(251, 251, 251, 0.582);
+    background-color: rgba(60, 191, 203, 0.582)
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

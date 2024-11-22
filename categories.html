@@ -1,0 +1,53 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <title>主页</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="icon" href="resources/icon.svg">
+    <script> 
+        var pre = "./";
+        var title = "分类";
+        var under = "分类";
+    </script>
+
+    <script src="scripts/database.js"></script>
+</head>
+
+<body>
+    <div id="passage" style="display: flex; flex-direction: column; justify-content: center;">
+    </div>
+
+    <script>
+        var main = document.getElementById("passage");
+        main.style.display = "flex";
+        main.style.flexDirection = "column";
+        main.style.justifyContent = "center";
+
+        for (var i in categories) {
+            var created = document.createElement("div");
+            var createdtitle = document.createElement("div");
+            var createdbody = document.createElement("div");
+            var createdhref = document.createElement("a");
+            created.className = "card";
+            createdhref.appendChild(createdtitle);
+            created.appendChild(createdhref);
+            created.appendChild(createdbody);
+            createdhref.href = `${pre}categories/${categories[i][2]}`;
+            createdtitle.className = "card-title";
+            createdbody.className = "card-body";
+            created.className = "card";
+            createdhref.style.textDecoration = "none";
+            createdtitle.style.color = "rgba(0, 0, 0, 0.75)";
+            createdtitle.innerHTML = `<b>${categories[i][1]}</b>`;  
+            createdbody.innerHTML = `<p style="text-align:center;margin:2px">${categories[i][3]}</p>`;
+            main.appendChild(created);
+        }
+    </script>
+
+    <script src="scripts/nav.js"></script>
+    <script src="scripts/apps.js"></script>
+</body>
+
+</html>
