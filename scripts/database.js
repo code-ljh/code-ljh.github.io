@@ -3,6 +3,7 @@ var articles = [
     ["trip", "csp2024.html", "CSP 2024 游记"],
     ["template", "quickio.html", "【模板】快速读入"],
     ["template", "bigintegers.html", "【模板】高精度"],
+    ["others", "akioi.html", "AK IOI"]
 ];
 
 var categories = [

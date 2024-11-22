@@ -1,0 +1,84 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <title>游记：CSP2024</title>
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="icon" href="../../resources/icon.svg">
+    <script> 
+        var pre = "../../";
+        var title = "AK IOI";
+        var under = "文章";
+    </script>
+
+    <script src="../../scripts/database.js"></script>
+</head>
+
+<body>
+    <div id="passage" style="margin-left: 5px; display: flex; align-items: center; justify-content: center;">
+        <div id="all" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+            <div id="row0" style="display: flex; align-items: center; justify-content: center;">
+                <div id="block00" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block01" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block02" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block03" style="display: flex; align-items: center; justify-content: center;"></div>
+            </div>
+            <div id="row1" style="display: flex; align-items: center; justify-content: center;">
+                <div id="block10" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block11" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block12" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block13" style="display: flex; align-items: center; justify-content: center;"></div>
+            </div>
+            <div id="row2" style="display: flex; align-items: center; justify-content: center;">
+                <div id="block20" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block21" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block22" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block23" style="display: flex; align-items: center; justify-content: center;"></div>
+            </div>
+            <div id="row3" style="display: flex; align-items: center; justify-content: center;">
+                <div id="block30" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block31" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block32" style="display: flex; align-items: center; justify-content: center;"></div>
+                <div id="block33" style="display: flex; align-items: center; justify-content: center;"></div>
+            </div>
+        </div>
+    </div> 
+
+    <script>
+        var map = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+        var color = ["#eeeeee", "#dddddd", "#d0d0d0", "#cccccc", "#c0c0c0", "#bbbbbb", "#b0b0b0", "#aaaaaa", "#a0a0a0", "#999999", "#909090", "#888888", "#808080", "#777777", "#707070", "#666666", "#606060"];
+        var name = ["", "CE", "Judging", "ILE", "OLE", "MLE", "TLE", "RE", "WA", "PC", "AC"];
+        document.getElementById("all").style.borderRadius = "15";
+        document.getElementById("all").style.backgroundColor = "#eeeeee";
+
+        function Refresh() {
+            for (var i = 0; i < 4; i++)
+                for (var j = 0; j < 4; j++) {
+                    document.getElementById(`block${i}${j}`).style.backgroundColor = color[map[i][j] + 1];
+                    if (map[i][j]) document.getElementById(`block${i}${j}`).innerHTML = `<p style="font-size:12px">${name[map[i][j]]}</p>`;
+                }
+        } 
+        
+        function SpawnBlocks() {
+            var blanks = [];
+            for (var i = 0; i < 4; i++)
+                for (var j = 0; j < 4; j++)
+                    if (!map[i][j]) blanks.append([i, j])
+        }
+        
+        Refresh(); SpawnBlocks();
+
+        for (var i = 0; i < 4; i++)
+            for (var j = 0; j < 4; j++) {
+                document.getElementById(`block${i}${j}`).style.height = "96px";
+                document.getElementById(`block${i}${j}`).style.width = "96px";
+                document.getElementById(`block${i}${j}`).style.margin = "2px";
+            }
+    </script>
+
+    <script src="../../scripts/nav.js"></script>
+    <script src="../../scripts/apps.js"></script>
+</body>
+
+</html>

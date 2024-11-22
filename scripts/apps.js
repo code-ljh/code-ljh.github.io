@@ -6,7 +6,7 @@ function setlength(string, length, prefix = "0") {
 
 function AppClocker(cardbody) {
     var specialdates = [
-        new Date(0, 10, 29, 0, 0, 0),
+        new Date(0, 10, 30, 0, 0, 0),
         new Date(0, 0, 1, 0, 0, 0),
         new Date(0, 3, 8, 0, 0, 0),
         new Date(0, 6, 1, 0, 0, 0),
