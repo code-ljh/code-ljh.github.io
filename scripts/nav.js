@@ -3,8 +3,8 @@ document.title = title;
 document.body.innerHTML += `
     <div id="headbar" class="shadowborder">
         <div id="headbar-title" class="darkover" style="cursor:pointer">
-            <b style="font-size:24px" id="headbar-title-text">
-                114514
+            <b style="font-size:20px" id="headbar-title-text">
+                code-ljh.github.io
             </b>
         </div>
 
