@@ -16,8 +16,60 @@
 </head>
 
 <body>
+    <div id="passage">
+        <canvas id="clock" width="400" height="400" ></canvas>
+    </div>
+
     <script src="scripts/nav.js"></script>
     <script src="scripts/apps.js"></script>
+
+    <script>
+        document.getElementById("main-body").style.display = "flex";
+        document.getElementById("main-body").style.justifyContent = "center";
+        document.getElementById("main-body").style.alignItems = "center";
+    </script>
+
+    <script>
+        setInterval(() => {
+            var canvas = document.getElementById("clock");
+            var parent = canvas.parentNode;
+            var newcanvas = document.createElement("canvas");
+            var ctx = newcanvas.getContext("2d");
+            canvas.remove();
+            newcanvas.width = newcanvas.height = "400";
+            newcanvas.id = "clock";
+            parent.appendChild(newcanvas);
+            ctx.fillStyle="#000000";
+            ctx.font = "10px Fira Code";
+            ctx.beginPath();
+            ctx.lineWidth = "5";
+            ctx.arc(200, 200, 175, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(200, 200, 1, 0, 2 * Math.PI);
+            ctx.stroke();
+            // var now = 0;
+            // for (var i = 0; i < 12; i++) {
+            //     ctx.fillText((12 - i).toString(), 200 + 160 * Math.sin(2 * Math.PI / 12 * i + Math.PI) - 5, 200 + 160 * Math.cos(2 * Math.PI / 12 * i + Math.PI) + 7);
+            // }
+            var brea = 12 - (new Date()).getHours() % 12 - (new Date()).getMinutes() / 60;
+            var secd = 12 - ((new Date()).getMinutes()) / 5 - ((new Date()).getSeconds()) / 300;
+            var third = 12 - ((new Date()).getSeconds()) / 5 - ((new Date()).getMilliseconds()) / 5000;
+            var x = [200 + 75 * Math.sin(2 * Math.PI / 12 * brea + Math.PI), 200 + 75 * Math.cos(2 * Math.PI / 12 * brea + Math.PI)];
+            var y = [200 + 120 * Math.sin(2 * Math.PI / 12 * secd + Math.PI), 200 + 120 * Math.cos(2 * Math.PI / 12 * secd + Math.PI)];
+            var z = [200 + 130 * Math.sin(2 * Math.PI / 12 * third + Math.PI), 200 + 130 * Math.cos(2 * Math.PI / 12 * third + Math.PI)];
+            ctx.moveTo(200, 200);
+            ctx.lineTo(x[0], x[1]);
+            ctx.stroke();
+            ctx.moveTo(200, 200);
+            ctx.lineTo(y[0], y[1]);
+            ctx.stroke();
+            ctx.lineWidth = "2";
+            ctx.moveTo(200, 200);
+            ctx.lineTo(z[0], z[1]);
+            ctx.stroke();
+        }, 100);
+    </script>
 </body>
 
 </html>

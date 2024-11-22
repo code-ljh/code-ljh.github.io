@@ -44,6 +44,10 @@ body {
     border: 1px solid rgba(34, 36, 38, .15);
 }
 
+a, p, h1, h2, h3, h4, h5, h6, div, span, pre, code, input, button {
+    font-family:'Fira Code', sans-serif
+}
+
 #headbar-title-text {
     margin-left: 5px;
 }
@@ -84,11 +88,11 @@ body {
 }
 
 pre {
-    border: 1px solid rgb(0, 0, 0, .15);
+    border: 1px double rgb(0, 0, 0, .15);
     background-color:  rgb(0, 0, 0, .02);
     padding: 5px; 
     border-radius: 5px;
-    font-size: 10px;
+    font-size: 8px;
 }
 
 #body-left {

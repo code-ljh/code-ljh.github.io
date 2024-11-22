@@ -102,6 +102,8 @@ function AppSayings(cardbody, cardtitle) {
         "所谓强者 则当行不可能之事 见不可状之物 摧不可挡之敌",
         "摧锋于正锐 挽澜于极危 以心中之火燃尽诸界 此乃燃钢之魂",
         "汝当立于更高处 眺望无垠远方",
+        "同学，请问您是干什么工作的？",
+        "How old are you?"
     ];
     var sxfather = document.createElement("div");
     var para = document.createElement("p");

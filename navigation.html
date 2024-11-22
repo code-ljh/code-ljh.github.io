@@ -1,0 +1,113 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <title>主页</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="icon" href="resources/icon.svg">
+    <script> 
+        var pre = "./";
+        var title = "导航";
+        var under = "导航";
+    </script>
+
+    <script src="scripts/database.js"></script>
+</head>
+
+<body>
+    <div id="passage" style="left: 8px; right: 8px; top: 40px; bottom: 0; position: absolute; padding: 10px;">
+        <div style="display:flex; flex-direction: column; left: 0; right: 0;">
+            <div style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                <div class="shadowborder darkover" style="top: 0; bottom: 0;display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.luogu.com.cn" style="margin: 5px;text-decoration: none; color:black">Luogu</a>
+                </div>
+                <div class="shadowborder darkover" style="top: 0; bottom: 0;display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.codeforces.com" style="margin: 5px;text-decoration: none; color:black">CodeForces</a>
+                </div>
+                <div class="shadowborder darkover" style="top: 0; bottom: 0;display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.atcoder.jp" style="margin: 5px;text-decoration: none; color:black">AtCoder</a>
+                </div>
+                <div class="shadowborder darkover" style="top: 0; bottom: 0;display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.acwing.com" style="margin: 5px;text-decoration: none; color:black">ACWing</a>
+                </div>
+            </div>
+            <div style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.baidu.com" style="margin: 5px;text-decoration: none; color:black">Baidu</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.google.com" style="margin: 5px;text-decoration: none; color:black">Google</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.bing.com" style="margin: 5px;text-decoration: none; color:black">New bing</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.chatgpt.com" style="margin: 5px;text-decoration: none; color:black">Chat GPT</a>
+                </div>
+            </div>
+            <div style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.oi-wiki.org" style="margin: 5px;text-decoration: none; color:black">OI Wiki</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.github.com" style="margin: 5px;text-decoration: none; color:black">Github</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="http://47.92.197.167:5283/" style="margin: 5px;text-decoration: none; color:black">Accoders NOI</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://oier.baoshuo.dev" style="margin: 5px;text-decoration: none; color:black">OIer DB</a>
+                </div>
+            </div>
+            <div style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://anacc22.github.io/another_graph_editor/" style="margin: 5px;text-decoration: none; color:black">Graph Editor</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://stackedit.io/app#" style="margin: 5px;text-decoration: none; color:black">Stack Edit</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://www.geogebra.org/calculator" style="margin: 5px;text-decoration: none; color:black">Geogebra</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://zh.numberempire.com/" style="margin: 5px;text-decoration: none; color:black">Num Empire</a>
+                </div>
+            </div>
+            <div style="display: flex; flex: 10; justify-content: center; align-items: center;">
+                <input id="inputbox114514" class="shadowborder" style="height: 32px; width: 100%; text-align: center;">
+                <div class="darkover shadowborder" onclick="SEARCH()" style="right: 0; height: 32px; width: 32px; top: 0;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://tetr.io" style="margin: 5px;text-decoration: none; color:black">tetr.io</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://florr.io" style="margin: 5px;text-decoration: none; color:black">florr.io</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://digdig.io" style="margin: 5px;text-decoration: none; color:black">digdig.io</a>
+                </div>
+                <div class="shadowborder darkover" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                    <a href="https://yorg.io" style="margin: 5px;text-decoration: none; color:black">yorg.io</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function SEARCH() {
+            console.log("114514");
+            window.location.href = `https://cn.bing.com/search?q=${document.getElementById("inputbox114514").value}`;
+        }
+    </script>
+
+    <script src="scripts/nav.js"></script>
+    <script src="scripts/apps.js"></script>
+</body>
+
+</html>
