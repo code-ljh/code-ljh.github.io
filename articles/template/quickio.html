@@ -16,6 +16,118 @@
 </head>
 
 <body>
+    <div id="passage"><pre><code id="template">#include &lt;bits/stdc++.h&gt;
+#define int long long
+class FastInputStream {
+    private:
+        static const int BUFSIZE = 16384;
+        std::streambuf *fb;
+        char buf[BUFSIZE], *s, *t;
+        
+    public: FastInputStream() {
+        fb = std::cin.rdbuf();
+        s = t = buf;
+    }
+    
+    public: char getc() {
+        if (s == t) {
+            s = buf;
+            t = buf + fb-&gt;sgetn(buf, BUFSIZE);		
+        }
+        char get = *s;
+        return s++, get;
+    }
+    
+    public: template&lt;class INT&gt;
+    void read(INT& x) {
+        char ch = getc();
+        int sign = 1; x = 0;
+        while (!isdigit(ch)) {
+            if (ch == '-') sign = -sign;
+            ch = getc();
+        }
+        while (isdigit(ch)) {
+            x = x * 10 + ch - '0';
+            ch = getc();
+        }
+        x *= sign;
+    }
+    
+    public: template&lt;class INT, class ...ARGS&gt;
+    void read(INT& a, ARGS& ... args) {
+        read(a);
+        read(args ... );
+    }
+} input;
+
+class FastOutputStream {
+    private:
+        static const int BUFSIZE = 16384;
+        std::streambuf *fb;
+        char buf[BUFSIZE], *s, *t;
+        
+    public: FastOutputStream() {
+        fb = std::cout.rdbuf();
+        s = buf, t = buf + BUFSIZE;
+    }
+    
+    public: void write(char ch) {
+        fb-&gt;sputc(ch);
+    }
+    
+    public: void write(std::string s) {
+        for (auto i : s) fb-&gt;sputc(i);
+    }
+    
+    public: void write(const char *ch) {
+        int ln = strlen(ch);
+        for (int i = 0; i &lt; ln; i++)
+            fb-&gt;sputc(ch[i]);
+    }
+    
+    public: template&lt;class INT&gt;
+    void write(INT x) {
+        int len = 0;
+        static char stack[64];
+        if (x &lt; 0) {
+            fb-&gt;sputc('-');
+            x = -x;
+        }
+        if (!x) {
+            fb-&gt;sputc('0');
+            return;
+        }
+        while (x) {
+            stack[len++] = x % 10 + '0';
+            x /= 10;
+        }
+        for (int i = len - 1; i &gt;= 0; i--)
+            fb-&gt;sputc(stack[i]);
+    }
+    
+    public: template&lt;class INT, class ...ARGS&gt;
+    void write(INT a, ARGS ... args) {
+        write(a);
+        write(args ... );
+    }
+} output;
+
+int n;
+int sum;
+
+signed main() {
+    input.read(n);
+    for (int i = 1; i &lt;= n; i++) {
+        int x;
+        input.read(x);
+        sum += x;
+    }
+    output.write(sum);
+    return 0;
+}</code></pre><div id="btn" onclick="document.getElementById('txt').innerHTML = '正在复制';setTimeout(async () => {document.getElementById('txt').innerHTML = '复制完成';setTimeout(async () => {document.getElementById('txt').innerHTML = '复制到剪贴板';}, 2000);await navigator.clipboard.writeText(document.getElementById('template').innerHTML);}, 1000)" class="shadowborder darkover" style="height:32px;justify-content: center;display: flex;align-items: center;">
+    <p id="txt">复制到剪贴板</p>
+</div></div>
+
     <script src="../../scripts/nav.js"></script>
     <script src="../../scripts/apps.js"></script>
 </body>

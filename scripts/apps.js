@@ -32,7 +32,7 @@ function AppClocker(cardbody) {
     Refresh = function () {
         var day = new Date();
         var paragraph = document.getElementById("clocker-paragraph");
-        paragraph.innerHTML = `<p style="margin: 2px;flex: 12; font-size: 16">当前时间：${setlength(day.getFullYear(), 4)}/${setlength(day.getMonth(), 2)}/${setlength(day.getDate(), 2)} ${setlength(day.getHours(), 2)}:${setlength(day.getMinutes(), 2)}:${setlength(day.getSeconds(), 2)}</p>`;
+        paragraph.innerHTML = `<p style="margin: 2px;flex: 12; font-size: 16">当前时间：${setlength(day.getFullYear(), 4)}/${setlength(day.getMonth() + 1, 2)}/${setlength(day.getDate(), 2)} ${setlength(day.getHours(), 2)}:${setlength(day.getMinutes(), 2)}:${setlength(day.getSeconds(), 2)}</p>`;
         for (var i in specialnames) {
             var d = Math.round((specialdates[i] - day) / 24 / 3600 / 1000);
             paragraph.innerHTML += `<div style="flex: 8; margin: 0px">
@@ -59,7 +59,7 @@ function AppCalendar(cardbody, cardtitle) {
     table.style.flexDirection = "column";
     table.style.margin = "0px";
     cardtitle.children[1].innerText = `日历`;
-    for (var i = 1; i <= 5; i++) {
+    for (var i = 1; i <= 6; i++) {
         var row = document.createElement("div");
         row.style.flex = 2;
         row.style.display = "flex";
@@ -85,14 +85,15 @@ function AppCalendar(cardbody, cardtitle) {
             item.appendChild(para);
         }
     }
+    cardbody.appendChild(table);
     var nowx = 1, nowy = firstdayinweek + 1;
     for (var i = 1; i <= dayinmonth[date.getMonth()]; i++) {
+        console.log(nowx - 1, nowy - 1);
         table.children[nowx - 1].children[nowy - 1].children[0].innerHTML = `${i}<br>${weekday[nowy - 1]}`;
         if (i == date.getDate()) table.children[nowx - 1].children[nowy - 1].children[0].style.color = "rgb(200, 0, 0)";
         nowy += 1;
         if (nowy == 8) nowy = 1, nowx += 1;
     }
-    cardbody.appendChild(table);
 }
 
 function AppSayings(cardbody, cardtitle) {
@@ -132,15 +133,76 @@ function AppSayings(cardbody, cardtitle) {
     cardbody.appendChild(sxfather);
 }
 
-var applist = ["倒计时", "日历", "一言"];
+function AppClock(cardbody, cardtitle) {
+    var size = 300;
+    var div = document.createElement("div");
+    cardbody.innerHTML += (` <canvas id="clock" width="${size}" height="${size}" ></canvas>`);
+    cardbody.appendChild(div);
+    div.style.display = "flex";
+    div.style.alignItems = "center";
+    div.style.justifyContent = "center";
+    setInterval(() => {
+        var canvas = document.getElementById("clock");
+        var parent = canvas.parentNode;
+        var newcanvas = document.createElement("canvas");
+        var ctx = newcanvas.getContext("2d");
+        canvas.remove();
+        newcanvas.width = newcanvas.height = size;
+        newcanvas.id = "clock";
+        parent.appendChild(newcanvas);
+        ctx.fillStyle="#000000";
+        ctx.font = "10px Fira Code";
+        ctx.beginPath();
+        ctx.lineWidth = size / 80;
+        ctx.arc(size/2, size/2, size*7/16, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(size/2, size/2, 1, 0, 2 * Math.PI);
+        ctx.stroke();
+        // var now = 0;
+        // for (var i = 0; i < 12; i++) {
+        //     ctx.fillText((12 - i).toString(), 200 + 160 * Math.sin(2 * Math.PI / 12 * i + Math.PI) - 5, 200 + 160 * Math.cos(2 * Math.PI / 12 * i + Math.PI) + 7);
+        // }
+        var brea = 12 - (new Date()).getHours() % 12 - (new Date()).getMinutes() / 60;
+        var secd = 12 - ((new Date()).getMinutes()) / 5 - ((new Date()).getSeconds()) / 300;
+        var third = 12 - ((new Date()).getSeconds()) / 5 - ((new Date()).getMilliseconds()) / 5000;
+        var x = [size/2 + size*3/16 * Math.sin(2 * Math.PI / 12 * brea + Math.PI), size/2 + size*3/16 * Math.cos(2 * Math.PI / 12 * brea + Math.PI)];
+        var y = [size/2 + size*3/10 * Math.sin(2 * Math.PI / 12 * secd + Math.PI), size/2 + size*3/10 * Math.cos(2 * Math.PI / 12 * secd + Math.PI)];
+        var z = [size/2 + size*13/40 * Math.sin(2 * Math.PI / 12 * third + Math.PI), size/2 + size*13/40 * Math.cos(2 * Math.PI / 12 * third + Math.PI)];
+        ctx.moveTo(size/2, size/2);
+        ctx.lineTo(x[0], x[1]);
+        ctx.stroke();
+        ctx.moveTo(size/2, size/2);
+        ctx.lineTo(y[0], y[1]);
+        ctx.stroke();
+        ctx.lineWidth = size/200;
+        ctx.moveTo(size/2, size/2);
+        ctx.lineTo(z[0], z[1]);
+        ctx.stroke();
+    }, 100);
+}
+
+var hasAdditional = true;
+try {
+    AdditionalApp;
+} catch (ReferenceError) {
+    hasAdditional = false;
+}
+
+var applist = ["倒计时", "日历", "一言", "时钟"];
 var appicons = [
-    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.9997 20.5815L16.4179 18.0113M4.9997 20.5815L7.58154 18.0113M11.9997 9.58148V12.5815L13.4416 13.9998M6.74234 3.99735C6.36727 3.62228 5.85856 3.41156 5.32812 3.41156C4.79769 3.41156 4.28898 3.62228 3.91391 3.99735C3.53884 4.37242 3.32813 4.88113 3.32812 5.41156C3.32812 5.942 3.53884 6.4507 3.91391 6.82578M20.0858 6.82413C20.4609 6.44905 20.6716 5.94035 20.6716 5.40991C20.6716 4.87948 20.4609 4.37077 20.0858 3.9957C19.7107 3.62063 19.202 3.40991 18.6716 3.40991C18.1411 3.40991 17.6324 3.62063 17.2574 3.9957M18.9997 12.5815C18.9997 16.4475 15.8657 19.5815 11.9997 19.5815C8.1337 19.5815 4.9997 16.4475 4.9997 12.5815C4.9997 8.71549 8.1337 5.58149 11.9997 5.58149C15.8657 5.58149 18.9997 8.71549 18.9997 12.5815Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 10H21M7 3V5M17 3V5M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 21H19.5M6 21L12 3L18 21M4.5 21H8M15 14H9" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-];
+    '<svg  width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.9997 20.5815L16.4179 18.0113M4.9997 20.5815L7.58154 18.0113M11.9997 9.58148V12.5815L13.4416 13.9998M6.74234 3.99735C6.36727 3.62228 5.85856 3.41156 5.32812 3.41156C4.79769 3.41156 4.28898 3.62228 3.91391 3.99735C3.53884 4.37242 3.32813 4.88113 3.32812 5.41156C3.32812 5.942 3.53884 6.4507 3.91391 6.82578M20.0858 6.82413C20.4609 6.44905 20.6716 5.94035 20.6716 5.40991C20.6716 4.87948 20.4609 4.37077 20.0858 3.9957C19.7107 3.62063 19.202 3.40991 18.6716 3.40991C18.1411 3.40991 17.6324 3.62063 17.2574 3.9957M18.9997 12.5815C18.9997 16.4475 15.8657 19.5815 11.9997 19.5815C8.1337 19.5815 4.9997 16.4475 4.9997 12.5815C4.9997 8.71549 8.1337 5.58149 11.9997 5.58149C15.8657 5.58149 18.9997 8.71549 18.9997 12.5815Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    '<svg  width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 10H21M7 3V5M17 3V5M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    '<svg  width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 21H19.5M6 21L12 3L18 21M4.5 21H8M15 14H9" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    '<svg  width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 7V12L9.5 13.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>',
+ ];
 var appfunction = [
-    AppClocker, AppCalendar, AppSayings
+    AppClocker, AppCalendar, AppSayings, AppClock, 
 ];
+
+if (hasAdditional) applist = [""].concat(applist);
+if (hasAdditional) appicons = [""].concat(appicons);
+if (hasAdditional) appfunction = [AdditionalApp].concat(appfunction);
 var parent = document.getElementById("body-right");
 
 for (var i in applist) {
@@ -148,6 +210,7 @@ for (var i in applist) {
     subcard.className = "card";
     var cardbody = document.createElement("div");
     cardbody.className = "card-body";
+    cardbody.style.display = "none";
     var cardtitle = document.createElement("div");
     cardtitle.className = "card-title";
     cardtitle.style.cursor = "pointer";
