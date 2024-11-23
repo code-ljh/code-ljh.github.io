@@ -1,0 +1,46 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="icon" href="../resources/icon.svg">
+
+    <script>
+        var title = "应用：日历";
+        var pre = "../";
+        var under = "应用";
+    </script>
+    
+    <script src="../scripts/database.js"></script>
+</head>
+
+<body>
+    <div id="passage" style="display:flex;justify-content: center;align-items: center;">
+    </div>
+
+    <script src="../scripts/nav.js"></script>
+    <script src="../scripts/apps.js"></script>
+
+    <script>
+        function ShowApp(which) {
+            var i = which;
+            document.getElementById("main-body").innerHTML = "";
+            document.getElementById("main-title").innerHTML = appicons[i] + `<b style="margin-left:5px">${applist[i]}</b>`;
+            appfunction[i](document.getElementById("main-body"), document.getElementById("main-title"));
+        } ShowApp(1);
+
+        var aapplist = document.getElementById("body-right");
+        for (var i = 0; i < appfunction.length; i++) {
+            var element = aapplist.children[i].children[1];
+            element.style.display = "none";
+            element.innerHTML += `
+                <a style="text-decoration:none;color:black" href="${appurl[i]}.html"><div class="darkover shadowborder" style="margin:15px;left:0;right:0;height:32px;display:flex;justify-content:center;align-items:center">
+                    <p>跳转</p>
+                </div></a>
+            `;
+        }
+    </script>
+</body>
+
+</html>

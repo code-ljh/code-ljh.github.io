@@ -27,16 +27,20 @@
 
     <script>
         function ShowApp(ele) {
-            console.log(ele);
             var element = ele.srcElement.parentNode;
+            var which = -1;
             for (var i = 0; i < appfunction.length; i++) {
                 if (aapplist.children[i] == element) {
-                    document.getElementById("main-body").innerHTML = "";
+                    document.getElementById("main-body").innerHTML = "", which = i;
                     document.getElementById("main-title").innerHTML = appicons[i] + `<b style="margin-left:5px">${applist[i]}</b>`;
-                    console.log(i);
                     appfunction[i](document.getElementById("main-body"), document.getElementById("main-title"));
                 }
             }
+            document.getElementById("main-body").innerHTML += `
+                <a style="text-decoration:none;color:black" href="applications/${appurl[which]}.html"><div class="darkover shadowborder" style="position:absolute;margin:15px;left:0;right:0;bottom:0;height:32px;display:flex;justify-content:center;align-items:center">
+                    <p>跳转</p>
+                </div></a>
+            `;
         }
 
         var aapplist = document.getElementById("body-right");
