@@ -1,0 +1,135 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <title>主页</title>
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="icon" href="../resources/icon.svg">
+    <script> 
+        var pre = "../";
+        var title = "工具：算番器";
+        var under = "工具";
+    </script>
+
+    <script src="../scripts/database.js"></script>
+</head>
+
+<body>
+    <div id="passage">
+        <input class="shadowborder" id="handcard" style="border-radius:15px; height: 32px; padding: 5px; width: 100%;  text-align: center;" placeholder="手牌">
+        <input class="shadowborder" id="fulubox" style="border-radius:15px; height: 32px; padding: 5px; width: 100%; text-align: center;" placeholder="附露">
+        <input class="shadowborder" id="angangbox" style="border-radius:15px; height: 32px; padding: 5px; width: 100%; text-align: center;" placeholder="暗杠">
+        <input class="shadowborder" id="mggangbox" style="border-radius:15px; height: 32px; padding: 5px; width: 100%; text-align: center;" placeholder="明杠">
+        <button class="shadowborder" id="calcbutton" style="border-radius:5px; height: 32px; padding: 5px; width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;" onclick="Calculate()"><p>计算</p></button>
+        <button class="shadowborder" id="calcbutton" style="border-radius:5px; height: 32px; padding: 5px; width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;" onclick="Clear()"><p>清空</p></button>
+        <p id="result">计算结果</p>
+    </div>
+
+    <script src="../scripts/nav.js"></script>
+    <script src="../scripts/apps.js"></script>
+
+    <script>
+        var validcards = ["1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "1S", "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "1M", "2M", "3M", "4M", "5M", "6M", "7M", "8M", "9M", "E", "S", "W", "N", "B", "F", "Z"];
+        var chinese = ["役满", "两倍役满", "三倍役满", "四倍役满", "五倍役满", "六倍役满"];    
+
+        function Clear() {
+            document.getElementById("result").innerText = "计算结果";
+        }
+
+        function Validate(cardlist, res) {
+            for (var i of cardlist) 
+                if (!validcards.includes(i)) {
+                    res.innerHTML = `【错误】未知的牌 "${i}"`;
+                    return false;
+                }
+            return true;
+        }
+
+        Valueize = (card) => validcards.indexOf(card);
+
+        function Compare(a, b) {
+            var va = Valueize(a), vb = Valueize(b);
+            return va - vb;
+        }
+
+        function Split(cardlist) {
+            var cards = [];
+            for (var card of cardlist.split(' ')) if (card) cards.push(card);
+            return cards.sort(Compare);
+        }
+
+        function Yakumans(hd, fl, ag, mg, res) {
+            var map = {};
+            var count = hd.length + fl.length + ag.length + mg.length;
+            for (var card of validcards) map[card] = 0;
+            for (var card of hd) map[card] += 1;
+            for (var card of ag) map[card] += 1;
+            for (var card of mg) map[card] += 1;
+            for (var card of fl) map[card] += 1;
+            var greater3 = 0;
+            for (var card of validcards) greater3 += (map[card] >= 3);
+            ZiYiSe = () => (count == map["E"] + map["N"] + map["S"] + map["W"] + map["B"] + map["F"] + map["Z"]); 
+            LvYiSe = () => (count == map["2S"] + map["3S"] + map["4S"] + map["6S"] + map["8S"] + map["F"]);
+            QingLaoTou = () => (count == map["1M"] + map["9M"] + map["1S"] + map["9S"] + map["1P"] + map["9P"]);
+            DaSanYuan = () => (map["B"] >= 3 && map["F"] >= 3 && map["Z"] >= 3);
+            DaSiXi = () => (map["E"] >= 3 && map["W"] >= 3 && map["N"] >= 3 && map["S"] >= 3);
+            XiaoSiXi = () => (
+                map["E"] >= 3 && map["W"] >= 3 && map["N"] >= 3 && map["S"] == 2 || 
+                map["E"] >= 3 && map["W"] >= 3 && map["N"] == 2 && map["S"] >= 3 ||
+                map["E"] >= 3 && map["W"] == 2 && map["N"] >= 3 && map["S"] >= 3 ||
+                map["E"] == 2 && map["W"] >= 3 && map["N"] >= 3 && map["S"] >= 3 
+            );
+            GuoShiWuShuang = () => (
+                map["E"] >= 1 && map["W"] >= 1 && map["S"] >= 1 && map["N"] >= 1 && map["B"] >= 1 && map["F"] >= 1 && map["Z"] >= 1 && 
+                map["1M"] >= 1 && map["9M"] >= 1 && map["1S"] >= 1 && map["9S"] >= 1 && map["1P"] >= 1 && map["9P"] >= 1 
+            );
+            JiuLianBaoDeng = () => (
+                map["1M"] >= 3 && map["2M"] >= 1 && map["3M"] >= 1 && map["4M"] >= 1 && map["5M"] >= 1 && map["6M"] >= 1 && map["7M"] >= 1 && map["8M"] >= 1 && map["9M"] >= 3 ||
+                map["1S"] >= 3 && map["2S"] >= 1 && map["3S"] >= 1 && map["4S"] >= 1 && map["5S"] >= 1 && map["6S"] >= 1 && map["7S"] >= 1 && map["8S"] >= 1 && map["9S"] >= 3 || 
+                map["1P"] >= 3 && map["2P"] >= 1 && map["3P"] >= 1 && map["4P"] >= 1 && map["5P"] >= 1 && map["6P"] >= 1 && map["7P"] >= 1 && map["8P"] >= 1 && map["9P"] >= 3   
+            );
+            SiAnKe = () => (fl.length == 0 && mg.length == 0 && greater3 == 4);
+            
+            var yakumans = []; 
+            var times = -1;
+            if (ag.length + mg.length == 16) yakumans.push("四杠子 役满"), times++;
+            if (ZiYiSe(hd, fl, ag, mg)) yakumans.push("字一色 役满"), times++;
+            if (LvYiSe(hd, fl, ag, mg)) yakumans.push("绿一色 役满"), times++;
+            if (QingLaoTou(hd, fl, ag, mg)) yakumans.push("清老头 役满"), times++;
+            if (DaSanYuan(hd, fl, ag, mg)) yakumans.push("大三元 役满"), times++;
+            if (XiaoSiXi(hd, fl, ag, mg)) yakumans.push("小四喜 役满"), times++;
+            if (GuoShiWuShuang(hd)) yakumans.push("国士无双十三面 两倍役满"), times++, times++;
+            if (JiuLianBaoDeng(hd)) yakumans.push("纯正九连宝灯 两倍役满"), times++, times++;
+            if (SiAnKe(hd, ag)) yakumans.push("四暗刻单骑 两倍役满"), times++, times++;
+            if (DaSiXi(hd, fl, ag, mg)) yakumans.push("大四喜 两倍役满"), times++, times++;
+            for (var yk of yakumans) {
+                result.innerHTML += yk + "<br>";
+            }
+            if (times > -1) {
+                result.innerHTML += `总计 ${chinese[times]}`;
+            } else return false;
+        }
+
+        function Calculate() {
+            Clear();
+            var handcards = document.getElementById("handcard").value;
+            var fulucards = document.getElementById("fulubox").value;
+            var angangcards = document.getElementById("angangbox").value;
+            var mggangcards = document.getElementById("mggangbox").value;
+            var result = document.getElementById("result");
+            var cards = Split(`${handcards} ${fulucards} ${angangcards} ${mggangcards}`);
+            var hand = Split(handcards);
+            var fulu = Split(fulucards);
+            var angang = Split(angangcards);
+            var mggang = Split(mggangcards);
+            var ret = Validate(cards, result);
+            if (!ret) return;
+            result.innerHTML = `${hand.join(' ')} | ${fulu.join(' ')} ${mggang.join(' ')} ${angang.join(' ')} <br>`;
+            var yakuman = Yakumans(hand, fulu, angang, mggang, result);
+            if (!yakuman) return;
+        }
+    </script>
+</body>
+
+</html>

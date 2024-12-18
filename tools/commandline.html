@@ -1,0 +1,86 @@
+<meta charset="UTF-8">
+
+<html>
+
+<head>
+    <title>主页</title>
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="icon" href="../resources/icon.svg">
+    <script> 
+        var pre = "../";
+        var title = "工具：命令行";
+        var under = "工具";
+    </script>
+
+    <script src="../scripts/database.js"></script>
+</head>
+
+<body>
+    <div id="passage">
+        <input class="shadowborder" id="inputbox" style="border-radius:15px; height: 32px; padding: 5px;">
+    </div>
+
+    <script src="../scripts/nav.js"></script>
+    <script src="../scripts/apps.js"></script>
+
+    <script>
+        function Joins(list) {
+            var string = "";
+            for (var i in list) string += list[i] + " ";
+            return string;
+        }
+
+        var round = 0;
+        function RunCommand(cmd) {
+            var commands = [
+                [["quit"], (op) => {window.location.href = "https://www.luogu.com.cn";}],
+                [["quit", "in", "<num>"], (op) => {setTimeout(() => {window.location.href = "https://www.luogu.com.cn";}, op[1])}],
+                [["help"], (op) => {var res = "";for (var i in commands) res += Joins(commands[i][0]) + "<br>"; return res;}],
+                [["help", "<cmd>"], (op) => {console.log(op);var res = "";for (var i in commands) if (op[0] == commands[i][0][0])res += Joins(commands[i][0]) + "<br>"; return res;}]
+            ];
+            var cmds = ["quit", "help"];
+            var splitted = cmd.split(' ');
+            var returned = `>>> &&&@@@<span style="color:red"&&&@@@>${splitted[0]}&&&@@@</span&&&@@@> &&&@@@<span style="color:#555500"&&&@@@>${Joins(splitted.slice(1))}&&&@@@</span&&&@@@><br> `;
+            console.log(splitted);
+
+            var flag = -1;
+            for (var i in commands) {
+                if (commands[i][0].length == splitted.length) {
+                    var matches = true;
+                    for (var j in commands[i][0]) {
+                        if (commands[i][0][j] == "<num>" && splitted[j].match("^[0-9]+$")) continue;
+                        if (commands[i][0][j] == "<cmd>" && cmds.indexOf(splitted[j]) != -1) continue;
+                        if (commands[i][0][j][0] != "<" && splitted[j] == commands[i][0][j]) continue;
+                        matches = false; 
+                    }
+                    if (matches) {
+                        flag = i;
+                        returned += (commands[i][1](splitted.slice(1)));
+                    }
+                }
+            }
+
+            if (flag == -1) {
+                returned += `Error: Unknown command.`;
+            }
+
+            var p = document.createElement("p");
+            if (returned.endsWith("<br>")) returned = returned.substr(0, returned.length - 4);
+            p.innerHTML = `${HTMLized(returned).replaceAll("<br>", `<br>[${round}] `)}`;
+            document.getElementById("passage").insertBefore(p, document.getElementById("passage").children[1]);
+            round ++ ;
+        }
+
+        var inputbox = document.getElementById("inputbox");
+        var func = (event) => {
+            console.log(event);
+            if (event.key == 'Enter') {
+                RunCommand(inputbox.value);
+                inputbox.value = "";
+            }
+        };
+        setInterval(() => {inputbox.addEventListener('keydown', func)}, 1000);
+    </script>
+</body>
+
+</html>

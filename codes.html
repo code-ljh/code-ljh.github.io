@@ -8,19 +8,15 @@
     <link rel="icon" href="resources/icon.svg">
     <script> 
         var pre = "./";
-        var title = "工具";
-        var under = "工具";
+        var title = "代码";
+        var under = "代码";
     </script>
 
     <script src="scripts/database.js"></script>
 </head>
 
 <body>
-    <div id="passage">
-    </div>
-
-    <script src="scripts/nav.js"></script>
-    <script src="scripts/apps.js"></script>
+    <div id="passage"></div>
 
     <script>
         var main = document.getElementById("passage");
@@ -28,26 +24,29 @@
         main.style.flexDirection = "column";
         main.style.justifyContent = "center";
 
-        for (var i in tools) {
+        for (var i in codes) {
             var created = document.createElement("div");
             var createdtitle = document.createElement("div");
-            var createdbody = document.createElement("div");
+            // var createdbody = document.createElement("div");
             var createdhref = document.createElement("a");
             created.className = "card";
             createdhref.appendChild(createdtitle);
             created.appendChild(createdhref);
-            created.appendChild(createdbody);
-            createdhref.href = `${pre}tools/${tools[i][2]}`;
+            // created.appendChild(createdbody);
+            createdhref.href = `${pre}codes/${codes[i][0]}/${codes[i][1]}`;
             createdtitle.className = "card-title";
-            createdbody.className = "card-body";
+            // createdbody.className = "card-body";
             created.className = "card";
             createdhref.style.textDecoration = "none";
             createdtitle.style.color = "rgba(0, 0, 0, 0.75)";
-            createdtitle.innerHTML = `<b>${tools[i][1]}</b>`;  
-            createdbody.innerHTML = `<p style="text-align:center;margin:2px">${tools[i][3]}</p>`;
+            createdtitle.innerHTML = `<b>${codes[i][2]}</b>`;  
+            // createdbody.innerHTML = `<p style="text-align:center;margin:2px">${codes[i][3]}</p>`;
             main.appendChild(created);
         }
     </script>
+
+    <script src="scripts/nav.js"></script>
+    <script src="scripts/apps.js"></script>
 </body>
 
 </html>
