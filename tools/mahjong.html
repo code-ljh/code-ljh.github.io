@@ -10,6 +10,59 @@
         var pre = "../";
         var title = "工具：算番器";
         var under = "工具";
+
+        var AdditionalAppName = "雀魂役种";
+        function AdditionalApp(cardbody, cardtitle) {
+            cardbody.innerHTML = `<p id="description" style="padding:15px">
+                役牌：白 1番<br>
+                役牌：发 1番<br>
+                役牌：中 1番<br>
+                立直 1番<br>
+                一发 1番<br>
+                抢杠 1番<br>
+                岭上开花 1番<br>
+                海底捞月 1番<br>
+                河底摸鱼 1番<br>
+                役牌：门风牌 1番<br>
+                役牌：场风牌 1番<br>
+                断幺九 1番<br>
+                一杯口 1番<br>
+                平和 1番<br>
+                一气通贯 2番 附露减一番<br>
+                混全带幺九 2番 附露减一番<br>
+                纯全带幺九 3番 附露减一番<br>
+                三暗刻 2番<br>
+                七对子 2番<br>
+                三杠子 2番<br>
+                小三元 2番<br>
+                对对和 2番<br>
+                混老头 2番<br> 
+                两立直 2番<br>      
+                两杯口 3番<br>          
+                混一色 3番 附露减一番<br>
+                清一色 6番 附露减一番<br>
+                古役：十二落台 1番<br>
+                古役：燕返 1番<br>
+                古役：杠振 1番<br>
+                天和 13番 役满<br>
+                地和 13番 役满<br>
+                四杠子 13番 役满<br>  
+                大三元 13番 役满<br>
+                小四喜 13番 役满<br>
+                字一色 13番 役满<br>
+                绿一色 13番 役满<br>
+                清老头 13番 役满<br>
+                国士无双 13番 役满<br>
+                四暗刻 13番 役满<br>
+                九莲宝灯 13番 役满<br>
+                大四喜 26番 两倍役满<br>
+                国士无双十三面 26番 两倍役满 <br>
+                四暗刻单骑 26番 两倍役满<br>
+                纯正九莲宝灯 26番 两倍役满<br>
+                古役：人和 13番 役满<br>
+                古役：大七星 26番 两倍役满<br>
+            </p>`;
+        }
     </script>
 
     <script src="../scripts/database.js"></script>
@@ -33,16 +86,116 @@
         var validcards = ["1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "1S", "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "1M", "2M", "3M", "4M", "5M", "6M", "7M", "8M", "9M", "E", "S", "W", "N", "B", "F", "Z"];
         var chinese = ["役满", "两倍役满", "三倍役满", "四倍役满", "五倍役满", "六倍役满"];    
 
-        function Clear() {
-            document.getElementById("result").innerText = "计算结果";
+        function GuoshiDist(hand) {
+            if (hand.length != 14) return 0x3f3f3f3f;
+            var map = {}, on = ["1M"];
+            for (var card of validcards) map[card] = 0;
+            for (var card of hand) map[card] += 1;
+            var distance = 0;
         }
 
-        function Validate(cardlist, res) {
+        function Windist(hand) {
+            var max = (a, b) => (a > b ? a : b);
+            var min = (a, b) => (a < b ? a : b);
+            var dp = []; // [34][5][2][5][5]
+            for (var i = 0; i < 44; i++) {
+                var sub = [];
+                for (var j = 0; j < 7; j++) {
+                    var sub2 = [];
+                    for (var k = 0; k < 3; k++) {
+                        var sub3 = [];
+                        for (var x = 0; x < 7; x++) {
+                            var sub4 = [];
+                            for (var y = 0; y < 7; y++) sub4.push(0x3f3f3f3f); 
+                            sub3.push(sub4);
+                        } sub2.push(sub3);
+                    } sub.push(sub2);
+                } dp.push(sub);
+            } console.log(dp);
+            dp[0][0][0][0][0] = 0;
+            var xxx = Math.floor(hand.length / 3);
+            console.log(xxx);
+            for (var i = 0; i < 34; i++) {
+                var has = 0;
+                for (var j of hand) has += (Valueize(j) == i);
+                for (var j = 0; j <= xxx; j++)
+                    for (var k = 0; k < 2; k++)
+                        for (var x = 0; x <= 2 && x + j <= xxx; x++) {
+                            for (var y = 0; y <= 2 && x + j + y <= xxx; y++) {
+                                if (dp[i][j][k][x][y] <= 20)
+                                    for (var choose = y + x; choose <= 4; choose++) {
+                                        var l = choose - y - x;
+                                        var nw = dp[i][j][k][x][y] + max(0, choose - has);
+                                        if (l <= 2) dp[i + 1][j + x][k][y][l] = min(dp[i + 1][j + x][k][y][l], nw);
+                                        if (l >= 2 && !k) dp[i + 1][j + x][1][y][l - 2] = min(dp[i + 1][j + x][1][y][l - 2], nw);
+                                        if (l >= 3 && j + x < xxx) dp[i + 1][j + x + 1][k][y][l - 3] = min(dp[i + 1][j + x + 1][k][y][l - 3], nw);
+                                    }
+                                if ((i) % 9 == 0 || (i) >= 27) break;
+                            }
+                            if ((i) % 9 == 0 || (i) >= 27) break;
+                        }
+            }
+            return min(dp[34][xxx][1][0][0], min(GuoshiDist(), QiDuiDist()));
+        }
+
+        function Clear() {
+            document.getElementById("result").innerText = "计算结果";
+            document.getElementById("result").style.color = "black";
+        }
+
+        function Validate(cardlist, hd, fl, ag, mg, res) {
+            // console.log("Validating");
             for (var i of cardlist) 
                 if (!validcards.includes(i)) {
                     res.innerHTML = `【错误】未知的牌 "${i}"`;
                     return false;
                 }
+            // console.log("Validating", fl);
+            if (fl.length % 3 != 0) {
+                console.log(fl);
+                res.innerHTML = `【错误】附露的数量不为三的倍数。`;
+                return false;
+            }
+            // console.log("Validating");
+            if (ag.length % 4 != 0) {
+                res.innerHTML = `【错误】暗杠的数量不为四的倍数。`;
+                return false;
+            }
+            // console.log("Validating");
+            if (mg.length % 4 != 0) {
+                res.innerHTML = `【错误】明杠的数量不为四的倍数。`;
+                return false;
+            }
+            // console.log("Validating");
+            for (var i = 0; i < ag.length; i += 4)
+                if (ag[i] != ag[i + 1] || ag[i] != ag[i + 2] || ag[i] != ag[i + 3]) {
+                    res.innerHTML = `【错误】试图暗杠不同的牌。`;
+                    return false;
+                }
+                // console.log("Validating");
+            for (var i = 0; i < mg.length; i += 4)
+                if (mg[i] != mg[i + 1] || mg[i] != mg[i + 2] || mg[i] != mg[i + 3]) {
+                    res.innerHTML = `【错误】试图明杠不同的牌。`;
+                    return false;
+                }
+            var mglen = mg.length / 4 * 3;
+            var aglen = ag.length / 4 * 3;
+            if (mglen + aglen + fl.length + hd.length != 14) {
+                res.innerHTML = `【错误】牌数不为 14 张。`;
+                return false;
+            }
+            var map = {};
+            var count = hd.length + fl.length + ag.length + mg.length;
+            for (var card of validcards) map[card] = 0;
+            for (var card of hd) map[card] += 1;
+            for (var card of ag) map[card] += 1;
+            for (var card of mg) map[card] += 1;
+            for (var card of fl) map[card] += 1;
+            var dist = Windist(hd);
+            if (dist != 0) {
+                res.innerHTML = `【错误】诈和！和牌距离：${dist}`;
+                return false;
+            }
             return true;
         }
 
@@ -53,10 +206,10 @@
             return va - vb;
         }
 
-        function Split(cardlist) {
+        function Split(cardlist, sorts) {
             var cards = [];
             for (var card of cardlist.split(' ')) if (card) cards.push(card);
-            return cards.sort(Compare);
+            return (sorts ? cards.sort(Compare) : cards);
         }
 
         function Yakumans(hd, fl, ag, mg, res) {
@@ -69,6 +222,13 @@
             for (var card of fl) map[card] += 1;
             var greater3 = 0;
             for (var card of validcards) greater3 += (map[card] >= 3);
+            console.log(validcards, map);
+            for (var card of validcards) 
+                if (map[card] > 4) {
+                    res.innerHTML = `【错误】${card} 有超过 4 张。`;
+                    console.log(res, res.innerHTML);
+                    return 114514;
+                }
             ZiYiSe = () => (count == map["E"] + map["N"] + map["S"] + map["W"] + map["B"] + map["F"] + map["Z"]); 
             LvYiSe = () => (count == map["2S"] + map["3S"] + map["4S"] + map["6S"] + map["8S"] + map["F"]);
             QingLaoTou = () => (count == map["1M"] + map["9M"] + map["1S"] + map["9S"] + map["1P"] + map["9P"]);
@@ -85,9 +245,11 @@
                 map["1M"] >= 1 && map["9M"] >= 1 && map["1S"] >= 1 && map["9S"] >= 1 && map["1P"] >= 1 && map["9P"] >= 1 
             );
             JiuLianBaoDeng = () => (
-                map["1M"] >= 3 && map["2M"] >= 1 && map["3M"] >= 1 && map["4M"] >= 1 && map["5M"] >= 1 && map["6M"] >= 1 && map["7M"] >= 1 && map["8M"] >= 1 && map["9M"] >= 3 ||
-                map["1S"] >= 3 && map["2S"] >= 1 && map["3S"] >= 1 && map["4S"] >= 1 && map["5S"] >= 1 && map["6S"] >= 1 && map["7S"] >= 1 && map["8S"] >= 1 && map["9S"] >= 3 || 
-                map["1P"] >= 3 && map["2P"] >= 1 && map["3P"] >= 1 && map["4P"] >= 1 && map["5P"] >= 1 && map["6P"] >= 1 && map["7P"] >= 1 && map["8P"] >= 1 && map["9P"] >= 3   
+                fl.length == 0 && mg.length == 0 && ag.length == 0 && (
+                    map["1M"] >= 3 && map["2M"] >= 1 && map["3M"] >= 1 && map["4M"] >= 1 && map["5M"] >= 1 && map["6M"] >= 1 && map["7M"] >= 1 && map["8M"] >= 1 && map["9M"] >= 3 ||
+                    map["1S"] >= 3 && map["2S"] >= 1 && map["3S"] >= 1 && map["4S"] >= 1 && map["5S"] >= 1 && map["6S"] >= 1 && map["7S"] >= 1 && map["8S"] >= 1 && map["9S"] >= 3 || 
+                    map["1P"] >= 3 && map["2P"] >= 1 && map["3P"] >= 1 && map["4P"] >= 1 && map["5P"] >= 1 && map["6P"] >= 1 && map["7P"] >= 1 && map["8P"] >= 1 && map["9P"] >= 3   
+                )
             );
             SiAnKe = () => (fl.length == 0 && mg.length == 0 && greater3 == 4);
             
@@ -100,7 +262,7 @@
             if (DaSanYuan(hd, fl, ag, mg)) yakumans.push("大三元 役满"), times++;
             if (XiaoSiXi(hd, fl, ag, mg)) yakumans.push("小四喜 役满"), times++;
             if (GuoShiWuShuang(hd)) yakumans.push("国士无双十三面 两倍役满"), times++, times++;
-            if (JiuLianBaoDeng(hd)) yakumans.push("纯正九连宝灯 两倍役满"), times++, times++;
+            if (JiuLianBaoDeng(hd)) yakumans.push("纯正九莲宝灯 两倍役满"), times++, times++;
             if (SiAnKe(hd, ag)) yakumans.push("四暗刻单骑 两倍役满"), times++, times++;
             if (DaSiXi(hd, fl, ag, mg)) yakumans.push("大四喜 两倍役满"), times++, times++;
             for (var yk of yakumans) {
@@ -108,6 +270,7 @@
             }
             if (times > -1) {
                 result.innerHTML += `总计 ${chinese[times]}`;
+                return true;
             } else return false;
         }
 
@@ -119,15 +282,22 @@
             var mggangcards = document.getElementById("mggangbox").value;
             var result = document.getElementById("result");
             var cards = Split(`${handcards} ${fulucards} ${angangcards} ${mggangcards}`);
-            var hand = Split(handcards);
-            var fulu = Split(fulucards);
-            var angang = Split(angangcards);
-            var mggang = Split(mggangcards);
-            var ret = Validate(cards, result);
+            var hand = Split(handcards, true);
+            var fulu = Split(fulucards, false);
+            console.log(fulu);
+            console.log(fulucards);
+            var angang = Split(angangcards, true);
+            var mggang = Split(mggangcards, true);
+            var ret = Validate(cards, hand, fulu, angang, mggang, result);
             if (!ret) return;
-            result.innerHTML = `${hand.join(' ')} | ${fulu.join(' ')} ${mggang.join(' ')} ${angang.join(' ')} <br>`;
+            console.log(fulu);
+            result.innerHTML = `${hand.join(' ')} | ${fulu ? fulu.join(' ') : ''} ${mggang ? mggang.join(' ') : ''} ${angang ? angang.join(' ') : ''} <br>`;
             var yakuman = Yakumans(hand, fulu, angang, mggang, result);
-            if (!yakuman) return;
+            console.log("Yakumans");
+            if (yakuman) {
+                if (yakuman == true) result.style.color = "red";
+                return;
+            }
         }
     </script>
 </body>

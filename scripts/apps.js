@@ -5,7 +5,7 @@ try {
     hasAdditional = false;
 }
 
-if (hasAdditional) applist = [""].concat(applist);
+if (hasAdditional) applist = [AdditionalAppName].concat(applist);
 if (hasAdditional) appicons = [""].concat(appicons);
 if (hasAdditional) appfunction = [AdditionalApp].concat(appfunction);
 var parent = document.getElementById("body-right");
