@@ -11,21 +11,37 @@
         var title = "工具：算番器";
         var under = "工具";
 
+        var ancients = false;
+
+        var Additional2AppName = "设置";
+        function Additional2App(cardbody, cardtitle) {
+            var btn = document.createElement("button");
+            btn.innerHTML = `<p>古役：关</p>`;
+            btn.className = "shadowborder darkover";
+            btn.style.width = "100%";
+            btn.onclick = () => {
+                ancients = !ancients;
+                if (ancients) btn.children[0].innerText = "古役：开";
+                else btn.children[0].innerText = "古役：关"; 
+            };
+            cardbody.appendChild(btn);
+        }
+
         var AdditionalAppName = "雀魂役种";
         function AdditionalApp(cardbody, cardtitle) {
             cardbody.innerHTML = `<p id="description" style="padding:15px">
-                役牌：白 1番<br>
-                役牌：发 1番<br>
-                役牌：中 1番<br>
-                立直 1番<br>
-                一发 1番<br>
-                抢杠 1番<br>
-                岭上开花 1番<br>
-                海底捞月 1番<br>
-                河底摸鱼 1番<br>
-                役牌：门风牌 1番<br>
-                役牌：场风牌 1番<br>
-                断幺九 1番<br>
+                （已做）役牌：白 1番<br>
+                （已做）役牌：发 1番<br>
+                （已做）役牌：中 1番<br>
+                （此处不计）立直 1番<br>
+                （此处不计）一发 1番<br>
+                （此处不计）抢杠 1番<br>
+                （此处不计）岭上开花 1番<br>
+                （此处不计）海底捞月 1番<br>
+                （此处不计）河底摸鱼 1番<br>
+                （此处不计）役牌：门风牌 1番<br>
+                （此处不计）役牌：场风牌 1番<br>
+                （已做）断幺九 1番<br>
                 一杯口 1番<br>
                 平和 1番<br>
                 一气通贯 2番 附露减一番<br>
@@ -33,34 +49,34 @@
                 纯全带幺九 3番 附露减一番<br>
                 三暗刻 2番<br>
                 七对子 2番<br>
-                三杠子 2番<br>
-                小三元 2番<br>
+                （已做）三杠子 2番<br>
+                （已做）小三元 2番<br>
                 对对和 2番<br>
-                混老头 2番<br> 
-                两立直 2番<br>      
+                （已做）混老头 2番<br> 
+                （此处不计）两立直 2番<br>      
                 两杯口 3番<br>          
-                混一色 3番 附露减一番<br>
-                清一色 6番 附露减一番<br>
+                （已做）混一色 3番 附露减一番<br>
+                （已做）清一色 6番 附露减一番<br>
                 古役：十二落台 1番<br>
-                古役：燕返 1番<br>
-                古役：杠振 1番<br>
-                天和 13番 役满<br>
-                地和 13番 役满<br>
-                四杠子 13番 役满<br>  
-                大三元 13番 役满<br>
-                小四喜 13番 役满<br>
-                字一色 13番 役满<br>
-                绿一色 13番 役满<br>
-                清老头 13番 役满<br>
-                国士无双 13番 役满<br>
-                四暗刻 13番 役满<br>
-                九莲宝灯 13番 役满<br>
-                大四喜 26番 两倍役满<br>
-                国士无双十三面 26番 两倍役满 <br>
-                四暗刻单骑 26番 两倍役满<br>
-                纯正九莲宝灯 26番 两倍役满<br>
-                古役：人和 13番 役满<br>
-                古役：大七星 26番 两倍役满<br>
+                （此处不计）古役：燕返 1番<br>
+                （此处不计）古役：杠振 1番<br>
+                （此处不计）天和 13番 役满<br>
+                （此处不计）地和 13番 役满<br>
+                （已做）四杠子 13番 役满<br>  
+                （已做）大三元 13番 役满<br>
+                （已做）小四喜 13番 役满<br>
+                （已做）字一色 13番 役满<br>
+                （已做）绿一色 13番 役满<br>
+                （已做）清老头 13番 役满<br>
+                （此处不计）国士无双 13番 役满<br>
+                （此处不计）四暗刻 13番 役满<br>
+                （此处不计）九莲宝灯 13番 役满<br>
+                （已做）大四喜 26番 两倍役满<br>
+                （已做）国士无双十三面 26番 两倍役满 <br>
+                （已做）四暗刻单骑 26番 两倍役满<br>
+                （已做）纯正九莲宝灯 26番 两倍役满<br>
+                （此处不计）古役：人和 13番 役满<br>
+                （已做）古役：大七星 26番 两倍役满<br>
             </p>`;
         }
     </script>
@@ -83,20 +99,44 @@
     <script src="../scripts/apps.js"></script>
 
     <script>
+        var max = (a, b) => (a > b ? a : b);
+        var min = (a, b) => (a < b ? a : b);
         var validcards = ["1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "1S", "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "1M", "2M", "3M", "4M", "5M", "6M", "7M", "8M", "9M", "E", "S", "W", "N", "B", "F", "Z"];
         var chinese = ["役满", "两倍役满", "三倍役满", "四倍役满", "五倍役满", "六倍役满"];    
 
         function GuoshiDist(hand) {
-            if (hand.length != 14) return 0x3f3f3f3f;
-            var map = {}, on = ["1M"];
-            for (var card of validcards) map[card] = 0;
-            for (var card of hand) map[card] += 1;
-            var distance = 0;
+            if (hand.length < 13) return 0x3f3f3f3f;
+
+            var mapcard = {};
+            for (var card of validcards) mapcard[card] = 0;
+            for (var card of hand) mapcard[card] += 1;
+
+            var onine = ["1M", "9M", "1S", "9S", "1P", "9P", "E", "W", "N", "S", "B", "F", "Z"];
+            var kinds = 0, doubles = 0;
+            for (var card of onine)
+                if (mapcard[card] == 1) kinds += 1;
+                else if (mapcard[card] > 1) kinds += 1, doubles += 1;
+            if (kinds == 13 && doubles == 0) return 1;
+            if (doubles) return 13 - kinds;
+            return 14 - kinds;
         }
 
-        function Windist(hand) {
-            var max = (a, b) => (a > b ? a : b);
-            var min = (a, b) => (a < b ? a : b);
+        function QiDuiDist(hand) {
+            if (hand.length < 13) return 0x3f3f3f3f;
+
+            var mapcard = {};
+            for (var card of validcards) mapcard[card] = 0;
+            for (var card of hand) mapcard[card] += 1;
+            var already2 = 0, already3 = 0, already4 = 0;
+            for (var card of validcards)
+                if (mapcard[card] == 2) already2 += 1;
+                else if (mapcard[card] == 3) already3 += 1;
+                else if (mapcard[card] == 4) already4 += 1;
+            var thrown = already3 + already4 * 2;
+            return max(thrown, 7 - (already3 + already4 + already2));
+        }
+
+        function WinDist(hand) {
             var dp = []; // [34][5][2][5][5]
             for (var i = 0; i < 44; i++) {
                 var sub = [];
@@ -111,10 +151,9 @@
                         } sub2.push(sub3);
                     } sub.push(sub2);
                 } dp.push(sub);
-            } console.log(dp);
+            } 
             dp[0][0][0][0][0] = 0;
             var xxx = Math.floor(hand.length / 3);
-            console.log(xxx);
             for (var i = 0; i < 34; i++) {
                 var has = 0;
                 for (var j of hand) has += (Valueize(j) == i);
@@ -135,7 +174,8 @@
                             if ((i) % 9 == 0 || (i) >= 27) break;
                         }
             }
-            return min(dp[34][xxx][1][0][0], min(GuoshiDist(), QiDuiDist()));
+            return dp[34][xxx][1][0][0];
+            // return 0x3f3f3f3f;
         }
 
         function Clear() {
@@ -152,7 +192,6 @@
                 }
             // console.log("Validating", fl);
             if (fl.length % 3 != 0) {
-                console.log(fl);
                 res.innerHTML = `【错误】附露的数量不为三的倍数。`;
                 return false;
             }
@@ -191,8 +230,8 @@
             for (var card of ag) map[card] += 1;
             for (var card of mg) map[card] += 1;
             for (var card of fl) map[card] += 1;
-            var dist = Windist(hd);
-            if (dist != 0) {
+            var dist = WinDist(hd);
+            if (dist != 0 && QiDuiDist(hd) != 0 && GuoshiDist(hd) != 0) {
                 res.innerHTML = `【错误】诈和！和牌距离：${dist}`;
                 return false;
             }
@@ -222,13 +261,12 @@
             for (var card of fl) map[card] += 1;
             var greater3 = 0;
             for (var card of validcards) greater3 += (map[card] >= 3);
-            console.log(validcards, map);
             for (var card of validcards) 
                 if (map[card] > 4) {
                     res.innerHTML = `【错误】${card} 有超过 4 张。`;
-                    console.log(res, res.innerHTML);
                     return 114514;
                 }
+            DaQiXing = () => (map["E"] + map["N"] + map["S"] + map["W"] + map["B"] + map["F"] + map["Z"] == count && map["E"] && map["N"] && map["S"] && map["B"]);
             ZiYiSe = () => (count == map["E"] + map["N"] + map["S"] + map["W"] + map["B"] + map["F"] + map["Z"]); 
             LvYiSe = () => (count == map["2S"] + map["3S"] + map["4S"] + map["6S"] + map["8S"] + map["F"]);
             QingLaoTou = () => (count == map["1M"] + map["9M"] + map["1S"] + map["9S"] + map["1P"] + map["9P"]);
@@ -256,7 +294,8 @@
             var yakumans = []; 
             var times = -1;
             if (ag.length + mg.length == 16) yakumans.push("四杠子 役满"), times++;
-            if (ZiYiSe(hd, fl, ag, mg)) yakumans.push("字一色 役满"), times++;
+            if (ancients && DaQiXing(hd, fl, ag, mg)) yakumans.push("大七星 两倍役满"), times++, times++;
+            else if (ZiYiSe(hd, fl, ag, mg)) yakumans.push("字一色 役满"), times++;
             if (LvYiSe(hd, fl, ag, mg)) yakumans.push("绿一色 役满"), times++;
             if (QingLaoTou(hd, fl, ag, mg)) yakumans.push("清老头 役满"), times++;
             if (DaSanYuan(hd, fl, ag, mg)) yakumans.push("大三元 役满"), times++;
@@ -274,6 +313,99 @@
             } else return false;
         }
 
+        function CalculateFans(hd, fl, ag, mg, res) {
+            var map = {};
+            var count = hd.length + fl.length + ag.length + mg.length;
+            for (var card of validcards) map[card] = 0;
+            for (var card of hd) map[card] += 1;
+            for (var card of ag) map[card] += 1;
+            for (var card of mg) map[card] += 1;
+            for (var card of fl) map[card] += 1;
+
+            var onine = ["1M", "9M", "1S", "9S", "1P", "9P", "B", "F", "Z", "E", "W", "S", "N"];
+            var words = ["B", "F", "Z", "W", "E", "S", "N"];
+            var onesum = 0, wordsum = 0;
+            for (var card of onine) onesum += map[card];
+            for (var word of words) wordsum += map[word];
+
+            var pongpong = false;
+            var doorclear = true;
+            if (fl.length || mg.length) doorclear = false;
+            var fans = 0;
+            var yis = [];
+            if (map["B"] >= 3) {
+                yis.push("役牌：白 1番");
+                fans += 1;
+            }
+            if (map["Z"] >= 3) {
+                yis.push("役牌：中 1番");
+                fans += 1;
+            }
+            if (map["F"] >= 3) {
+                yis.push("役牌：发 1番");
+                fans += 1;
+            }
+            if (map["F"] >= 3 && map["B"] >= 3 && map["Z"] == 2 || map["F"] >= 3 && map["B"] == 2 && map["Z"] >= 3 || map["F"] == 2 && map["B"] >= 3 && map["Z"] >= 3) {
+                yis.push("小三元 2番");
+                fans += 2;
+            }
+            if (onesum == 0) {
+                yis.push("断幺九 1番");
+                fans += 1;
+            }
+            if (onesum >= count) {
+                yis.push("混老头 2番");
+                pongpong = true;
+                yis.push("对对和 2番");
+                fans += 4;
+            }
+            if (ag.length + mg.length >= 12) {
+                yis.push("三杠子 2番");
+                fans += 2;
+            }
+            if (map["B"] + map["F"] + map["Z"] + map["E"] + map["W"] + map["N"] + map["S"] == 0 && 
+                (
+                    map["1M"] + map["2M"] + map["3M"] + map["4M"] + map["5M"] + map["6M"] + map["7M"] + map["8M"] + map["9M"] >= count ||
+                    map["1P"] + map["2P"] + map["3P"] + map["4P"] + map["5P"] + map["6P"] + map["7P"] + map["8P"] + map["9P"] >= count || 
+                    map["1S"] + map["2S"] + map["3S"] + map["4S"] + map["5S"] + map["6S"] + map["7S"] + map["8S"] + map["9S"] >= count
+                )
+            ) {
+                console.log(doorclear);
+                yis.push(`清一色 ${doorclear ? "6" : "5"}番`);
+                fans += (doorclear ? 6 : 5);
+            } else if (
+                map["1M"] + map["2M"] + map["3M"] + map["4M"] + map["5M"] + map["6M"] + map["7M"] + map["8M"] + map["9M"] >= count - wordsum ||
+                map["1P"] + map["2P"] + map["3P"] + map["4P"] + map["5P"] + map["6P"] + map["7P"] + map["8P"] + map["9P"] >= count - wordsum || 
+                map["1S"] + map["2S"] + map["3S"] + map["4S"] + map["5S"] + map["6S"] + map["7S"] + map["8S"] + map["9S"] >= count - wordsum
+            ) {
+                yis.push(`混一色 ${doorclear ? "3" : "2"}番`);
+                fans += (doorclear ? 3 : 2);
+            }
+
+            if (QiDuiDist(hd) == 0 && WinDist(hd) != 0) {
+                yis.push("七对子 2番");
+                fans += 2;
+            } else if (QiDuiDist(hd) == 0) {
+                yis.push("两杯口 3番");
+                yis.push("平和 1番");
+                fans += 4;
+            }
+
+            for (var yi of yis) {
+                res.innerText += yi;
+                res.innerHTML += "<br>";
+            }
+
+            res.innerHTML += `${fans}番<br>`;
+            if (fans >= 5) {
+                if (fans == 5) res.innerHTML += "满贯<br>";
+                else if (fans <= 7) res.innerHTML += "跳满<br>";
+                else if (fans <= 10) res.innerHTML += "倍满<br>";
+                else if (fans <= 12) res.innerHTML += "三倍满<br>";
+                else res.innerHTML += "累计役满<br>";
+            } else res.innerHTML += "屁胡<br>";
+        } 
+
         function Calculate() {
             Clear();
             var handcards = document.getElementById("handcard").value;
@@ -284,20 +416,17 @@
             var cards = Split(`${handcards} ${fulucards} ${angangcards} ${mggangcards}`);
             var hand = Split(handcards, true);
             var fulu = Split(fulucards, false);
-            console.log(fulu);
-            console.log(fulucards);
             var angang = Split(angangcards, true);
             var mggang = Split(mggangcards, true);
             var ret = Validate(cards, hand, fulu, angang, mggang, result);
             if (!ret) return;
-            console.log(fulu);
             result.innerHTML = `${hand.join(' ')} | ${fulu ? fulu.join(' ') : ''} ${mggang ? mggang.join(' ') : ''} ${angang ? angang.join(' ') : ''} <br>`;
             var yakuman = Yakumans(hand, fulu, angang, mggang, result);
-            console.log("Yakumans");
             if (yakuman) {
                 if (yakuman == true) result.style.color = "red";
                 return;
             }
+            CalculateFans(hand, fulu, angang, mggang, result);
         }
     </script>
 </body>

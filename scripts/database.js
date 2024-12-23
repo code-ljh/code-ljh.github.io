@@ -203,7 +203,7 @@ var categories = [
 
 var tools = [
     ["commandline", "命令行", "commandline.html", "网站内命令行"],
-    ["mahjong", "日嘛算番数", "mahjong.html", "雀魂"],
+    ["mahjong", "日麻算番数（烂尾）", "mahjong.html", "雀魂"],
 ]
 
 var applist = ["倒计时", "日历", "一言", "时钟"];

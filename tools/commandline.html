@@ -36,9 +36,11 @@
                 [["quit"], (op) => {window.location.href = "https://www.luogu.com.cn";}],
                 [["quit", "in", "<num>"], (op) => {setTimeout(() => {window.location.href = "https://www.luogu.com.cn";}, op[1])}],
                 [["help"], (op) => {var res = "";for (var i in commands) res += Joins(commands[i][0]) + "<br>"; return res;}],
-                [["help", "<cmd>"], (op) => {console.log(op);var res = "";for (var i in commands) if (op[0] == commands[i][0][0])res += Joins(commands[i][0]) + "<br>"; return res;}]
+                [["help", "<cmd>"], (op) => {var res = "";for (var i in commands) if (op[0] == commands[i][0][0])res += Joins(commands[i][0]) + "<br>"; return res;}],
+                [["goto", "<url>"], (op) => {window.location.href = op[0];}]
             ];
-            var cmds = ["quit", "help"];
+            var cmds = ["quit", "help", "goto"];
+            console.log("Commands: ", commands, cmds);
             var splitted = cmd.split(' ');
             var returned = `>>> &&&@@@<span style="color:red"&&&@@@>${splitted[0]}&&&@@@</span&&&@@@> &&&@@@<span style="color:#555500"&&&@@@>${Joins(splitted.slice(1))}&&&@@@</span&&&@@@><br> `;
             console.log(splitted);
@@ -50,6 +52,7 @@
                     for (var j in commands[i][0]) {
                         if (commands[i][0][j] == "<num>" && splitted[j].match("^[0-9]+$")) continue;
                         if (commands[i][0][j] == "<cmd>" && cmds.indexOf(splitted[j]) != -1) continue;
+                        if (commands[i][0][j] == "<url>" && splitted[j].match("^https://[0-9.a-zA-Z/]*$")) continue;
                         if (commands[i][0][j][0] != "<" && splitted[j] == commands[i][0][j]) continue;
                         matches = false; 
                     }
@@ -73,7 +76,6 @@
 
         var inputbox = document.getElementById("inputbox");
         var func = (event) => {
-            console.log(event);
             if (event.key == 'Enter') {
                 RunCommand(inputbox.value);
                 inputbox.value = "";
