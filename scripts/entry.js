@@ -44,4 +44,15 @@ function main(pages) {
 
     if (real.includes("articles") && real.includes("nav."))
         initArticleList();
+
+    setTimeout(() => {
+        hljs.highlightAll();
+        setTimeout(() => {
+            var list = document.getElementsByClassName("hljs");
+            for (var ele of list) {
+                ele.style.background = "#000000";
+                ele.style.color = "#555555";
+            }
+        }, 200);      
+    }, 200);
 }
