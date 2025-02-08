@@ -1,0 +1,61 @@
+p, h1, h2, h3, h4, h5, h6, pre, code {
+    color: #dddddd;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin: 5px;
+}
+
+h6 {
+    color: #cccccc;
+}
+
+h5 {
+    color: #bbbbbb;
+}
+
+h4 {
+    color: #aaaaaa;
+}
+
+h3 {
+    color: #999999;
+}
+
+h2 {
+    color: #888888;
+}
+
+h1 {
+    color: #777777;
+}
+
+ul, table, td, th, tfoot, thead, li {
+    color: #dddddd;
+}
+
+pre {
+    padding: 8px;
+    background-color: #000000;
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+    overflow-y: auto;
+}
+
+body {
+    margin: 0;
+    background-color: #555555;
+}
+
+.boxshadow {
+    border: 1px solid #000000;
+    box-shadow: 0 1px 8px #00000033;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 1px 8px #00000033;
+    border: 1px solid #000000;
+    margin: 7px;
+    padding: 7px;
+    background-color: #00000088;
+}

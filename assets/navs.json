@@ -1,0 +1,10 @@
+{
+    "entry": ["homepage", "settings", "articles", "applications", "warehouse"],
+    "navigations": {
+        "settings": {"icon": "/assets/images/settings.svg", "link": "nav.settings"},
+        "homepage": {"icon": "/assets/images/homepage.svg", "link": "nav.homepage"},
+        "articles": {"icon": "/assets/images/articles.svg", "link": "nav.articles"},
+        "applications": {"icon": "/assets/images/applications.svg", "link": "nav.applications"},
+        "warehouse": {"icon": "/assets/images/warehouse.svg", "link": "nav.warehouse"}
+    }
+}

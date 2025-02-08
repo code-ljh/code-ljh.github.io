@@ -1,0 +1,116 @@
+@keyframes becomegrey {
+    from {
+        background-color: #00000000
+    } to {
+        background-color: #00000033
+    }
+}
+
+@keyframes becamegrey {
+    from {
+        background-color: #00000033
+    } to {
+        background-color: #00000000
+    }
+}
+
+@keyframes becomechosen {
+    0% {
+        background-color: #00000033;
+    }100% {
+        background-color: #00000088;
+    }
+}
+
+@keyframes becamechosen {
+    0% {
+        background-color: #00000088;
+    } 100% {
+        background-color: #00000033;
+    }
+}
+
+#lead-bar {
+    position: fixed;
+    top: 0;
+    left: 7vh;
+    right: 0;
+    bottom: 93vh;
+    background-color: #00000055;
+}
+
+#nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: calc(100vw - 7vh);
+    bottom: 0; 
+    background-color: #00000055;
+}
+
+.nav-items {
+    position: fixed;
+    left: 0;
+    right: calc(100vw - 7vh);
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000000;
+    animation: becamegrey 0.5s;
+}
+
+.nav-items:hover {
+    background-color: #00000033;
+    animation: becomegrey 0.5s;
+}
+
+.nav-images {
+    height: 3vh;
+    width: 3vh;
+}
+
+#main {
+    position: absolute;
+    top: 7vh;
+    left: 7vh;
+    right: 0px;
+    min-height: 80vh;
+}
+
+#main-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 30%;
+    min-height: 80vh;
+}
+
+#main-right {
+    position: absolute;
+    top: 0;
+    left: 70%;
+    right: 0;
+    min-height: 80vh;
+}
+
+.article-box {
+    margin: 5px;
+    background-color: #00000033;
+    padding-left: 15px;
+    border-radius: 5px;
+    animation: becamechosen 0.5s;
+}
+
+.article-box:hover {
+    background-color: #00000088;
+    animation: becomechosen 0.5s;
+} 
+
+.article-box>p {
+    margin: 15px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
