@@ -96,16 +96,29 @@
 
 .article-box {
     margin: 5px;
-    background-color: #00000033;
     padding-left: 15px;
     border-radius: 5px;
-    animation: becamechosen 0.5s;
 }
 
-.article-box:hover {
+.canchosen {
+    animation: becamechosen 0.5s;
+    background-color: #00000033;
+}
+
+.canchosen:hover {
     background-color: #00000088;
     animation: becomechosen 0.5s;
-} 
+}
+
+.cardchosen {
+    animation: becomechosen 0.5s;
+    background-color: #00000088;
+}
+
+.cardchosen:hover {
+    background-color: #00000033;
+    animation: becamechosen 0.5s;
+}
 
 .article-box>p {
     margin: 15px;

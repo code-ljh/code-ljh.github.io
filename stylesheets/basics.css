@@ -5,6 +5,18 @@ p, h1, h2, h3, h4, h5, h6, pre, code {
     margin: 5px;
 }
 
+a {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin: 5px;
+    padding: 5px;
+}
+
+input {
+    font-family: 'Fira Code';
+    font-size: 18px;
+}
+
 h6 {
     color: #cccccc;
 }
@@ -46,6 +58,64 @@ body {
     background-color: #555555;
 }
 
+@keyframes changelink {
+    from {
+        color: #5555ff
+    } to {
+        color: #aaaaff
+    }
+}
+
+@keyframes changedlink {
+    from {
+        color: #aaaaff
+    } to {
+        color: #5555ff
+    }
+}
+
+a {
+    color: #5555ff;
+    animation: changedlink 0.5s;
+    text-decoration: none
+}
+
+a:hover {
+    color: #aaaaff;
+    animation: changelink 0.5s;
+}
+
+a>* {
+    color: #5555ff;
+    animation: changedlink 0.5s;
+}
+
+a>*:hover {
+    color: #aaaaff;
+    animation: changelink 0.5s;
+}
+
+.linking {
+    color: #5555ff;
+    animation: changedlink 0.5s;
+    text-decoration: none
+}
+
+.linking:hover {
+    color: #aaaaff;
+    animation: changelink 0.5s;
+}
+
+.linking>* {
+    color: #5555ff;
+    animation: changedlink 0.5s;
+}
+
+.linking>*:hover {
+    color: #aaaaff;
+    animation: changelink 0.5s;
+}
+
 .boxshadow {
     border: 1px solid #000000;
     box-shadow: 0 1px 8px #00000033;
@@ -58,4 +128,10 @@ body {
     margin: 7px;
     padding: 7px;
     background-color: #00000088;
+}
+
+.centeritems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

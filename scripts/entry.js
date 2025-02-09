@@ -1,5 +1,9 @@
 import {initNavigation} from '/scripts/classes/navigation.js';
-import {initArticle, initArticleList} from '/scripts/classes/articles.js';
+import {initSettings, GetSettings} from '/scripts/classes/settings.js';
+import {
+    initArticle, initArticleList,
+    initApplication, initApplicationList
+} from '/scripts/classes/articles.js';
 
 fetch('/assets/pages.json')
     .then((response) => {return response.json()})
@@ -8,10 +12,12 @@ fetch('/assets/pages.json')
     });
 
 function initFrame() {
-    var leadbar = document.createElement("div");
-    leadbar.id = "lead-bar";
-    leadbar.className = "boxshadow";
-    document.body.appendChild(leadbar);
+    if (GetSettings("show-leading") == 'yes') {
+        var leadbar = document.createElement("div");
+        leadbar.id = "lead-bar";
+        leadbar.className = "boxshadow";
+        document.body.appendChild(leadbar);
+    }
     var navbar = document.createElement("div");
     navbar.id = "nav-bar";
     navbar.className = "boxshadow";
@@ -28,22 +34,43 @@ function initFrame() {
     right.id = "main-right";
     right.className = "card";
     main.appendChild(right);
+    if (GetSettings("show-leading") == 'no') {
+        main.style.top = "0px";
+    }
 } 
 
 function main(pages) {
+    document.body.spellcheck = false;
+    initFrame();
+
     var link = window.location.href;
     if (!link.includes("?")) 
         window.location.href = link + "?nav.homepage";
     var sharp = link.indexOf("?");
     var real = link.slice(sharp + 1);
+    
+    if (!pages[real]) {
+        var main = document.getElementById("main-left");
+        main.innerHTML = `<p>Error 404 page not found</p>`;
+        return;
+    }
+    
     document.title = pages[real]["title"];
-    initFrame();
 
     if (real.includes("articles."))
         initArticle(real.slice(9));
 
     if (real.includes("articles") && real.includes("nav."))
         initArticleList();
+
+    if (real.includes("applications."))
+        initApplication(real.slice(13));
+
+    if (real.includes("applications") && real.includes("nav."))
+        initApplicationList();
+
+    if (real.includes("settings"))
+        initSettings();
 
     setTimeout(() => {
         hljs.highlightAll();
