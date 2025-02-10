@@ -10,30 +10,47 @@ export function initArticle(real) {
             datathis = json[real]; 
             var main = document.getElementById("main-left");
             var other = document.getElementById("main-right");
-            main.style.overflowY = "auto";
-            main.style.height = "90vh";
             fetch(`/articles/${real}.md`)
                 .then((response) => {return response.text();})
                 .then((text) => {
-                    main.innerHTML = marked.parse(text).replaceAll("\t", "    ");
+                    var txt = (text).replaceAll("\t", "    ");
+                    console.log(main);
                     other.innerHTML = `<p>${datathis}</p><hr>`;
-                    
-                    var titles = [];
-                    for (var i of main.children) 
-                        if (i.tagName[0] == "H") {
-                            var para = i.innerText;
-                            for (var j = 0; j < parseInt(i.tagName[1]); j++) para = '-' + para;
-                            other.innerHTML += `<p>${para}</p>`;
-                        }
 
-                    setTimeout(() => {
-                        renderMathInElement(main, {
+                    function Markatex(str) {
+                        document.body.innerHTML += `<textarea id="ta" style="display:none;">${str}</textarea>`;
+                        renderMathInElement(document.getElementById("ta"), {
                             delimiters: [
                                 {left: "$$", right: "$$", display: true},
                                 {left: "$", right: "$", display: false}
                             ],
                             throwOnError: false
-                        })
+                        });
+                        var txt = document.getElementById("ta").innerHTML;
+                        document.getElementById("ta").remove();
+                        return marked.parse(txt.replaceAll("&gt;", ">").replaceAll("&lt;", "<"));
+                    } 
+
+                    setTimeout(() => {
+                        document.getElementById("main-left").innerHTML = Markatex(txt);
+                        document.getElementById("main").appendChild(main);
+                        console.log(main);
+                        document.getElementById("main-left").remove();
+                    
+                        var titles = [];
+                        var md = `${datathis}\n\n---\n\n`;
+                        for (var i of main.children) 
+                            if (i.tagName[0] == "H") {
+                                var para = i.innerHTML;
+                                for (var j = 0; j < parseInt(i.tagName[1]); j++) para = '\\>$\ $' + para;
+                                md += `${para}\n\n`;
+                            }
+
+                        console.log(md);
+                        
+                        other.innerHTML = Markatex(md);
+                        document.getElementById("main").appendChild(other);
+                        document.getElementById("main-right").remove();
                     }, 200);
                 }) 
         });

@@ -1,3 +1,8 @@
+var defaultset = {
+    "link-behavior": "anothertab",
+    "show-leading": "yes"
+};
+
 export function initSettings() {
     var entry = ["link-behavior", "show-leading"];
 
@@ -26,10 +31,7 @@ export function initSettings() {
         return true;
     }
 
-    var defaults = {
-        "link-behavior": "anothertab",
-        "show-leading": "yes"
-    };
+    var defaults = defaultset;
 
     if (!Valid(localStorage.getItem("settings"))) {
         localStorage.setItem("settings", JSON.stringify(defaults));
@@ -41,9 +43,9 @@ export function initSettings() {
     
     for (var i of entry) {
         main.innerHTML += `
-            <div id="${i}" class="card" style="display: flex; justify-content: center; align-items:center">
-                <p>${assets[i]["description"]}</p>
-                <p>${defaults[i]}</p>
+            <div id="${i}" class="card cardchosen" style="display: flex; justify-content: center; align-items:center">
+                <p class="linking">${assets[i]["description"]}</p>
+                <p class="linking">${defaults[i]}</p>
             </div>
         `;
     }
@@ -62,6 +64,6 @@ export function initSettings() {
 
 export function GetSettings(key) {
     var set = JSON.parse(localStorage.getItem("settings"));
-    console.log(set, key);
+    if (!localStorage.getItem("settings")) localStorage.setItem("settings", JSON.stringify(defaultset));
     return set[key];
 }

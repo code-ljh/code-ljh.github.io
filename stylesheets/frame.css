@@ -83,7 +83,8 @@
     top: 0;
     left: 0;
     right: 30%;
-    min-height: 80vh;
+    height: 85vh;
+    overflow:auto;
 }
 
 #main-right {
@@ -91,7 +92,8 @@
     top: 0;
     left: 70%;
     right: 0;
-    min-height: 80vh;
+    height: 85vh;
+    overflow: auto;
 }
 
 .article-box {
@@ -125,5 +127,23 @@
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    background: #181c27;
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #687582
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5e72e4
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent
+}
+
+body {
+    overflow: hidden;
 }

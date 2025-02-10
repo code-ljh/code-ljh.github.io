@@ -1,9 +1,18 @@
 {
-    "articles": ["quickio", "P7147", "input"],
-    "applications": ["cfrand", "katex"],
+    "articles": [
+        "quickio",
+        "P7147",
+        "input",
+        "maxflow"
+    ],
+    "applications": [
+        "cfrand",
+        "katex"
+    ],
     "quickio": "Yet Another Code Template for fastio in C++.",
     "P7147": "Solution of P7147 in Luogu.",
     "cfrand": "Yet Another Random Codeforces Problemsetter.",
     "katex": "Yet Another Online Katex Editor.",
-    "input": "Experiment of ways to input in C++"
+    "input": "Experiment of ways to input in C++",
+    "maxflow": "Some notes for maxflow algorithms"
 }

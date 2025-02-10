@@ -34,12 +34,10 @@ function initFrame() {
     right.id = "main-right";
     right.className = "card";
     main.appendChild(right);
-    if (GetSettings("show-leading") == 'no') {
-        main.style.top = "0px";
-    }
+    if (GetSettings("show-leading") == 'no') main.style.top = "0px";
 } 
 
-function main(pages) {
+async function main(pages) {
     document.body.spellcheck = false;
     initFrame();
 

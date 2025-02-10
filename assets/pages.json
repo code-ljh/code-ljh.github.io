@@ -1,12 +1,35 @@
 {
-    "nav.homepage": {"title": "Homepage"},
-    "nav.warehouse": {"title": "Warehouse"},
-    "nav.applications": {"title": "Applications"},
-    "nav.settings": {"title": "Settings"},
-    "nav.articles": {"title": "Articles"},
-    "articles.input": {"title": "Input Experiment"},
-    "articles.quickio": {"title": "Quickio Template"},
-    "articles.P7147": {"title": "Solution of P7147"},
-    "applications.cfrand": {"title": "Random Codeforces"},
-    "applications.katex": {"title": "Katex Editor"}
+    "nav.homepage": {
+        "title": "Homepage"
+    },
+    "nav.warehouse": {
+        "title": "Warehouse"
+    },
+    "nav.applications": {
+        "title": "Applications"
+    },
+    "nav.settings": {
+        "title": "Settings"
+    },
+    "nav.articles": {
+        "title": "Articles"
+    },
+    "articles.input": {
+        "title": "Input Experiment"
+    },
+    "articles.quickio": {
+        "title": "Quickio Template"
+    },
+    "articles.P7147": {
+        "title": "Solution of P7147"
+    },
+    "applications.cfrand": {
+        "title": "Random Codeforces"
+    },
+    "applications.katex": {
+        "title": "Katex Editor"
+    },
+    "articles.maxflow": {
+        "title": "Maxflow Algorithms"
+    }
 }
