@@ -1,0 +1,108 @@
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code {
+    font-family: 'Fira Code';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.up {
+    display: inline-block;
+    text-decoration: none;
+    font-family: sans-serif;
+    transition: transform 0.3s ease-out;
+}
+
+.up:hover {
+    transform: translateY(-3px);
+}
+
+.greyed {
+    opacity: 0.7;
+    filter: grayscale(0%);
+    transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.greyed:hover {
+    background-color:#00000005;
+    opacity: 1;
+}
+
+.disgreyed {
+    background-color: #00000011;
+}
+
+.card {
+    border-radius: 15px;
+    border: 3px solid #00000011;
+    box-shadow: 2px 2px 2px #00000011;
+    margin: 5px;
+    padding: 15px;
+}
+
+*::-webkit-scrollbar {
+    display:none;
+}
+
+.button {
+    border-radius: 15px;
+    background-color: #00000011;
+    border: 3px solid #00000011;
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 15px;
+}
+
+*::selection {
+    background-color: rgba(103, 170, 234, 0.243);
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+blockquote {
+    background-color: #00000011;
+    padding: 15px;
+}
+
+p, b, div {
+    color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    border: 2px solid #00000011;
+    padding: 8px;
+    padding-top: 12px;
+    border-radius: 5px;
+}
+
+a {
+    color: lightskyblue;
+}
+
+a:hover {
+    color: lightsteelblue;
+}
