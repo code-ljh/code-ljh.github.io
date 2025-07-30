@@ -1,8 +1,11 @@
-function addarticle(i) {
+function addshowcard(i, type="article") {
     var parent = document.getElementById("main");
     var articlecard = document.createElement("a");
     parent.appendChild(articlecard);
     articlecard.classList.add("card");
+    articlecard.style.backgroundColor = (
+        type == "article" ? "#00000005" : "#ff000005");
+    console.log(articlecard.style.backgroundColor, articlecard);
     articlecard.style.margin = "15px";
     articlecard.style.marginTop = "7px";
     articlecard.style.display = "flex";
@@ -19,13 +22,35 @@ function addarticle(i) {
     descrbar.style.borderTop = "2px solid #00000022";
     descrbar.style.paddingTop = "20px";
     descrbar.style.margin = "2px";
-    var catebar = document.createElement("p");
-    catebar.style.color = "#00000055";
-    catebar.innerText = `Posted under ${i["categories"].join("/")}`;
-    catebar.style.margin = "2px";
+    var catebar = document.createElement("div");
+    catebar.innerHTML = `<a style="color:#00000055;margin: 0px;" 
+        href="${'/categories.html?' + (i['categories'].join('.'))}">
+        ${i["categories"].join("/")}
+        </p>`;
+    catebar.style.margin = "0px";
+    catebar.style.padding = "0px";
+    catebar.style.justifySelf = "left";
+    catebar.style.textAlign = "right";
     var tagsbar = document.createElement("div");
     tagsbar.style.display = "flex";
     tagsbar.style.flexDirection = "row";
+    var ttt = document.createElement("a");
+        ttt.classList.add("card");
+        ttt.classList.add("centered");
+        ttt.classList.add("up");
+        ttt.style.padding = "5px";
+        ttt.style.borderRadius = "10px";
+    var p = document.createElement("p");
+    p.style.fontSize = "12px";
+    p.style.margin = "0";
+    p.style.padding = "0";
+    p.innerText = ":>>>";
+    ttt.appendChild(p);
+    ttt.style.backgroundColor = "#00ff0007";
+    ttt.href = (type == "article" ? 
+        `/articles/show.html?${i["id"]}` : 
+        `/applications/${i["id"]}/main.html`);
+    tagsbar.appendChild(ttt);
     for (var j of i["tags"]) {
         var tag = document.createElement("a");
         tag.classList.add("card");
@@ -40,16 +65,28 @@ function addarticle(i) {
         p.innerText = j;
         tag.appendChild(p);
         tag.href = `/tags.html?${j}`;
-        tag.style.backgroundColor = "#ffffff";
+        tag.style.backgroundColor = "#ffffff00";
         tagsbar.appendChild(tag);
     }
     articlecard.appendChild(titlebar);
     articlecard.appendChild(descrbar);
     articlecard.appendChild(catebar);
     articlecard.appendChild(tagsbar);
-    articlecard.classList.add("up");
-    articlecard.style.backgroundColor = "#00000005";
-    articlecard.href = `/articles/show.html?${i["id"]}`;
+    articlecard.style.transition = "background-color 0.3s";
+    // articlecard.classList.add("hover-white");
+    // articlecard.style.backgroundColor = "#00000005";
+    articlecard.href = (type == "article" ? 
+        `/articles/show.html?${i["id"]}` : 
+        `/applications/${i["id"]}/main.html`);
+}
+
+function loadapplications(data) {
+    if (applicationsname == "__list__") {
+        var parent = document.getElementById("main");
+        parent.style.flexDirection = "column";
+        for (var i of data)
+            addshowcard(i, "application");        
+    }
 }
 
 function loadarticles(data) {
@@ -57,7 +94,7 @@ function loadarticles(data) {
         var parent = document.getElementById("main");
         parent.style.flexDirection = "column";
         for (var i of data)
-            addarticle(i);
+            addshowcard(i);
     } else {
         var found;
         for (var i of data)
@@ -108,8 +145,9 @@ function loadarticles(data) {
                         tag.classList.add("card");
                         tag.classList.add("centered");
                         tag.classList.add("up");
+                        tag.style.color = "#00000050";
                         tag.style.padding = "10px";
-                        tag.innerHTML = `<p style="margin:0;padding:0;">under ${found["categories"].join(".")}</p>`;
+                        tag.innerHTML = `<p style="margin:0;padding:0; color:#00000050">return to /${found["categories"].join("/")}/</p>`;
                         tag.href = `/categories.html?${found["categories"].join(".")}`;
                         articlecard.appendChild(tag);
                         parent.appendChild(articlecard);
@@ -119,9 +157,13 @@ function loadarticles(data) {
     }
 }
 
-function loadtags(data) {
+function loadtags(data, dtat) {
     taglist = {};
     for (var i of data)
+        for (var j of i["tags"])
+            if (taglist[j] == undefined) taglist[j] = 1;
+            else taglist[j] += 1;
+    for (var i of dtat)
         for (var j of i["tags"])
             if (taglist[j] == undefined) taglist[j] = 1;
             else taglist[j] += 1;
@@ -139,69 +181,59 @@ function loadtags(data) {
                 articlecard.innerHTML = "<h2>An overall list of all tags</h2>";
                 articlecard.children[0].style.margin = "-5px";
                 articlecard.children[0].style.border = "0px";
+                var tagsbars = [
+                    document.createElement("div"),
+                    document.createElement("div"),
+                    document.createElement("div"),
+                    document.createElement("div")
+                ];
                 var tagsbar = document.createElement("div");
-                var tagsbarleft = document.createElement("div");
-                var tagsbarmiddle = document.createElement("div");
-                var tagsbarright = document.createElement("div");
-                tagsbarleft.style.display = "flex";
-                tagsbarleft.style.flexDirection = "column";
-                tagsbarleft.style.padding = "15px";
-                tagsbarright.style.display = "flex";
-                tagsbarright.style.flexDirection = "column";
-                tagsbarright.style.padding = "15px";
-                tagsbarright.style.paddingLeft = "0";
-                tagsbarmiddle.style.display = "flex";
-                tagsbarmiddle.style.flexDirection = "column";
-                tagsbarmiddle.style.padding = "15px";
-                tagsbarmiddle.style.paddingLeft = "0";
+
+                for (var i of tagsbars) {
+                    i.style.display = "flex";
+                    i.style.flexDirection = "column";
+                    i.style.padding = "7.5px";
+                    i.style.flex = "1";
+                    tagsbar.appendChild(i);
+                }
+
                 tagsbar.style.display = "flex";
                 tagsbar.style.flexDirection = "row";
-                tagsbarleft.style.flex = "1";
-                tagsbarright.style.flex = "1";
-                tagsbarmiddle.style.flex = "1";
 
                 var index = 0;
-                for (var i in taglist) {
+                for (var i of Object.keys(taglist).sort()) {
                     var tag = document.createElement("a");
                     tag.classList.add("card");
                     tag.classList.add("centered");
                     tag.classList.add("hover-box");
+                    tag.classList.add("up");
                     laston = undefined;
-                    // tag.onmouseover = (evt) => {
-                        // if (evt.fromElement.tagName == "A")
-                            // evt.fromElement.children[1].style.display = "flex",
-                            // laston = evt.fromElement.children[1];
-                    // };
-                    // tag.onmouseleave = (evt) => {
-                        // if (evt.fromElement.tagName == "A")
-                            // evt.fromElement.children[1].style.display = "none";
-                    // }
                     tag.style.padding = "10px";
                     tag.innerHTML = `<p style="margin:0;padding:0;">${i}</p>`;
                     tag.innerHTML += `
-                        <div class="centered" style="color:#ffffff;background-color:#00000050;display:flex;position:absolute;transform:translate(0,100%)">
-                            <p style="color:#ffffff;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:16px">
+                        <div class="centered" style="color:#555555;background-color:#00000020;display:flex;position:absolute;transform:translate(0,100%)">
+                            <p style="color:#555555;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:16px">
                                 ${taglist[i]}
                             </p>
                         </div>
                     `;
                     tag.href = `/tags.html?${i}`;
-                    if (index % 3 == 0) tagsbarleft.appendChild(tag);
-                    else if (index % 3 == 2) tagsbarright.appendChild(tag);
-                    else tagsbarmiddle.appendChild(tag);
+                    tagsbars[index % 4].appendChild(tag);
                     index += 1;
                 }
 
-                tagsbar.appendChild(tagsbarleft);
-                tagsbar.appendChild(tagsbarmiddle);
-                tagsbar.appendChild(tagsbarright);
                 parent.appendChild(tagsbar);
             }, 400
         );
     } else {
         for (var i of data) {
             if (i["tags"].includes(tagname)) {
-                addarticle(i);
+                addshowcard(i);
+            }
+        }
+        for (var i of dtat) {
+            if (i["tags"].includes(tagname)) {
+                addshowcard(i, "applications");
             }
         }
 
@@ -214,7 +246,8 @@ function loadtags(data) {
     }
 }
 
-function loadcategories(data) {
+function loadcategories(data, dtat) {
+    data = data.concat(dtat);
     var parent = document.getElementById("main");
     var articlecard = document.createElement("div");
     parent.style.flexDirection = "column";
@@ -229,7 +262,7 @@ function loadcategories(data) {
     tag.classList.add("card");
     tag.classList.add("centered");
     tag.style.padding = "10px";
-    tag.innerHTML = `<p style="margin:0;padding:0;">/</p>`;
+    tag.innerHTML = `<p style="margin:0;padding:0;">root://</p>`;
     tag.href = `/categories.html`;
     articlecard.appendChild(tag);
     for (var i of catename) {
@@ -321,27 +354,50 @@ function loadcategories(data) {
     }
 
     for (var i of articles) {
-        catename.push(i["id"]);
-        k.innerHTML += `
-            <tr class="blue">
-                <th> 
-                    <p>
-                        <a href="/articles/show.html?${i["id"]}">
-                            ${i["id"] + ".arc"}
-                        </a>
-                    </p> 
-                </th>
-
-                <th> <p> ${i["name"]} </p> </th>
-                <th> <p> article </p> </th>
-                <th> <p> ${1} </p> </th>
-            </tr>
-        `; 
+        if (i["categories"][0] === "apps") {
+            catename.push(i["id"]);
+            k.innerHTML += `
+                <tr class="red">
+                    <th> 
+                        <p>
+                            <a class="red" href="/applications/${i["id"]}/main.html">
+                                ${i["id"] + ".app"}
+                            </a>
+                        </p> 
+                    </th>
+                    <th> <p> ${i["name"]} </p> </th>
+                    <th> <p> application </p> </th>
+                    <th> <p> ${1} </p> </th>
+                </tr>
+            `;
+        } else {
+            catename.push(i["id"]);
+            k.innerHTML += `
+                <tr class="blue">
+                    <th> 
+                        <p>
+                            <a class="blue" href="/articles/show.html?${i["id"]}">
+                                ${i["id"] + ".arc"}
+                            </a>
+                        </p> 
+                    </th>
+                    <th> <p> ${i["name"]} </p> </th>
+                    <th> <p> article </p> </th>
+                    <th> <p> ${1} </p> </th>
+                </tr>
+            `;
+        }
     }
 }
 
 function loadtemplate(template) {
-    const listid = ["tab-home", "tab-articles", "tab-tags", "tab-categories"];
+    const listid = [
+        "tab-home", 
+        "tab-articles", 
+        "tab-tags", 
+        "tab-categories",
+        "tab-applications"
+    ];
 
     const katexcss = "/library/katex.css";
     const katexjs = "/library/katex.js";
@@ -388,24 +444,35 @@ function loadtemplate(template) {
         else
             document.getElementById(i).classList.add("greyed");
 
+    fetch('/src/applications.json')
+        .then(response => response.json())
+        .then(data => {
+            if (tabname == "applications")
+                loadapplications(data);
+        });
+
     fetch('/src/articles.json')
         .then(response => response.json())
         .then(data => {
             if (tabname == "articles")
                 loadarticles(data)
-            if (tabname == "tags")
-                loadtags(data);
-            if (tabname == "categories")
-                loadcategories(data);
+            fetch("/src/applications.json")
+                .then(response => response.json())
+                .then(dtat => {
+                    if (tabname == "categories")
+                        loadcategories(data, dtat);
+                    if (tabname == "tags")
+                        loadtags(data, dtat);
+                });
         }
         );
 
     var g = document.getElementById("settings-gear");
     g.onclick = () => {
         var e = document.getElementById("popup");
-        // console.log(e);
-        if (e.style.display == "block") e.style.display = "none";
-        else e.style.display = "block";
+        console.log(e);
+        if (e.style.opacity === "0") e.style.opacity = "1", e.style.display = "block";
+        else e.style.opacity = "0", e.style.display = "none";
     };
 }
 

@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Katex Editor",
+        "description": "Yet Another Online Katex Editor.",
+        "id": "editor",
+        "tags": ["technology", "katex", "editor"],
+        "categories": ["apps", "editor", "katex"]
+    }
+]

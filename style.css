@@ -21,7 +21,6 @@ h6 {
 
 a {
     text-decoration: none;
-    color: #000000;
 }
 
 .up {
@@ -36,15 +35,17 @@ a {
 }
 
 .greyed {
-    opacity: 0.7;
-    filter: grayscale(0%);
-    transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    background-color: #00000000;
+    transition: all 0.3s;
     cursor: pointer;
+}
+
+.hover-white :hover {
+    background-color: white;
 }
 
 .greyed:hover {
     background-color: #00000005;
-    opacity: 1;
 }
 
 .disgreyed {
@@ -94,6 +95,14 @@ div {
     color: black;
 }
 
+a {
+    color: lightblue;
+}
+
+a:hover {
+    color: lightsteelblue;
+}
+
 h1,
 h2,
 h3,
@@ -104,14 +113,6 @@ h6 {
     padding: 8px;
     padding-top: 12px;
     border-radius: 5px;
-}
-
-a {
-    color: lightskyblue;
-}
-
-a:hover {
-    color: lightsteelblue;
 }
 
 @keyframes rot {
@@ -134,21 +135,31 @@ code {
     tab-size: 4;
 }
 
-/* 添加到style标签中 */
+
 table {
     border-collapse: collapse;
     width: 80%;
     margin: 20px auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    /* border-radius: 15px; */
 }
 
 thead tr {
     background-color: #009879;
+    /* border-radius: 15px; */
     color: #ffffff;
 }
 
-th, td {
-    padding: 12px 15px;
+th,
+tr,
+td {
+
+    font-size: 12px;
+}
+
+th,
+td {
+    padding: 7px 12px;
 }
 
 th {
@@ -157,10 +168,7 @@ th {
 
 tbody tr {
     border-bottom: 1px solid #dddddd;
-}
-
-tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+    font-size: 16px;
 }
 
 tbody tr:hover {
@@ -173,15 +181,87 @@ tbody tr:hover {
     color: #009879;
 }
 
-th > p {
+th>p {
     margin: 0px;
     color: #009879;
 }
 
-.blue > * {
+.blue {
     color: rgba(61, 153, 240, 0.743);
 }
 
-.blue > * > * {
+.blue>* {
     color: rgba(61, 153, 240, 0.743);
+}
+
+.blue>*>* {
+    color: rgba(61, 153, 240, 0.743);
+}
+
+.red>* {
+    color: #d65252;
+}
+
+.red>*>* {
+    color: #d65252;
+}
+
+.red {
+    color: #d65252;
+}
+
+input {
+    font-family: "Fira Code";
+}
+
+.modern-input {
+    padding: 4px 5px;
+    box-sizing: border-box;
+    border: none;
+    border: 2px solid #ccc;
+    background-color: #00000005;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.modern-input:focus {
+    border-bottom: 2px solid #4a90e2;
+    outline: none;
+}
+
+.modern-textarea {
+    padding: 15px;
+    margin: 15px;
+    border: 3px outset #00000015;
+    transition: 0.3s;
+}
+
+.modern-textarea:focus {
+    border-bottom: 2px solid #4a90e2;
+    outline: none;
+}
+
+.modern-button {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    font-family:'Fira Code';
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #5d7df4, #9a6adc);
 }

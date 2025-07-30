@@ -1,13 +1,13 @@
 [
     {
-        "name": "Hello World from code-ljh.github.io",
+        "name": "Hello World",
         "description": "The first blog as 2025/07/26;",
         "id": "hello-world",
         "tags": ["testing", "technology", "web"],
         "categories": ["technology", "website"]
     },
     {
-        "name": "Read me",
+        "name": "Readme",
         "description": "README.md of code-ljh.github.io repository.",
         "id": "readme",
         "tags": ["testing", "technology", "web", "github"],
