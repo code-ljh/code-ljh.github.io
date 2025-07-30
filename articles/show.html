@@ -16,7 +16,14 @@
         <script>
             var templatename = "home";
             var tabname = "articles";
-            var articlesname = "hello-world";
+            var articlesname = "__nothing__";
+
+            if (window.location.href.includes("?")) {
+                articlesname = window.location.href.slice(
+                    window.location.href.indexOf('?') + 1,
+                    window.location.href.length
+                );
+            }
         </script>
 
         <script src="/script/main.js"></script>

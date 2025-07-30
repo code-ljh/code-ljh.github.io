@@ -1,7 +1,7 @@
 [
     {
         "name": "Hello World from code-ljh.github.io",
-        "description": "The first blog as 2025/07/26; The first blog aka Hello world in Code-ljh.github.io; A large testing step of this myster1ous's website!",
+        "description": "The first blog as 2025/07/26;",
         "id": "hello-world",
         "tags": ["testing", "technology", "web"],
         "categories": ["technology", "website"]
@@ -19,5 +19,12 @@
         "id": "equations",
         "tags": ["math", "oi"], 
         "categories": ["study", "oi", "math"]
+    },
+    {
+        "name": "Template",
+        "description": "A simple & portable tool to test your code.",
+        "id": "template",
+        "tags": ["oi", "technology", "template", "code-cpp"],
+        "categories": ["study", "oi", "template"]
     }
 ]

@@ -43,7 +43,7 @@ a {
 }
 
 .greyed:hover {
-    background-color:#00000005;
+    background-color: #00000005;
     opacity: 1;
 }
 
@@ -60,7 +60,7 @@ a {
 }
 
 *::-webkit-scrollbar {
-    display:none;
+    display: none;
 }
 
 .button {
@@ -74,7 +74,7 @@ a {
 }
 
 *::selection {
-    background-color: rgba(103, 170, 234, 0.243);
+    background-color: rgba(101, 168, 230, 0.243);
 }
 
 .centered {
@@ -88,11 +88,18 @@ blockquote {
     padding: 15px;
 }
 
-p, b, div {
+p,
+b,
+div {
     color: black;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     border: 2px solid #00000011;
     padding: 8px;
     padding-top: 12px;
@@ -105,4 +112,76 @@ a {
 
 a:hover {
     color: lightsteelblue;
+}
+
+@keyframes rot {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+#settings-gear :hover {
+    /* transform:translateY(5px); */
+    animation: rot 0.5s ease-in-out;
+}
+
+pre,
+code {
+    tab-size: 4;
+}
+
+/* 添加到style标签中 */
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+thead tr {
+    background-color: #009879;
+    color: #ffffff;
+}
+
+th, td {
+    padding: 12px 15px;
+}
+
+th {
+    text-align: left;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+    color: #009879;
+}
+
+.green-a {
+    margin: 0px;
+    color: #009879;
+}
+
+th > p {
+    margin: 0px;
+    color: #009879;
+}
+
+.blue > * {
+    color: rgba(61, 153, 240, 0.743);
+}
+
+.blue > * > * {
+    color: rgba(61, 153, 240, 0.743);
 }

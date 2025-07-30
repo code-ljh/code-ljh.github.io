@@ -4,8 +4,10 @@ function addarticle(i) {
     parent.appendChild(articlecard);
     articlecard.classList.add("card");
     articlecard.style.margin = "15px";
+    articlecard.style.marginTop = "7px";
     articlecard.style.display = "flex";
     articlecard.style.justifyContent = "center";
+    articlecard.style.flex = "1";
     articlecard.style.flexDirection = "column";
     var titlebar = document.createElement("h3");
     titlebar.style.color = "black";
@@ -29,11 +31,16 @@ function addarticle(i) {
         tag.classList.add("card");
         tag.classList.add("centered");
         tag.classList.add("up");
-        tag.style.padding = "10px";
-        tag.style.width = "128px";
-        tag.innerHTML = `<p style="margin:0;padding:0;">${j}</p>`;
+        tag.style.padding = "5px";
+        tag.style.borderRadius = "10px";
+        var p = document.createElement("p");
+        p.style.fontSize = "12px";
+        p.style.margin = "0";
+        p.style.padding = "0";
+        p.innerText = j;
+        tag.appendChild(p);
         tag.href = `/tags.html?${j}`;
-        tag.style.backgroundColor = "#00000005";
+        tag.style.backgroundColor = "#ffffff";
         tagsbar.appendChild(tag);
     }
     articlecard.appendChild(titlebar);
@@ -42,7 +49,7 @@ function addarticle(i) {
     articlecard.appendChild(tagsbar);
     articlecard.classList.add("up");
     articlecard.style.backgroundColor = "#00000005";
-    articlecard.href = `/articles/${i["id"]}.html`;
+    articlecard.href = `/articles/show.html?${i["id"]}`;
 }
 
 function loadarticles(data) {
@@ -59,6 +66,7 @@ function loadarticles(data) {
                 break;
             }
         document.title = `${found["name"]} | code-ljh 的小站`;
+        
         var main = document.getElementById("main");
         var maincard = document.createElement("div");
         maincard.classList.add("card");
@@ -73,6 +81,8 @@ function loadarticles(data) {
                 setTimeout(
                     () => {
                         maincard.innerHTML = marked.parse(txt);
+                        maincard.style.margin = "15px";
+                        maincard.style.padding = "21px";
                         renderMathInElement(
                             maincard, {
                             throwOnError: false,
@@ -83,14 +93,33 @@ function loadarticles(data) {
                         }
                         );
                         hljs.highlightAll();
+
+                        var parent = document.getElementById("main");
+                        var articlecard = document.createElement("div");
+                        parent.style.flexDirection = "column";
+                        articlecard.style.margin = "15px";
+                        // articlecard.style.backgroundColor = "#00000005";
+
+                        articlecard.style.display = "flex";
+                        articlecard.style.padding = "0px";
+
+                        x = "";
+                        var tag = document.createElement("a");
+                        tag.classList.add("card");
+                        tag.classList.add("centered");
+                        tag.classList.add("up");
+                        tag.style.padding = "10px";
+                        tag.innerHTML = `<p style="margin:0;padding:0;">under ${found["categories"].join(".")}</p>`;
+                        tag.href = `/categories.html?${found["categories"].join(".")}`;
+                        articlecard.appendChild(tag);
+                        parent.appendChild(articlecard);
                     }, 400
                 );
             });
     }
 }
 
-function loadtags(data)
-{
+function loadtags(data) {
     taglist = {};
     for (var i of data)
         for (var j of i["tags"])
@@ -102,7 +131,6 @@ function loadtags(data)
             () => {
                 var parent = document.getElementById("main");
                 var articlecard = document.createElement("div");
-                parent.appendChild(articlecard);
                 parent.style.flexDirection = "column";
                 articlecard.classList.add("card");
                 articlecard.classList.add("centered");
@@ -137,11 +165,26 @@ function loadtags(data)
                     var tag = document.createElement("a");
                     tag.classList.add("card");
                     tag.classList.add("centered");
-                    tag.classList.add("up");
+                    tag.classList.add("hover-box");
+                    laston = undefined;
+                    // tag.onmouseover = (evt) => {
+                        // if (evt.fromElement.tagName == "A")
+                            // evt.fromElement.children[1].style.display = "flex",
+                            // laston = evt.fromElement.children[1];
+                    // };
+                    // tag.onmouseleave = (evt) => {
+                        // if (evt.fromElement.tagName == "A")
+                            // evt.fromElement.children[1].style.display = "none";
+                    // }
                     tag.style.padding = "10px";
-                    tag.innerHTML = `<p style="margin:0;padding:0;">
-                        ${i} || (${taglist[i]})
-                    </p>`;
+                    tag.innerHTML = `<p style="margin:0;padding:0;">${i}</p>`;
+                    tag.innerHTML += `
+                        <div class="centered" style="color:#ffffff;background-color:#00000050;display:flex;position:absolute;transform:translate(0,100%)">
+                            <p style="color:#ffffff;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:16px">
+                                ${taglist[i]}
+                            </p>
+                        </div>
+                    `;
                     tag.href = `/tags.html?${i}`;
                     if (index % 3 == 0) tagsbarleft.appendChild(tag);
                     else if (index % 3 == 2) tagsbarright.appendChild(tag);
@@ -162,11 +205,138 @@ function loadtags(data)
             }
         }
 
+        document.title = `标签 ${tagname} | code-ljh 的小站`;
         var elements = document.querySelectorAll("a");
         for (var i of elements)
             if (i.innerText == tagname) {
-                i.style.backgroundColor = "#00000000";
+                i.style.backgroundColor = "#00000015";
             }
+    }
+}
+
+function loadcategories(data) {
+    var parent = document.getElementById("main");
+    var articlecard = document.createElement("div");
+    parent.style.flexDirection = "column";
+    articlecard.style.margin = "15px";
+    // articlecard.style.backgroundColor = "#00000005";
+
+    articlecard.style.display = "flex";
+    articlecard.style.padding = "0px";
+
+    x = "";
+    var tag = document.createElement("a");
+    tag.classList.add("card");
+    tag.classList.add("centered");
+    tag.style.padding = "10px";
+    tag.innerHTML = `<p style="margin:0;padding:0;">/</p>`;
+    tag.href = `/categories.html`;
+    articlecard.appendChild(tag);
+    for (var i of catename) {
+        x += i;
+        var tag = document.createElement("a");
+        tag.classList.add("card");
+        tag.classList.add("centered");
+        tag.classList.add("up");
+        tag.style.padding = "10px";
+        tag.innerHTML = `<p style="margin:0;padding:0;">${i}/</p>`;
+        tag.href = `/categories.html?${x.split("/").join(".")}`;
+        articlecard.appendChild(tag);
+        x += "/";
+    }
+
+    parent.appendChild(articlecard);
+    console.log(articlecard, parent);
+            
+    var main = document.getElementById("main");
+    main.innerHTML += `
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+    `;
+
+    function foldersize(fold) {
+        catename.pop();
+        var prefix = catename.concat(fold);
+        // console.log(prefix);
+        var displays = [];
+        for (var i of data) {
+            if (i["categories"].length < prefix.length) continue;
+            var flag = true;
+            for (var j in prefix)
+                if (prefix[j] !== i["categories"][j])
+                    flag = false;
+            if (flag)
+                displays.push(i["categories"][prefix.length]);
+        } return displays.length;
+    } 
+
+    var displays = [];
+    var articles = [];
+    for (var i of data) {
+        if (i["categories"].join(" ") === catename.join(" ")) {
+            articles.push(i);
+            continue;
+        }
+        if (i["categories"].length <= catename.length) continue;
+        var flag = true;
+        for (var j in catename)
+            if (catename[j] !== i["categories"][j])
+                flag = false;
+        if (flag)
+            displays.push(i["categories"][catename.length]);
+    }
+
+    displays = [... new Set(displays)];
+    // console.log(displays);
+
+    var k = document.getElementById("table-body");
+
+    for (var i of displays) {
+        catename.push(i);
+        k.innerHTML += `
+            <tr>
+                <th> 
+                    <p>
+                        <a class="green-a" href="/categories.html?${(catename).join(".")}">
+                            ${"/" + catename.join("/") + "/"}
+                        </a>
+                    </p> 
+                </th>
+
+                <th> <p>${i}</p> </th>
+                <th> <p>folder</p> </th>
+                <th> <p> ${foldersize(i)} </p> </th>
+            </tr>
+        `; 
+    }
+
+    for (var i of articles) {
+        catename.push(i["id"]);
+        k.innerHTML += `
+            <tr class="blue">
+                <th> 
+                    <p>
+                        <a href="/articles/show.html?${i["id"]}">
+                            ${i["id"] + ".arc"}
+                        </a>
+                    </p> 
+                </th>
+
+                <th> <p> ${i["name"]} </p> </th>
+                <th> <p> article </p> </th>
+                <th> <p> ${1} </p> </th>
+            </tr>
+        `; 
     }
 }
 
@@ -225,8 +395,18 @@ function loadtemplate(template) {
                 loadarticles(data)
             if (tabname == "tags")
                 loadtags(data);
+            if (tabname == "categories")
+                loadcategories(data);
         }
         );
+
+    var g = document.getElementById("settings-gear");
+    g.onclick = () => {
+        var e = document.getElementById("popup");
+        // console.log(e);
+        if (e.style.display == "block") e.style.display = "none";
+        else e.style.display = "block";
+    };
 }
 
 (function main() {
