@@ -2,13 +2,7 @@
 #include <bits/stdc++.h>
 #define int long long
 
-signed main() {
-//    std::system("g++ {file}.cpp -o {file} -O2 -static -std=c++14");
-//    std::system("g++ {file}-gen.cpp -o {file}-gen -O2 -static -std=c++14");
-//    std::system("g++ {file}-sol.cpp -o {file}-sol -O2 -static -std=c++14");
-    
-//    std::cerr << "Successfully compiled three cpp.\n";
-    
+signed main() {    
     int tc = 0;
     while (true) {
         tc += 1;
@@ -17,7 +11,6 @@ signed main() {
         
         int tfrom = clock();
         std::system("{file}.exe < {file}.in > {file}.out");
-//        int x = std::system("fc P11833.out P11833.ans");
         int tto = clock();
 
         bool flag = false;

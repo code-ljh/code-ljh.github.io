@@ -73,8 +73,6 @@ function addshowcard(i, type="article") {
     articlecard.appendChild(catebar);
     articlecard.appendChild(tagsbar);
     articlecard.style.transition = "background-color 0.3s";
-    // articlecard.classList.add("hover-white");
-    // articlecard.style.backgroundColor = "#00000005";
     articlecard.href = (type == "article" ? 
         `/articles/show.html?${i["id"]}` : 
         `/applications/${i["id"]}/main.html`);
@@ -105,12 +103,15 @@ function loadarticles(data) {
         document.title = `${found["name"]} | code-ljh 的小站`;
         
         var main = document.getElementById("main");
+        var miin = document.getElementById("miin");
         var maincard = document.createElement("div");
         maincard.classList.add("card");
         main.style.flexDirection = "column";
 
         main.appendChild(maincard);
         maincard.innerText = "内容加载中......";
+
+        miin.innerHTML += `<h3>Description</h3><p style="margin:15px;color:#00000050">${found["description"]}</p>`;
 
         fetch(`/src/articles/${found["id"]}.md`)
             .then(response => response.text())
@@ -163,6 +164,7 @@ function loadtags(data, dtat) {
         for (var j of i["tags"])
             if (taglist[j] == undefined) taglist[j] = 1;
             else taglist[j] += 1;
+
     for (var i of dtat)
         for (var j of i["tags"])
             if (taglist[j] == undefined) taglist[j] = 1;
@@ -201,26 +203,33 @@ function loadtags(data, dtat) {
                 tagsbar.style.flexDirection = "row";
 
                 var index = 0;
-                for (var i of Object.keys(taglist).sort()) {
-                    var tag = document.createElement("a");
-                    tag.classList.add("card");
-                    tag.classList.add("centered");
-                    tag.classList.add("hover-box");
-                    tag.classList.add("up");
+                function tagbox(txt1, txt2, href) {
+                    var ttt = document.createElement("a");
+                    ttt.classList.add("card");
+                    ttt.classList.add("centered");
+                    ttt.classList.add("hover-box");
+                    ttt.classList.add("up");
+                    ttt.classList.add("tooltip-container");
                     laston = undefined;
-                    tag.style.padding = "10px";
-                    tag.innerHTML = `<p style="margin:0;padding:0;">${i}</p>`;
-                    tag.innerHTML += `
-                        <div class="centered" style="color:#555555;background-color:#00000020;display:flex;position:absolute;transform:translate(0,100%)">
+                    ttt.style.padding = "10px";
+                    ttt.innerHTML = `<p style="margin:0;padding:0;text-align:center">${txt1}</p>`;
+                    ttt.innerHTML += `
+                        <div class="centered tooltip-text" style="color:#555555;background-color:#00000020;display:flex;position:absolute;transform:translate(0,100%)">
                             <p style="color:#555555;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:16px">
-                                ${taglist[i]}
+                                ${txt2}
                             </p>
                         </div>
                     `;
-                    tag.href = `/tags.html?${i}`;
-                    tagsbars[index % 4].appendChild(tag);
+                    ttt.href = href;
+                    tagsbars[index % 4].appendChild(ttt);
                     index += 1;
                 }
+
+                tagbox("=articles=", data.length, "/articles.html");
+                tagbox("=apps=", dtat.length, "/applications.html");
+
+                for (var i of Object.keys(taglist).sort()) 
+                    tagbox(i, taglist[i], "/tags.html?" + i);
 
                 parent.appendChild(tagsbar);
             }, 400
@@ -393,7 +402,6 @@ function loadcategories(data, dtat) {
 function loadtemplate(template) {
     const listid = [
         "tab-home", 
-        "tab-articles", 
         "tab-tags", 
         "tab-categories",
         "tab-applications"
@@ -454,16 +462,19 @@ function loadtemplate(template) {
     fetch('/src/articles.json')
         .then(response => response.json())
         .then(data => {
-            if (tabname == "articles")
+            try {
+                articlesname;
                 loadarticles(data)
-            fetch("/src/applications.json")
-                .then(response => response.json())
-                .then(dtat => {
-                    if (tabname == "categories")
-                        loadcategories(data, dtat);
-                    if (tabname == "tags")
-                        loadtags(data, dtat);
-                });
+            } catch {
+                fetch("/src/applications.json")
+                    .then(response => response.json())
+                    .then(dtat => {
+                        if (tabname == "categories")
+                            loadcategories(data, dtat);
+                        if (tabname == "tags")
+                            loadtags(data, dtat);
+                    });
+            }            
         }
         );
 

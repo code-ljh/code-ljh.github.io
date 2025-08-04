@@ -4,27 +4,41 @@
         "description": "The first blog as 2025/07/26;",
         "id": "hello-world",
         "tags": ["testing", "technology", "web"],
-        "categories": ["technology", "website"]
+        "categories": ["website", "technology"]
     },
     {
         "name": "Readme",
         "description": "README.md of code-ljh.github.io repository.",
         "id": "readme",
         "tags": ["testing", "technology", "web", "github"],
-        "categories": ["technology", "website"]
+        "categories": ["website", "technology"]
     },
     {
-        "name": "Equation",
-        "description": "Set of Formula solving equations.",
+        "name": "一元方程解法大全",
+        "description": "一元方程求根公式大全！",
         "id": "equations",
         "tags": ["math", "oi"], 
         "categories": ["study", "oi", "math"]
     },
     {
-        "name": "Template",
-        "description": "A simple & portable tool to test your code.",
-        "id": "template",
+        "name": "【模板】对拍",
+        "description": "一个简易的对拍模板。",
+        "id": "testing",
         "tags": ["oi", "technology", "template", "code-cpp"],
         "categories": ["study", "oi", "template"]
+    },
+    {
+        "name": "Home",
+        "description": "这是 code-ljh 的网站，欢迎你的到来！",
+        "id": "home",
+        "tags": ["website", "index", "home"],
+        "categories": ["website"]
+    },
+    {
+        "name": "莫队学习笔记",
+        "description": "莫队：一种优雅的离线根号暴力",
+        "id": "mo-algo",
+        "tags": ["oi", "algorithm", "notes", "data-structure"],
+        "categories": ["study", "oi", "algorithm", "data-structure"]
     }
 ]
