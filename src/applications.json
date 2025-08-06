@@ -1,9 +1,16 @@
 [
     {
-        "name": "Katex Editor",
-        "description": "Yet Another Online Katex Editor.",
+        "name": "Katex 在线编辑器",
+        "description": "是的，又一个在线 Katex 编辑器！但是，这是不一样的编辑器！是有 myster1ous 特色的编辑器（滑稽）",
         "id": "editor",
         "tags": ["technology", "katex", "editor"],
-        "categories": ["apps", "editor", "katex"]
+        "categories": ["apps", "tool"]
+    },
+    {
+        "name": "倒计时",
+        "description": "管不住自己的小朋友们你们好啊，Gamer 们你们好啊，我是计时器。",
+        "id": "countdown",
+        "tags": ["countdown", "self-control", "toolkit"],
+        "categories": ["apps", "tool"]
     }
 ]

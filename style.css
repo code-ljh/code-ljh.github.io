@@ -7,7 +7,7 @@ h5,
 h6,
 pre,
 code {
-    font-family: 'Fira Code';
+    font-family: 'Fira Code', 'Consolas';
 }
 
 h1,
@@ -211,7 +211,7 @@ th>p {
 }
 
 input {
-    font-family: "Fira Code";
+    font-family: "Fira Code", 'Consolas';
 }
 
 .modern-input {
@@ -230,8 +230,6 @@ input {
 }
 
 .modern-textarea {
-    padding: 15px;
-    margin: 15px;
     border: 3px outset #00000015;
     transition: 0.3s;
 }
@@ -248,7 +246,7 @@ input {
     border-radius: 8px;
     background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: white;
-    font-family: 'Fira Code';
+    font-family: 'Fira Code', 'Consolas';
     font-size: 16px;
     font-weight: 600;
     text-align: center;
@@ -263,6 +261,12 @@ input {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     background: linear-gradient(135deg, #5d7df4, #9a6adc);
+}
+
+.modern-button-active {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #709eee, #79d7ee);
 }
 
 .tooltip-container {

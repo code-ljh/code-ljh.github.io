@@ -18,14 +18,14 @@
         "description": "一元方程求根公式大全！",
         "id": "equations",
         "tags": ["math", "oi"], 
-        "categories": ["study", "oi", "math"]
+        "categories": ["oi", "math"]
     },
     {
         "name": "【模板】对拍",
         "description": "一个简易的对拍模板。",
         "id": "testing",
         "tags": ["oi", "technology", "template", "code-cpp"],
-        "categories": ["study", "oi", "template"]
+        "categories": ["oi", "template"]
     },
     {
         "name": "Home",
@@ -39,6 +39,13 @@
         "description": "莫队：一种优雅的离线根号暴力",
         "id": "mo-algo",
         "tags": ["oi", "algorithm", "notes", "data-structure"],
-        "categories": ["study", "oi", "algorithm", "data-structure"]
+        "categories": ["oi", "algorithm", "data-structure"]
+    },
+    {
+        "name": "S+20250805 比赛记录",
+        "description": "2025 年 08 月 05 日，PC 比赛，记之。",
+        "id": "20250805pc-nfls",
+        "tags": ["oi", "contest", "problemset", "training", "notes"],
+        "categories": ["oi", "contests", "training"]
     }
 ]

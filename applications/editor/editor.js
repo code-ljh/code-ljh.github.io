@@ -20,23 +20,34 @@ setTimeout(
         main.style.flexDirection = "row";
 
         miin.innerHTML = `
+        <div style="flex-direction:column;display: flex">
             <div class="modern-button tooltip-container" id="distribute" style="margin:15px">
                 Share
-                <div class="centered tooltip-text" style="color:#555555;background-color:#00000020;display:flex;position:absolute;transform:translate(0,100%);bottom:225%">
-                    <p style="color:#555555;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px;">
+                <div class="centered tooltip-text" style="color:#555555;display:flex;position:absolute;transform:translate(0,100%);bottom:50%">
+                    <p style="color:#ffffff;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px;">
                         按下此按钮后复制链接以与其他人分享文档
                     </p>
                 </div>
             </div>
 
-            <div class="modern-button tooltip-container" id="display">
-                Display
-                <div class="centered tooltip-text" style="color:#555555;background-color:#00000020;display:flex;position:absolute;transform:translate(0,100%);bottom:0%">
-                    <p style="color:#555555;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px;">
+            <div class="modern-button tooltip-container" id="display" style="margin:15px">
+                Show
+                <div class="centered tooltip-text" style="color:#555555;display:flex;position:absolute;transform:translate(0,100%);bottom:50%">
+                    <p style="color:#ffffff;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px;">
                         进入展示模式，输入框将被隐藏
                     </p>
                 </div>
             </div>
+
+            <div class="modern-button tooltip-container" id="save" style="margin:15px">
+                Save
+                <div class="centered tooltip-text" style="color:#555555;display:flex;position:absolute;transform:translate(0,100%);bottom:50%">
+                    <p style="color:#ffffff;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px;">
+                        保存到 katex-document 的本地缓存中，清缓存会消失。
+                    </p>
+                </div>
+            </div>
+        </div>
         `;
 
         var dis = document.getElementById("distribute");
@@ -45,6 +56,12 @@ setTimeout(
             var right = document.getElementById("rightpart");
             var base64 = encodeBase64(left.value);
             location.href = "/applications/editor/main.html?" + base64;
+        };
+
+        var sav = document.getElementById("save");
+        sav.onclick = () => {
+            var left = document.getElementById("leftpart");
+            localStorage.setItem("katex-document", left.value);
         };
         
         dis = document.getElementById("display");
@@ -79,14 +96,21 @@ setTimeout(
         try {
             k = decodeBase64(k);
         } catch {
-            k = "在这里写下你的 KaTeX 文档！";
+            var d = localStorage.getItem("katex-document");
+            if (d != null) {
+                k = d;
+            } else {
+                k = "在这里写下你的 KaTeX 文档！";
+            }            
         }
 
+        main.style.height = "100vh";
+        main.style.overflow = "hidden";
         main.innerHTML = `
-            <div style="position:absolute;left:0;right:50%;top:0;bottom:0; transition: all 0.3s">
-                <textarea id="leftpart" class="modern-textarea" style="width:32.5vw;height:90vh;transition: all 0.3s">${k}</textarea>
+            <div style="position:absolute;left:0;right:50%;top:0;bottom:0; transition: all 0.3s;">
+                <textarea id="leftpart" class="modern-textarea" style="width:32.5vw;height:90vh;transition: all 0.3s;margin: 15px; padding: 5px">${k}</textarea>
             </div>
-            <div style="position:absolute;left:47.5%;right:0;top:0;bottom:0; transition: all 0.3s">
+            <div style="position:absolute;left:47.5%;right:0;top:0;bottom:0; transition: all 0.3s;">
                 <div id="rightpart" style="width:40vw;height:90vh; padding: 2px; margin: 15px; overflow:auto; font-size: 10px">
                 
                 </div>
