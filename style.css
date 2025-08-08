@@ -58,6 +58,16 @@ a {
     box-shadow: 2px 2px 2px #00000011;
     margin: 5px;
     padding: 15px;
+    background: linear-gradient(135deg, #ffffff, #eeeeee);
+}
+
+.card-app {
+    border-radius: 15px;
+    border: 3px solid #00000011;
+    box-shadow: 2px 2px 2px #00000011;
+    margin: 5px;
+    padding: 15px;
+    background: linear-gradient(135deg, #fbe0e06b, #c490906b);
 }
 
 *::-webkit-scrollbar {
@@ -96,11 +106,11 @@ div {
 }
 
 a {
-    color: lightblue;
+    color: royalblue;
 }
 
 a:hover {
-    color: lightsteelblue;
+    color: lightskyblue;
 }
 
 h1,
@@ -148,6 +158,11 @@ thead tr {
     background-color: #009879;
     /* border-radius: 15px; */
     color: #ffffff;
+    background: linear-gradient(135deg, #009879, #1bb620);
+}
+
+tbody {
+    background: linear-gradient(135deg, #ffffff, #eeeeee);
 }
 
 th,

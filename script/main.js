@@ -2,9 +2,10 @@ function addshowcard(i, type="article") {
     var parent = document.getElementById("main");
     var articlecard = document.createElement("a");
     parent.appendChild(articlecard);
-    articlecard.classList.add("card");
-    articlecard.style.backgroundColor = (
-        type == "article" ? "#00000005" : "#ff000005");
+    if (type == "article")
+        articlecard.classList.add("card");
+    if (type == "application")
+        articlecard.classList.add("card-app");
     console.log(articlecard.style.backgroundColor, articlecard);
     articlecard.style.margin = "15px";
     articlecard.style.marginTop = "7px";
@@ -479,14 +480,6 @@ function loadtemplate(template) {
             }            
         }
         );
-
-    var g = document.getElementById("settings-gear");
-    g.onclick = () => {
-        var e = document.getElementById("popup");
-        console.log(e);
-        if (e.style.opacity === "0") e.style.opacity = "1", e.style.display = "block";
-        else e.style.opacity = "0", e.style.display = "none";
-    };
 }
 
 (function main() {
