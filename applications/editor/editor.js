@@ -43,7 +43,7 @@ setTimeout(
                 Save
                 <div class="centered tooltip-text" style="color:#555555;display:flex;position:absolute;transform:translate(0,100%);bottom:50%">
                     <p style="color:#ffffff;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px;">
-                        保存到 katex-document 的本地缓存中，清缓存会消失。
+                        保存到本地缓存中，清缓存会消失。
                     </p>
                 </div>
             </div>
@@ -108,10 +108,10 @@ setTimeout(
         main.style.overflow = "hidden";
         main.innerHTML = `
             <div style="position:absolute;left:0;right:50%;top:0;bottom:0; transition: all 0.3s;">
-                <textarea id="leftpart" class="modern-textarea" style="width:32.5vw;height:90vh;transition: all 0.3s;margin: 15px; padding: 5px">${k}</textarea>
+                <textarea id="leftpart" class="modern-textarea" style="width:32.5vw;height:95vh;transition: all 0.3s;margin: 5px; padding: 10px">${k}</textarea>
             </div>
-            <div style="position:absolute;left:47.5%;right:0;top:0;bottom:0; transition: all 0.3s;">
-                <div id="rightpart" style="width:40vw;height:90vh; padding: 2px; margin: 15px; overflow:auto; font-size: 10px">
+            <div style="position:absolute;left:45%;right:0;top:0;bottom:0; transition: all 0.3s;">
+                <div id="rightpart" style="width:40vw;height:95vh; padding: 2px; margin: 0px; overflow:auto; font-size: 10px">
                 
                 </div>
             </div>

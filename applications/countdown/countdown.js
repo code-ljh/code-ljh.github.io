@@ -1,6 +1,7 @@
 function mainfunc() {
     var main = document.getElementById("main");
     var miin = document.getElementById("miin");
+    main.style.height = "100vh";
     main.innerHTML = `
         <div class="centered" style="position:absolute;left:0;right:0;top:0;bottom:0;flex-direction:column">
             <textarea class="modern-textarea" id="h2" style="height: 64px; width: 256px; padding: 0px; padding-left: 75px; padding-right: 75px; text-align:center; font-size: 50px">01:00:00</textarea>

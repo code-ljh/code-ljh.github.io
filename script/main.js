@@ -15,6 +15,8 @@ function addshowcard(i, type="article") {
     var titlebar = document.createElement("h3");
     titlebar.style.color = "black";
     titlebar.innerText = i["name"];
+    if (type == "article")
+        titlebar.innerText = `${i["time"][0]}/${i["time"][1]}/${i["time"][2]} ${i["name"]}`;
     titlebar.style.margin = "2px";
     titlebar.style.textAlign = "center";
     var descrbar = document.createElement("p");
@@ -111,7 +113,7 @@ function loadarticles(data) {
         main.appendChild(maincard);
         maincard.innerText = "内容加载中......";
 
-        miin.innerHTML += `<h3>Description</h3><p style="margin:15px;color:#00000050">${found["description"]}</p>`;
+        miin.innerHTML += `<p style="margin:15px;color:#000000cc">${found["description"]}</p>`;
 
         fetch(`/src/articles/${found["id"]}.md`)
             .then(response => response.text())

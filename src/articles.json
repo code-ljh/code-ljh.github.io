@@ -4,48 +4,63 @@
         "description": "The first blog as 2025/07/26;",
         "id": "hello-world",
         "tags": ["testing", "technology", "web"],
-        "categories": ["website", "technology"]
+        "categories": ["website", "technology"],
+        "time": [2025, 7, 26]
     },
     {
         "name": "Readme",
         "description": "README.md of code-ljh.github.io repository.",
         "id": "readme",
         "tags": ["testing", "technology", "web", "github"],
-        "categories": ["website", "technology"]
+        "categories": ["website", "technology"],
+        "time": [2025, 7, 27]
     },
     {
         "name": "一元方程解法大全",
         "description": "一元方程求根公式大全！",
         "id": "equations",
         "tags": ["math", "oi"], 
-        "categories": ["oi", "math"]
+        "categories": ["oi", "math"],
+        "time": [2025, 7, 28]
     },
     {
         "name": "【模板】对拍",
         "description": "一个简易的对拍模板。",
         "id": "testing",
         "tags": ["oi", "technology", "template", "code-cpp"],
-        "categories": ["oi", "template"]
+        "categories": ["oi", "template"],
+        "time": [2025, 7, 31]
     },
     {
         "name": "Home",
         "description": "这是 code-ljh 的网站，欢迎你的到来！",
         "id": "home",
         "tags": ["website", "index", "home"],
-        "categories": ["website"]
+        "categories": ["website"],
+        "time": [2025, 8, 1]
     },
     {
         "name": "莫队学习笔记",
         "description": "莫队：一种优雅的离线根号暴力",
         "id": "mo-algo",
         "tags": ["oi", "algorithm", "notes", "data-structure"],
-        "categories": ["oi", "algorithm", "data-structure"]
+        "categories": ["oi", "algorithm", "data-structure"],
+        "time": [2025, 8, 5]
     },
     {
         "name": "S+20250805 比赛记录",
         "description": "2025 年 08 月 05 日，PC 比赛，记之。",
         "id": "20250805pc-nfls",
-        "tags": ["oi", "contest", "problemset", "training", "notes"],
-        "categories": ["oi", "contests", "training"]
+        "tags": ["oi", "contest", "problemset", "training", "notes", "pc", "nfls"],
+        "categories": ["oi", "contests", "training", "nfls", "pc"],
+        "time": [2025, 8, 5]
+    },
+    {
+        "name": "CSP20250807 模拟赛比赛记录",
+        "description": "2025 年 08 月 06 日，OI 比赛，记之。",
+        "id": "20250806oi-nfls",
+        "tags": ["oi", "contest", "problemset", "training", "notes", "csp", "nfls"],
+        "categories": ["oi", "contests", "training", "nfls", "noi"],
+        "time": [2025, 8, 7]
     }
 ]
