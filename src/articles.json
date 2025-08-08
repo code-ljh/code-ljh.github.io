@@ -62,5 +62,37 @@
         "tags": ["oi", "contest", "problemset", "training", "notes", "csp", "nfls"],
         "categories": ["oi", "contests", "training", "nfls", "noi"],
         "time": [2025, 8, 7]
+    },
+    {
+        "name": "【模板】快速读入",
+        "description": "卡常专用。",
+        "id": "fastread",
+        "tags": ["oi", "template", "C++", "from-luogu"],
+        "categories": ["oi", "template"],
+        "time": [2025, 8, 8]
+    },
+    {
+        "name": "网络流学习笔记（来自我的洛谷博客）",
+        "description": "烂尾 网络流学习笔记。",
+        "id": "maxflow",
+        "tags": ["oi", "notes", "algorithm", "graph", "from-luogu"],
+        "categories": ["oi", "algorithm", "graph"],
+        "time": [2025, 8, 8]
+    },
+    {
+        "name": "CSP-S 2022 游记（昔日余晖）",
+        "description": "CSP-S 2022 六年级游记，致不存在的辉煌。",
+        "id": "csps2022trip",
+        "tags": ["ccf", "contest", "csp", "from-luogu"],
+        "categories": ["oi", "contests", "ccf"],
+        "time": [2025, 8, 8]
+    },
+    {
+        "name": "SN 迷惑行为大赏",
+        "description": "SN CSP-S 2022 迷惑行为大赏。",
+        "id": "sn-freak",
+        "tags": ["ccf", "contest", "csp", "from-luogu"],
+        "categories": ["oi", "contests", "ccf"],
+        "time": [2025, 8, 8]
     }
 ]
