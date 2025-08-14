@@ -14,6 +14,8 @@ function mainfunc() {
             </div>
         </div>
     `;
+    miin.style.justifyContent = "stretch";
+    // miin.style.alignItems = "stretch";
     var state = "normal";
 
     function hours(x) {
@@ -47,8 +49,8 @@ function mainfunc() {
                     alarmsound.play();
                 }
             } miin.innerHTML = `
-                当前时间
-                ${hours(new Date().getHours())}:${minutes(new Date().getMinutes())}:${minutes(new Date().getSeconds())}
+                <p>当前时间
+                ${hours(new Date().getHours())}:${minutes(new Date().getMinutes())}:${minutes(new Date().getSeconds())}</p>
             `;           
         }, 1000
     );

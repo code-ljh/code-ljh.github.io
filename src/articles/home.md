@@ -9,3 +9,9 @@
 
 - [Github 仓库](https://github.com/code-ljh/code-ljh.github.io)；
 - [Github Pages](https://code-ljh.github.io)
+
+## Fast Travel
+
+- [Hello World](/articles/show.html?hello-world)；
+- [Read Me](/articles/show.html?readme)；
+- [Equations aka $\KaTeX$ Test](/articles/show.html?equations)；

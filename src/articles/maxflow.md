@@ -125,7 +125,14 @@ signed main() {
 
 然后：
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/i3rcsjv0.png)
+```
+Subtask #0
+AC  AC  AC  AC  AC  AC
+AC  AC  TLE TLE AC  AC
+
+Subtask #1
+AC
+```
 
 为什么呢？因为这个算法的最坏时间复杂度是和流量有关的！但是流量可是 $10^9$ 量级的！所以这就会导致 $\text{TLE}$。
 
@@ -411,11 +418,11 @@ signed main() {
 
 还是我们原来 FF、EK 和 Dinic 的主要思想：找增广路。在一条增广路上每条边新增的流量都是相同的，因此，我们可以吧这个流量提出来，也就是说，这条增广路对代价的贡献也就是：
 
+
 $$
 \begin{aligned}
-\Delta\text{cost}(\text{path})& = \sum^{\in \text{path}}_{u \to v} \text{f}(\text{path}) \times \text{c}(u \to v)
-\newline
-& = \text{f}(\text{path}) \times \sum^{\in \text{path}}_{u \to v} \text{c}(u\to v)
+\Delta\text{cost}(\text{path}) &= \sum^{(u\to v)\in\text{path}}\text{f}(\text{path}) \times \text{c}(u \to v)\newline
+&= \text{f}(\text{path})\times\sum^{(u\to v)\in\text{path}}\text{c}(u\to v)
 \end{aligned}
 $$
 

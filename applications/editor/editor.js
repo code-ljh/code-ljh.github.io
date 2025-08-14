@@ -111,7 +111,7 @@ setTimeout(
                 <textarea id="leftpart" class="modern-textarea" style="width:32.5vw;height:95vh;transition: all 0.3s;margin: 5px; padding: 10px">${k}</textarea>
             </div>
             <div style="position:absolute;left:45%;right:0;top:0;bottom:0; transition: all 0.3s;">
-                <div id="rightpart" style="width:40vw;height:95vh; padding: 2px; margin: 0px; overflow:auto; font-size: 10px">
+                <div id="rightpart" style="width:40vw;height:95vh; padding: 5px; margin: 7px; overflow:auto; font-size: 10px; border:2px solid #00000030">
                 
                 </div>
             </div>

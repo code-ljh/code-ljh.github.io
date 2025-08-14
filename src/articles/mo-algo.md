@@ -32,7 +32,7 @@
 
 ### 例题
 
-例题：[P1494 [国家集训队] 小 Z 的袜子](https://www.luogu.com.cn/problem/P1494)；
+### [P1494 [国家集训队] 小 Z 的袜子](https://www.luogu.com.cn/problem/P1494)；
 
 #### 题目大意
 
@@ -170,3 +170,125 @@ signed main() {
 ```
 
 莫队的一个小常数优化：将左端点所在块的编号为奇数的询问按照右端点从小到大排序，若为偶数则从大到小排序，这个很好理解，因为奇数块处理完后 $r$ 会比较偏右，下一个偶数块从大到小排就可以省去很多移动步数，根据 oi-wiki，这个平均能快 $30\%$。我实测例题 $n=5\times10^4$ 的时候大约能快 $10\text{ms}$ 或 $20\%$。
+
+### [P4137 Rmq Problem / mex](https://www.luogu.com.cn/problem/P4137)
+
+#### 题目大意
+
+给定序列 $\{a_1,a_2,\dots,a_n\}$，$q$ 次询问，每次询问要求你给出给定区间的 $\text{mex}$。
+
+$\text{mex}$ Minimum EXcluded natural number，最小未包含自然数。
+
+#### 做法
+
+经典的无修改莫队。但是数据范围是 $n \leqslant 2\times10^5$ 有点难办。
+
+莫队的主要复杂度在于移动区间左右端点和对于每个查询求 $\text{Ans}$，记移动一次需要 $\text{move}(n)$ 时间，查询一次需 $\text{query}(n)$ 时间，则莫队整体复杂度可以表示为：
+
+$$
+\mathcal{T}(n) = {}^1\mathcal{O}(n\sqrt{n})\times\text{move}(n)+{}^2\mathcal{O}(q\log q) + {}^3\mathcal{O}(q)\times\text{query}(n)
+$$
+
+1. $\mathcal{O}(n\sqrt{n})\times\text{move}(n)$ 是总共移动区间的开销。
+2. $\mathcal{O}(q\log q)$ 排序询问的开销。
+3. $\mathcal{O}(q)\times\text{query}(n)$ 查询 $q$ 次的开销。
+
+可以发现，$\text{move}$ 和 $\text{query}$ 的地位完全不对等，前者系数远高于后者。
+
+首先，我们可以很自然的想到一个 $\text{move}(n)=\mathcal{O}(\log n)$ 的做法，即全局维护一个 $\text{cnt}$ 的线段树，对于每个询问查询时线段树上二分。非常可惜的是，这个做法常数过大根本无法通过本题，实测 $44\text{pts}$。
+
+上述做法复杂度瓶颈在于移动，我们考虑平衡这里，对于这种数据范围大的莫对题，严格 $\mathcal{O}(1)$ 的 $\text{move}$ 非常重要！！
+
+考虑平衡移动和查询的复杂度。
+
+我们想到 $\text{bitset}$ 有一个 `_Find_first()` 函数，如果我们将 $\text{cnt}$ 数组布尔化后再去反，则直接就是答案了，虽然是 $\mathcal{O}(n)$，但是常数极小，不仅有 $\text{bitset}$ 特色 $1/64$ 常数，而且也大概率跑不满，因为最多循环到答案便 `return` 了。
+
+最终复杂度 $\mathcal{O}(nq)$，常数 $1/64$。
+
+以上这个例子告诉我们复杂度平衡的重要性，如果 $\text{move}$ 和 $\text{query}$ 都是 $\mathcal{O}(\log n)$ TLE 地体无完肤，$\mathcal{O}(1)$ 的 $\text{move}$ 即使 $\text{query}$ 慢一点仍然可以 $100\text{pts}$。
+
+```cpp
+#include <bits/stdc++.h>
+#define int int64_t
+
+constexpr int N = 262144;
+
+int CD(int x, int y) {
+	return (x % y ? x / y + 1
+		 : x / y);
+}
+
+
+int n, q;
+int A[N];
+int block;
+
+int Cnt[N], Ans[N];
+std::bitset<N> B;
+int glf, grt;
+
+struct Query {
+	int l, r, id;
+	bool operator<(const Query& q) const& { 
+		if (CD(l, block) != CD(q.l, block)) {
+			return l < q.l;
+		} else {
+			if (CD(l, block) & 1) {
+				return r < q.r;
+			} else {
+				return r > q.r;
+			}
+		}
+	} 
+} Q[N];
+
+void Add(int x) {
+	Cnt[x] += 1;
+	if (Cnt[x] == 1) B[x] = false;
+}
+
+void Remove(int x) {
+	if (Cnt[x] == 1) B[x] = true;
+	Cnt[x] -= 1;
+}
+
+signed main() {
+	std::cin.tie(nullptr);
+	std::cin.sync_with_stdio(false);
+	
+	std::cin >> n >> q;
+	block = std::sqrt(n);
+	for (int i = 1; i <= n; i++)
+		std::cin >> A[i];
+	
+	for (int i = 1; i <= q; i++) {
+		std::cin >> Q[i].l >> Q[i].r;
+		Q[i].id = i;
+	}
+	
+	std::sort(Q + 1, Q + q + 1);
+	
+	glf = Q[1].l;
+	grt = Q[1].r;
+	
+	for (int i = 0; i < N; i++)
+		B[i] = true;
+	
+	for (int i = glf; i <= grt; i++)
+		Add(A[i]);
+	
+	Ans[Q[1].id] = B._Find_first();
+	
+	for (int i = 2; i <= q; i++) {
+		while (glf < Q[i].l) Remove(A[glf++]);
+		while (glf > Q[i].l) Add(A[--glf]);
+		while (grt < Q[i].r) Add(A[++grt]);
+		while (grt > Q[i].r) Remove(A[grt--]);
+		Ans[Q[i].id] = B._Find_first();
+	}
+	
+	for (int i = 1; i <= q; i++)
+		std::cout << Ans[i] << "\n";
+	return 0;
+}
+```

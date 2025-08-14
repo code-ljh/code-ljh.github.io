@@ -35,7 +35,7 @@ a {
 }
 
 .greyed {
-    background-color: #00000000;
+    background: linear-gradient(135deg, #f1f1f1, #dbf7f9);
     transition: all 0.3s;
     cursor: pointer;
 }
@@ -45,11 +45,15 @@ a {
 }
 
 .greyed:hover {
-    background-color: #00000005;
+    background: linear-gradient(135deg, #fefeec, #e6e0e0);
 }
 
 .disgreyed {
-    background-color: #00000011;
+    background: linear-gradient(135deg, #b4cfe976, #b3abe45a);
+}
+
+.tab {
+    background: linear-gradient(135deg, #ffffff, #eeeeee);
 }
 
 .card {
@@ -61,13 +65,31 @@ a {
     background: linear-gradient(135deg, #ffffff, #eeeeee);
 }
 
+.card-active {
+    border-radius: 15px;
+    border: 3px solid #00000011;
+    box-shadow: 2px 2px 2px #00000011;
+    margin: 5px;
+    padding: 15px;
+    background: linear-gradient(135deg, #bdb4f17b, #8eb5e762);
+}
+
 .card-app {
     border-radius: 15px;
     border: 3px solid #00000011;
     box-shadow: 2px 2px 2px #00000011;
     margin: 5px;
     padding: 15px;
-    background: linear-gradient(135deg, #fbe0e06b, #c490906b);
+    background: linear-gradient(135deg, #fbe0e020, #c4909020);
+}
+
+.card-tag-marked {
+    border-radius: 15px;
+    border: 3px solid #00000011;
+    box-shadow: 2px 2px 2px #00000011;
+    margin: 5px;
+    padding: 15px;
+    background: linear-gradient(135deg, #dddddd, #eeeeee);
 }
 
 *::-webkit-scrollbar {
@@ -147,22 +169,25 @@ code {
 
 
 table {
+    border: 5px;
+    border-color: #6fb8e9;
+    border-style:outset;
     border-collapse: collapse;
     width: 80%;
     margin: 20px auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
     /* border-radius: 15px; */
 }
 
 thead tr {
-    background-color: #009879;
+    background-color: #797d7c;
     /* border-radius: 15px; */
-    color: #ffffff;
-    background: linear-gradient(135deg, #009879, #1bb620);
+    color: #fff;
+    background: linear-gradient(135deg, #2613d3, rgb(43, 170, 215));
 }
 
 tbody {
-    background: linear-gradient(135deg, #ffffff, #eeeeee);
+    background: linear-gradient(135deg, #ffffff, #d7d5d5);
 }
 
 th,
@@ -175,10 +200,6 @@ td {
 th,
 td {
     padding: 7px 12px;
-}
-
-th {
-    text-align: left;
 }
 
 tbody tr {
@@ -284,6 +305,10 @@ input {
     background: linear-gradient(135deg, #709eee, #79d7ee);
 }
 
+.modern-button-active:hover {
+    background: linear-gradient(135deg, #296ee5, #1cc3ed);
+}
+
 .tooltip-container {
     position: relative;
     display: inline-block;
@@ -310,4 +335,10 @@ input {
 .tooltip-container:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
+}
+
+.cpp-copy-button {
+    position:absolute;
+    right: 0;
+    top: 0;
 }

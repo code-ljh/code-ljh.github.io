@@ -6,7 +6,6 @@ function addshowcard(i, type="article") {
         articlecard.classList.add("card");
     if (type == "application")
         articlecard.classList.add("card-app");
-    console.log(articlecard.style.backgroundColor, articlecard);
     articlecard.style.margin = "15px";
     articlecard.style.marginTop = "7px";
     articlecard.style.display = "flex";
@@ -61,6 +60,7 @@ function addshowcard(i, type="article") {
         tag.classList.add("up");
         tag.style.padding = "5px";
         tag.style.borderRadius = "10px";
+        tag.innerHTML = `<img src="/asset/tag.svg" style="margin:2px" width="15" height="15">`;
         var p = document.createElement("p");
         p.style.fontSize = "12px";
         p.style.margin = "0";
@@ -114,13 +114,22 @@ function loadarticles(data) {
         main.appendChild(maincard);
         maincard.innerText = "内容加载中......";
 
-        miin.innerHTML += `<p style="margin:15px;color:#000000cc">${found["description"]}</p>`;
+        miin.style.justifyContent = "stretch";
+        miin.style.alignItems = "stretch";
+        miin.innerHTML += `<b style="margin:15px;margin-bottom:0px">文章描述</b><p style="margin:15px;color:#000000cc">${found["description"]}</p>`;
+
+        function Size(x) {
+            if (x < 1000) return `${x}B`;
+            if (x <= 1000000) return `${Math.round(x / 1000)}KB`;
+            if (x <= 1000000000) return `${Math.round(x / 1000000)}MB`;
+        }
 
         fetch(`/src/articles/${found["id"]}.md`)
             .then(response => response.text())
             .then(txt => {
                 setTimeout(
                     () => {
+                        miin.innerHTML += `<p style="margin:15px">本文大小 ${(txt.length)} 字节。</p>`;
                         maincard.innerHTML = marked.parse(txt);
                         maincard.style.margin = "15px";
                         maincard.style.padding = "21px";
@@ -149,12 +158,74 @@ function loadarticles(data) {
                         tag.classList.add("card");
                         tag.classList.add("centered");
                         tag.classList.add("up");
-                        tag.style.color = "#00000050";
+                        tag.classList.add("modern-button");
                         tag.style.padding = "10px";
-                        tag.innerHTML = `<p style="margin:0;padding:0; color:#00000050">return to /${found["categories"].join("/")}/</p>`;
+                        tag.innerHTML = `<p style="margin:0;padding:0; color:#ffffff; width: 128px; text-align:center">Return</p>`;
                         tag.href = `/categories.html?${found["categories"].join(".")}`;
                         articlecard.appendChild(tag);
+                        tag = document.createElement("div");
+                        tag.id = "copy-button";
+                        tag.classList.add("card");
+                        tag.classList.add("centered");
+                        tag.classList.add("up");
+                        tag.classList.add("modern-button");
+                        tag.style.padding = "10px";
+                        tag.innerHTML = `<p style="margin:0;padding:0; color:#ffffff; width: 128px; text-align:center">Copy</p>`;
+                        tag.onclick = () => {
+                            navigator.clipboard.writeText(txt);
+                            var cb = document.getElementById("copy-button");
+                            cb.children[0].innerText = "Copied";
+                            cb.classList.add("modern-button-active");
+                            setTimeout(() => {
+                                var cb = document.getElementById("copy-button");
+                                cb.children[0].innerText = "Copy";
+                                cb.classList.remove("modern-button-active");
+                            }, 1000);
+                        };
+                        articlecard.appendChild(tag);
                         parent.appendChild(articlecard);
+
+                        var lis = document.getElementsByClassName("language-cpp");
+                        var index = 0;
+                        var eee = [];
+                        while (lis.length) {
+                            var ele = lis[0];
+                            var par = ele.parentNode;
+                            var inner = par.children[0].innerHTML;
+                            var newpar = document.createElement("div");
+                            par.replaceWith(newpar);
+                            newpar.innerHTML = `
+                                <div style="background-color:#00000002;padding:12px;border:2px solid #eeeeee;display:flex;flex-direction:column">
+                                    <b style="font-size:30px;margin:0px; padding:5px;display:flex;border-bottom:2px solid #00000010"> 
+                                    <img class="copy-button-img up" src="/asset/copy.svg" width="30" height="30" style="border:2px solid #eee;padding:2px;margin:2px">
+                                    <p style="margin:2px">Code C++ (Folded)</p> </b>
+                                </div>
+                            `;
+                            newpar.children[0].id = index;
+                            index += 1;
+                            eee.push(`<pre style="border:2px solid #00000010; margin:5px; padding:15px; overflow:auto"><code>${inner}</code></pre>`);
+                            newpar.onclick = (evt)=>{
+                                var tar = evt.srcElement;
+                                if (tar.tagName === "P") tar = tar.parentNode;
+                                if (tar.tagName === "B") tar = tar.parentNode;
+                                if (tar.tagName === "IMG") {
+                                    var e = tar.parentNode.parentNode;
+                                    e = e.children[1].children[0];
+                                    navigator.clipboard.writeText(e.innerText);
+                                    tar.src = "/asset/tick.svg";
+                                    setTimeout(() => {
+                                        tar.src = "/asset/copy.svg";
+                                    }, 500);
+                                } else {
+                                    if (tar.children.length == 1)
+                                    tar.innerHTML += eee[tar.id],
+                                    tar.children[0].children[1].innerText = "Code C++";
+                                    else tar.removeChild(tar.children[1]),
+                                    tar.children[0].children[1].innerText = "Code C++ (Folded)";
+                                }
+                                
+                            };
+                        }                        
                     }, 400
                 );
             });
@@ -206,19 +277,25 @@ function loadtags(data, dtat) {
                 tagsbar.style.flexDirection = "row";
 
                 var index = 0;
-                function tagbox(txt1, txt2, href) {
+                function tagbox(txt1, txt2, href, type=false) {
                     var ttt = document.createElement("a");
-                    ttt.classList.add("card");
+                    ttt.classList.add(type?"card-active":"card");
                     ttt.classList.add("centered");
                     ttt.classList.add("hover-box");
                     ttt.classList.add("up");
                     ttt.classList.add("tooltip-container");
                     laston = undefined;
                     ttt.style.padding = "10px";
-                    ttt.innerHTML = `<p style="margin:0;padding:0;text-align:center">${txt1}</p>`;
+                    ttt.innerHTML = `
+                        <img src="/asset/tag.svg" style="margin:2px;position:absolute" width="15" height="15">
+                        <p style="margin:0;padding:0;text-align:center;font-size:14px">
+                            ${txt1}
+                        </p>
+                    `;
                     ttt.innerHTML += `
                         <div class="centered tooltip-text" style="color:#555555;background-color:#00000020;display:flex;position:absolute;transform:translate(0,100%)">
-                            <p style="color:#555555;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:16px">
+                            <img src="/asset/article.svg" style="margin:2px" width="15" height="15">
+                            <p style="color:#555555;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px">
                                 ${txt2}
                             </p>
                         </div>
@@ -228,8 +305,8 @@ function loadtags(data, dtat) {
                     index += 1;
                 }
 
-                tagbox("=articles=", data.length, "/articles.html");
-                tagbox("=apps=", dtat.length, "/applications.html");
+                tagbox("articles", data.length, "/articles.html", true);
+                tagbox("apps", dtat.length, "/applications.html", true);
 
                 for (var i of Object.keys(taglist).sort()) 
                     tagbox(i, taglist[i], "/tags.html?" + i);
@@ -245,7 +322,7 @@ function loadtags(data, dtat) {
         }
         for (var i of dtat) {
             if (i["tags"].includes(tagname)) {
-                addshowcard(i, "applications");
+                addshowcard(i, "application");
             }
         }
 
@@ -253,7 +330,8 @@ function loadtags(data, dtat) {
         var elements = document.querySelectorAll("a");
         for (var i of elements)
             if (i.innerText == tagname) {
-                i.style.backgroundColor = "#00000015";
+                i.classList.remove("card");
+                i.classList.add("card-tag-marked");
             }
     }
 }
@@ -291,7 +369,6 @@ function loadcategories(data, dtat) {
     }
 
     parent.appendChild(articlecard);
-    console.log(articlecard, parent);
             
     var main = document.getElementById("main");
     main.innerHTML += `
@@ -312,7 +389,6 @@ function loadcategories(data, dtat) {
     function foldersize(fold) {
         catename.pop();
         var prefix = catename.concat(fold);
-        // console.log(prefix);
         var displays = [];
         for (var i of data) {
             if (i["categories"].length < prefix.length) continue;
@@ -342,7 +418,6 @@ function loadcategories(data, dtat) {
     }
 
     displays = [... new Set(displays)];
-    // console.log(displays);
 
     var k = document.getElementById("table-body");
 
@@ -352,6 +427,7 @@ function loadcategories(data, dtat) {
             <tr>
                 <th> 
                     <p>
+                        <img src="/asset/categories.svg" style="margin:-1px" width="15" height="15">
                         <a class="green-a" href="/categories.html?${(catename).join(".")}">
                             ${"/" + catename.join("/") + "/"}
                         </a>
@@ -372,6 +448,7 @@ function loadcategories(data, dtat) {
                 <tr class="red">
                     <th> 
                         <p>
+                            <img src="/asset/applications.svg" style="margin:-1px" width="15" height="15">
                             <a class="red" href="/applications/${i["id"]}/main.html">
                                 ${i["id"] + ".app"}
                             </a>
@@ -388,6 +465,7 @@ function loadcategories(data, dtat) {
                 <tr class="blue">
                     <th> 
                         <p>
+                            <img src="/asset/article.svg" style="margin:-1px" width="15" height="15">
                             <a class="blue" href="/articles/show.html?${i["id"]}">
                                 ${i["id"] + ".arc"}
                             </a>
@@ -405,6 +483,7 @@ function loadcategories(data, dtat) {
 function loadtemplate(template) {
     const listid = [
         "tab-home", 
+        "tab-articles",
         "tab-tags", 
         "tab-categories",
         "tab-applications"
@@ -467,7 +546,7 @@ function loadtemplate(template) {
         .then(data => {
             try {
                 articlesname;
-                loadarticles(data)
+                loadarticles(data);
             } catch {
                 fetch("/src/applications.json")
                     .then(response => response.json())

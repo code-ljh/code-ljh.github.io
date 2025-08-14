@@ -67,7 +67,7 @@
         "name": "【模板】快速读入",
         "description": "卡常专用。",
         "id": "fastread",
-        "tags": ["oi", "template", "C++", "from-luogu"],
+        "tags": ["oi", "template", "code-cpp", "from-luogu"],
         "categories": ["oi", "template"],
         "time": [2025, 8, 8]
     },
@@ -94,5 +94,29 @@
         "tags": ["ccf", "contest", "csp", "from-luogu"],
         "categories": ["oi", "contests", "ccf"],
         "time": [2025, 8, 8]
+    },
+    {
+        "name": "更新日志",
+        "description": "code-ljh.github.io 的网站更新日志",
+        "id": "updatelog",
+        "tags": ["website", "technology", "github", "modify"],
+        "categories": ["website"],
+        "time": [2025, 8, 13]
+    },
+    {
+        "name": "S+20250814 比赛记录",
+        "description": "NFLS PC 赛制比赛，2025/08/14",
+        "id": "20250814pc-nfls",
+        "tags": ["oi", "contest", "problemset", "training", "notes", "pc", "nfls"],
+        "categories": ["oi", "contests", "training", "nfls", "pc"],
+        "time": [2025, 8, 14]
+    },
+    {
+        "name": "【模板】高精度",
+        "description": "来自我的洛谷博客。",
+        "id": "bitinteger",
+        "tags": ["oi", "template", "project", "algorithm", "from-luogu"],
+        "categories": ["oi", "template"],
+        "time": [2025, 8, 14]
     }
 ]

@@ -95,17 +95,17 @@ class FastOutputStream {
 	}
 } output;
 
-int n;
-int sum;
+// int n;
+// int sum;
 
-signed main() {
-    input.read(n);
-    for (int i = 1; i <= n; i++) {
-        int x;
-        input.read(x);
-        sum += x;
-    }
-    output.write(sum);
-    return 0;
-}
+// signed main() {
+//     input.read(n);
+//     for (int i = 1; i <= n; i++) {
+//         int x;
+//         input.read(x);
+//         sum += x;
+//     }
+//     output.write(sum);
+//     return 0;
+// }
 ```
