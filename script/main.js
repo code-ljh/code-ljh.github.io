@@ -94,8 +94,62 @@ function loadarticles(data) {
     if (articlesname == "__list__") {
         var parent = document.getElementById("main");
         parent.style.flexDirection = "column";
+        parent.innerHTML = `
+        <div class="card" style="display:flex;flex-direction:row;margin: 12px;">
+            <div class="centered" style="flex:1">
+                <a href="/articles-simplified.html"> Simplified List </a>
+            </div>
+            <div class="centered" style="flex:1">
+                <a href="/articles.html" style="color:lightsteelblue"> Traditional List </a>
+            </div>
+        </div>
+        `;
         for (var i of data)
             addshowcard(i);
+    } else if (articlesname == "__simplified_list__") {
+        var p = document.getElementById("main");
+        p.innerHTML = `
+        <div class="card" style="display:flex;flex-direction:row;margin: 12px;">
+            <div class="centered" style="flex:1">
+                <a href="/articles-simplified.html" style="color:lightsteelblue"> Simplified List </a>
+            </div>
+            <div class="centered" style="flex:1">
+                <a href="/articles.html"> Traditional List </a>
+            </div>
+        </div>
+        `;
+        p.innerHTML += `
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th style="text-align:left">ID</th>
+                    <th style="text-align:left">Name</th>
+                    <th style="text-align:left">Tags</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+        `;
+
+        function Char(string, length) {
+            if (string.length > length) 
+                return string.slice(0, length - 3) + '...';
+            return string;
+        }
+
+        var tb = document.getElementById("table-body");
+        for (var i of data) {
+            tb.innerHTML += `
+            <tr>
+                <th class="blue" style="text-align:left"> <a href="/articles/show.html?${i["id"]}">${i["id"] + '.arc'}</a> </th>
+                <th style="text-align:left"> ${i["name"]} </th>
+                <th style="text-align:left"> ${Char("(" + i["tags"].length + ")" + i["tags"].join("|"), 20)} </th>
+                <th> ${i["time"].join('/')} </th>
+            </tr>
+            `;
+        }
     } else {
         var found;
         for (var i of data)
@@ -195,11 +249,15 @@ function loadarticles(data) {
                             var newpar = document.createElement("div");
                             par.replaceWith(newpar);
                             newpar.innerHTML = `
-                                <div style="background-color:#00000002;padding:12px;border:2px solid #eeeeee;display:flex;flex-direction:column">
-                                    <b style="font-size:30px;margin:0px; padding:5px;display:flex;border-bottom:2px solid #00000010"> 
+                            <div class="target-header card" style="background-color:#00000002;padding:12px;border:2px solid #eeeeee;display:flex;flex-direction:column">
+                                <div style="font-size:30px;margin:0px; padding:5px;display:flex;border-bottom:2px solid #00000010"> 
+                                    <p class="card" style="margin:2px;border:2px solid #00000030;padding:2px;text-align:center;padding-left: 7px; padding-right:7px">Code C++</p>
+                                    <img class="fold-button-img up" src="/asset/categories.svg" width="30" height="30" style="border:2px solid #eee;padding:2px;margin:2px">
                                     <img class="copy-button-img up" src="/asset/copy.svg" width="30" height="30" style="border:2px solid #eee;padding:2px;margin:2px">
-                                    <p style="margin:2px">Code C++ (Folded)</p> </b>
+                                    <img class="plus-button-img up" src="/asset/plus.svg" width="30" height="30" style="border:2px solid #eee;padding:2px;margin:2px">
+                                    <img class="minus-button-img up" src="/asset/minus.svg" width="30" height="30" style="border:2px solid #eee;padding:2px;margin:2px"> 
                                 </div>
+                            </div>
                             `;
                             newpar.children[0].id = index;
                             index += 1;
@@ -208,22 +266,46 @@ function loadarticles(data) {
                                 var tar = evt.srcElement;
                                 if (tar.tagName === "P") tar = tar.parentNode;
                                 if (tar.tagName === "B") tar = tar.parentNode;
+                                // console.log(tar.classList);
+                                // console.log(tar);
                                 if (tar.tagName === "IMG") {
-                                    var e = tar.parentNode.parentNode;
-                                    e = e.children[1].children[0];
-                                    navigator.clipboard.writeText(e.innerText);
-                                    tar.src = "/asset/tick.svg";
-                                    setTimeout(() => {
-                                        tar.src = "/asset/copy.svg";
-                                    }, 500);
-                                } else {
-                                    if (tar.children.length == 1)
-                                    tar.innerHTML += eee[tar.id],
-                                    tar.children[0].children[1].innerText = "Code C++";
-                                    else tar.removeChild(tar.children[1]),
-                                    tar.children[0].children[1].innerText = "Code C++ (Folded)";
+                                    try {
+                                        var e = tar.parentNode.parentNode;
+                                        e = e.children[1].children[0];
+                                    } catch {}
+                                    if (tar.classList.contains("copy-button-img")) {
+                                        navigator.clipboard.writeText(e.innerText);
+                                        tar.src = "/asset/tick.svg";
+                                        setTimeout(() => {
+                                            tar.src = "/asset/copy.svg";
+                                        }, 500);
+                                    } else if (tar.classList.contains("plus-button-img")) {
+                                        e = e.parentNode;
+                                        var p = parseFloat(e.style.fontSize.slice(0, -2));
+                                        p += 1;
+                                        e.style.fontSize = `${p}px`;
+                                    } else if (tar.classList.contains("minus-button-img")) {
+                                        e = e.parentNode;
+                                        var p = parseFloat(e.style.fontSize.slice(0, -2));
+                                        p -= 1;
+                                        e.style.fontSize = `${p}px`;
+                                    } else {
+                                        var oritar = tar;
+                                        console.log(tar);
+                                        tar = tar.parentNode.parentNode;
+                                        console.log(tar);
+                                        if (tar.children.length == 1) {
+                                            tar.innerHTML += eee[tar.id],
+                                            tar.children[1].style.fontSize = "12.5px";
+                                            oritar.src = "/asset/article.svg";
+                                            tar.children[0].children[1].replaceWith(oritar);
+                                            console.log(oritar);
+                                        } else {
+                                            tar.removeChild(tar.children[1]);
+                                            oritar.src = "/asset/categories.svg";
+                                        }
+                                    }       
                                 }
-                                
                             };
                         }                        
                     }, 400
@@ -375,7 +457,7 @@ function loadcategories(data, dtat) {
         <table id="myTable">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th style="text-align:left">ID</th>
                     <th>Name</th>
                     <th>Type</th>
                     <th>Size</th>
@@ -425,7 +507,7 @@ function loadcategories(data, dtat) {
         catename.push(i);
         k.innerHTML += `
             <tr>
-                <th> 
+                <th style="text-align:left"> 
                     <p>
                         <img src="/asset/categories.svg" style="margin:-1px" width="15" height="15">
                         <a class="green-a" href="/categories.html?${(catename).join(".")}">
@@ -446,7 +528,7 @@ function loadcategories(data, dtat) {
             catename.push(i["id"]);
             k.innerHTML += `
                 <tr class="red">
-                    <th> 
+                    <th style="text-align:left"> 
                         <p>
                             <img src="/asset/applications.svg" style="margin:-1px" width="15" height="15">
                             <a class="red" href="/applications/${i["id"]}/main.html">
@@ -463,7 +545,7 @@ function loadcategories(data, dtat) {
             catename.push(i["id"]);
             k.innerHTML += `
                 <tr class="blue">
-                    <th> 
+                    <th style="text-align:left"> 
                         <p>
                             <img src="/asset/article.svg" style="margin:-1px" width="15" height="15">
                             <a class="blue" href="/articles/show.html?${i["id"]}">

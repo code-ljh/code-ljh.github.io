@@ -27,3 +27,12 @@
 - Markdown 加入新功能：支持复制代码块、代码块默认关闭，点击即可打开。
 - Some minor fixes.
 - Github Pushed.
+
+##### 2025-08-15
+
+- Markdown 加入新功能：支持放大、缩小。
+- Some minor fixes.
+
+##### 2025-08-16
+
+- Github Pushed.

@@ -15,3 +15,4 @@
 - [Hello World](/articles/show.html?hello-world)；
 - [Read Me](/articles/show.html?readme)；
 - [Equations aka $\KaTeX$ Test](/articles/show.html?equations)；
+- [Update Log](/articles/show.html?updatelog)；

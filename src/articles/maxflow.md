@@ -584,6 +584,72 @@ $\therefore$ 最小割 $\cong$ 最大流 $(\text{SAS})$ （滑稽）
 
 [$\texttt{AC Record}$](https://www.luogu.com.cn/record/154855519)
 
+```cpp
+#include <bits/stdc++.h>
+#define int long long
+const int N = 120;
+const int INF = 1145141919810LL;
+int n, m, G[N][N];
+int vis[N], dis[N], pre[N];
+
+bool getpath() {
+	for (int i = 1; i <= n + 1; i++) vis[i] = 0;
+	std::queue<int> que;
+	que.emplace(0); dis[0] = INF;
+	while (que.size()) {
+		int x = que.front();
+		que.pop();
+		for (int i = 0; i <= n + 1; i++)
+			if (G[x][i] != INF && G[x][i] != 0 && vis[i] == 0) {
+				vis[i] = 1;
+				pre[i] = x;
+				dis[i] = std::min(dis[x], G[x][i]);
+				que.push(i);
+				if (i == n + 1) return true;
+			}
+	}
+	return false; 
+}
+
+signed main() {
+	std::cin >> m >> n;
+	
+	for (int i = 0; i <= n + 1; i++)
+		for (int j = 0; j <= n + 1; j++)
+			G[i][j] = INF;
+	for (int i = 1; i <= m; i++)
+		G[0][i] = 1, G[i][0] = 0;
+	for (int i = m + 1; i <= n; i++)
+		G[i][n + 1] = 1, G[n + 1][i] = 0;
+		
+	while (1) {
+		int x, y;
+		std::cin >> x >> y;
+		if (x == -1 && y == -1) break;
+		G[x][y] = 1;
+		G[y][x] = 0;
+	}
+	
+	int ans = 0;
+	while (getpath()) {
+		int x = n + 1;
+		ans += dis[n + 1];
+		while (x != 0) {
+			G[pre[x]][x] -= dis[n + 1];
+			G[x][pre[x]] += dis[n + 1];
+			x = pre[x];
+		}
+	}
+	
+	std::cout << ans << std::endl;
+	for (int i = m + 1; i <= n; i++)
+		for (int j = 1; j <= m; j++)
+			if (G[i][j] != 0 && G[i][j] != INF)
+				std::cout << j << " " << i << std::endl;
+	return 0;
+}
+```
+
 ### $\color{cornflowerblue}\text{P2761}$ 软件补丁问题
 
 #### $\texttt{Statement}$
@@ -602,7 +668,7 @@ $1\leq n\leq 20, 1 \leq m \leq 100$
 
 这题感觉难度全在位运算优化，乍一看每个 $\text{bug}$ 输入是三种状态：无影响，必须有，必须没有，好像不能位运算，但我们可以把其中一种状态提取出来，我提取的是无影响的状态。
 
-```cpp
+```c
 int cost;
 std::string need;
 std::string change;
@@ -634,6 +700,102 @@ for (int state = 0; state < (1 << n); state++)
 
 [$\texttt{AC Record}$](https://www.luogu.com.cn/record/169940864)
 
+```cpp
+#include <iostream>
+#include <bitset>
+#include <queue>
+
+constexpr int maxn = 2097152;
+constexpr int inf = 2147483647;
+
+struct edges {
+	int to;
+	int cost;
+
+	edges(int a=0, int b=0):
+		to(a), cost(b) {}
+}; std::vector<edges> graph[maxn];
+
+int n, m;
+int dist[maxn];
+int source, thrink;
+std::bitset<maxn> visited;
+
+using pair = std::pair<int, int>;
+using container = std::vector<pair>;
+using comparer = std::greater<pair>;
+
+int dijkstra() {
+	for (int i = 0; i < (1 << n); i++) dist[i] = inf;
+	dist[source] = 0;
+	std::priority_queue<pair, container, comparer> que;
+	que.emplace(dist[source], source);
+	
+	while (que.size()) {
+		int top = que.top().second;
+		que.pop();
+
+		if (visited[top]) continue;
+		visited[top] = true;
+
+		for (auto e : graph[top]) {
+			int to = e.to;
+
+			if (visited[to]) continue;
+
+			if (dist[to] > dist[top] + e.cost) {
+				dist[to] = dist[top] + e.cost;
+				que.emplace(dist[to], to);
+			}
+		}
+	}
+
+	// for (int i = 0; i < (1 << n); i++) {
+	// 	std::cout << "The dist from " << source << " to " << i << ": ";
+	// 	(dist[i] == inf ? 
+	// 		std::cout << "unreachable\n" :
+	// 		std::cout << dist[i] << std::endl);
+	// }
+
+	return (dist[thrink] == inf ? 0 : dist[thrink]);
+}
+
+signed main() {
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(NULL), std::cout.tie(NULL);
+
+	// freopen("input.in" , "r", stdin);
+	// freopen("error.out", "w", stderr);
+	// freopen("print.out", "w", stdout);
+
+	std::cin >> n >> m;
+	source = (1 << n) - 1;
+	thrink = 0;
+
+	for (int i = 1; i <= m; i++) {
+		int cost;
+		std::string need;
+		std::string change;
+		std::cin >> cost >> need >> change;
+		int nd = 0, xd = 0, get = 0, rem = 0;
+		for (auto i : need) 
+			nd = (nd << 1) | (i != '-'),
+			xd = (xd << 1) | (i == '0');
+		for (auto i : change)
+			get = (get << 1) | (i == '+'),
+			rem = (rem << 1) | (i == '-');
+		rem = (1 << n) - 1 - rem;
+
+		for (int state = 0; state < (1 << n); state++)
+			if ((xd | state) == nd)
+				graph[state].push_back(edges((state | get) & rem, cost));
+	}
+
+	std::cout << dijkstra() << std::endl;
+	return 0;
+}
+```
+
 ### $\color{cornflowerblue}\text{P4016}$ 负载平衡问题
 #### $\texttt{Statement}$
 
@@ -656,6 +818,118 @@ for (int state = 0; state < (1 << n); state++)
 
 [$\texttt{AC Record}$](https://www.luogu.com.cn/record/169166320)
 
+```cpp
+#include <bits/stdc++.h>
+#define int long long
+
+constexpr int maxn = 210;
+constexpr int infinity = 1145141919810LL;
+
+struct edges {
+	int u, v, flow, cost;
+	edges *reverse;
+	edges(int a=0, int b=0, int c=0, int d=0) {
+		flow = c, cost = d;
+		u = a, v = b;
+	}
+};
+
+int n, sum;
+int a[maxn];
+int source, thrink;
+int dist[maxn], flow[maxn];
+edges *prev[maxn];
+std::bitset<maxn> inque;
+
+std::vector<edges*> graph[maxn];
+
+bool spfa() {
+	
+	for (int i = 1; i <= n * 2 + 2; i++)
+		dist[i] = infinity;
+	
+	std::queue<int> que;
+	que.emplace(source);
+	dist[source] = 0;
+	flow[source] = infinity;
+	
+	while (que.size()) {
+		int x = que.front();
+		que.pop();
+		inque[x] = false;
+		
+		for (edges *e : graph[x]) {
+			int y = e->v;
+			
+			if (dist[y] > dist[x] + e->cost && e->flow) {
+				dist[y] = dist[x] + e->cost;
+				flow[y] = std::min(flow[x], e->flow);
+				prev[y] = e;
+				
+				if (!inque[y]) {
+					inque[y] = true;
+					que.emplace(y);
+				}
+			}
+		}
+	}
+	
+	return dist[thrink] != infinity;
+}
+
+int maxflow;
+int update() {
+	int x = thrink;
+	while (x != source) {
+		prev[x]->flow -= flow[thrink];
+		prev[x]->reverse->flow += flow[thrink];
+		x = prev[x]->u;
+	}
+	maxflow += flow[thrink];
+	return dist[thrink] * flow[thrink];
+}
+
+void makedge(int u, int v, int f, int c) {
+	edges *adge = new edges(u, v, f, +c);
+	edges *bdge = new edges(v, u, 0, -c);
+	adge->reverse = bdge;
+	bdge->reverse = adge;
+	graph[u].emplace_back(adge);
+	graph[v].emplace_back(bdge);
+}
+
+signed main() {
+	std::cin >> n;
+	source = n * 2 + 1, thrink = n * 2 + 2;
+	
+	for (int i = 1; i <= n; i++) {
+		std::cin >> a[i];
+		sum += a[i];
+	}
+	
+	for (int i = 1; i <= n; i++) {
+		makedge(i + n, thrink, sum / n, 0);
+		int prev = i - 1;
+		int next = i + 1;
+		if (prev == 0) prev = n;
+		if (next == n + 1) next = 1;
+		makedge(i, i + n, infinity, 0);
+		makedge(i, prev + n, infinity, 1);
+		makedge(i, next + n, infinity, 1);
+		makedge(i, next, infinity, 1);
+		makedge(i, prev, infinity, 1);
+		makedge(source, i, a[i], 0);
+	}
+	
+	int mincost = 0;
+	while (spfa()) mincost += update();
+	
+	//std::cout << maxflow << " " << sum << "\n";
+	std::cout << mincost;
+	return 0;
+}
+```
+
 ### $\color{cornflowerblue}\text{P4014}$ 分配问题
 
 #### $\texttt{Statement}$
@@ -664,13 +938,162 @@ for (int state = 0; state < (1 << n); state++)
 
 #### $\texttt{Solution}$
 
-- 二分图上最小/大费用最大流板子
+- 二分图上最小/大费用最大流板子；有的人称此为“带权”最大匹配。
 - $n$ 件工作和 $n$ 个人分别建点，然后代价为 $c_{i, j}$ 流量 $1$ 连边就行了。
 - 超级源点连工作，流量 $1$ 代价 $0$，超级汇点连人流量 $1$ 代价 $0$，确保每个工作只会由一个人干，每个人也只会干一个工作。
 
 分别跑一个最小费用最大流和最大费用最大流就行了！最大费用就把最短路改为最长路即可，其他不变。
 
 [$\texttt{AC Record}$](https://www.luogu.com.cn/record/168755291)
+
+```cpp
+#include <bits/stdc++.h>
+#define int long long
+
+constexpr int maxn = 110;
+constexpr int infinity = 1145141919810LL;
+
+struct edges {
+	int from, to, flow, cost;
+	edges *reverse;
+	
+	edges(int a=0, int b=0, int c=0, int d=0) {
+		from = a, to = b;
+		flow = c, cost = d;
+		reverse = nullptr;
+	}
+}; 
+
+int n;
+int a[maxn][maxn];
+int source, thrink;
+int dist[maxn], inqu[maxn], flow[maxn];
+edges *prev[maxn];
+
+std::vector<edges*> graph[maxn];
+
+void makedge(int f, int t, int flow, int cost) {
+	edges *adge = new edges(f, t, flow, +cost);
+	edges *bdge = new edges(t, f,    0, -cost);
+	adge->reverse = bdge, bdge->reverse = adge;
+	graph[f].emplace_back(adge), graph[t].emplace_back(bdge); 
+}
+
+bool spfa(int option) {
+	for (int i = 1; i <= n * 2 + 2; i++) {
+		flow[i] = 0;
+		inqu[i] = false;
+		prev[i] = nullptr;
+		
+		if (option) {
+			dist[i] = -infinity;
+		} else {
+			dist[i] = +infinity;
+		}
+	}
+	
+	std::queue<int> queue;
+	queue.emplace(source);
+	flow[source] = infinity;
+	dist[source] = 0;
+	
+	while (queue.size()) {
+		int x = queue.front();
+		queue.pop();
+		inqu[x] = false;
+		std::cerr << "Expanding queue by " << x << "\n"; 
+		
+		for (edges *e : graph[x]) {
+			int y = e->to;
+			if (e->flow <= 0) continue;
+			
+			if (option) {
+				if (dist[y] < dist[x] + e->cost) {
+					dist[y] = dist[x] + e->cost;
+					flow[y] = std::min(flow[x], e->flow);
+					prev[y] = e;
+					std::cerr << ">>> Expanded " << y << " into the queue.\n";
+					
+					if (!inqu[y]) {
+						inqu[y] = true;
+						queue.emplace(y);
+					}
+				}
+			} else {
+				if (dist[y] > dist[x] + e->cost) {
+					dist[y] = dist[x] + e->cost;
+					flow[y] = std::min(flow[x], e->flow);
+					prev[y] = e;
+					
+					if (!inqu[y]) {
+						inqu[y] = true;
+						queue.emplace(y);
+					}
+				}
+			}
+		}
+	}
+	
+	return std::abs(dist[thrink]) != infinity;
+}
+
+signed main() {
+	freopen("啥本.out", "w", stderr);
+	
+	std::cin >> n;
+	source = n*2 + 1, thrink = n*2 + 2;
+	for (int i = 1; i <= n; i++)
+		for (int j = 1; j <= n; j++) {
+			std::cin >> a[i][j];
+			makedge(i, j + n, 1, a[i][j]);
+		}
+	
+	for (int i = 1; i <= n; i++) {
+		makedge(source, i, 1, 0);
+		makedge(i + n, thrink, 1, 0);
+	}
+	
+	int maxcost = 0, mincost = 0;
+	while (spfa(1)) {
+		std::cerr << "find augumenting path in maxcost" << std::endl;
+		int x = thrink;
+		maxcost += dist[x];
+		while (x != source) {
+			prev[x]->flow -= flow[thrink];
+			prev[x]->reverse->flow += flow[thrink];
+			std::cerr << x << " ";
+			x = prev[x]->from;
+		}
+		std::cerr << " path of " << flow[thrink] << std::endl;
+	}
+	
+	for (int i = 1; i <= n*2 + 2; i++) graph[i].clear();
+	
+	for (int i = 1; i <= n; i++)
+		for (int j = 1; j <= n; j++) {
+			std::cerr << a[i][j];
+			makedge(i, j + n, 1, a[i][j]);
+		}
+	
+	for (int i = 1; i <= n; i++) {
+		makedge(source, i, 1, 0);
+		makedge(i + n, thrink, 1, 0);
+	}
+	
+	while (spfa(0)) {
+		std::cerr << "find augumenting path in mincost" << std::endl;
+		int x = thrink;
+		mincost += dist[x];
+		while (x != source) {
+			prev[x]->flow -= flow[thrink];
+			prev[x]->reverse->flow += flow[thrink];
+			x = prev[x]->from; 
+		}
+	}
+	std::cout << mincost << "\n" << maxcost << std::endl;
+	return 0;
+}
+```
 
 ### $\color{cornflowerblue}\text{P4015}$ 运输问题
 #### $\texttt{Statement}$
@@ -688,3 +1111,139 @@ $$\sum a = \sum b, \\ 1 \leq n, m \leq 100$$
 - 跑最小（大）费用最大流。
 
 [$\texttt{AC Record}$](https://www.luogu.com.cn/record/168761804)
+
+```cpp
+#include <bits/stdc++.h>
+#define int long long
+
+constexpr int maxn = 200;
+constexpr int infinity = 1145141919810LL;
+constexpr int tag_min = 1145141919810LL;
+constexpr int tag_max = 1919810114514LL;
+
+struct edges {
+	int from, to, cost, flow;
+	edges *reverse;
+	
+	edges(int a=0, int b=0, int c=0, int d=0) {
+		from = a, to = b;
+		cost = d, flow = c;
+		reverse = nullptr;
+	}
+};
+
+int m, n;
+int a[maxn], b[maxn];
+int cost[maxn][maxn];
+int source, thrink;
+std::vector<edges*> graph[maxn];
+std::bitset<maxn> inque;
+int dist[maxn], flow[maxn];
+edges *prev[maxn];
+
+bool spfa(int tag) {
+	for (int i = 1; i <= n + m + 2; i++)
+		dist[i] = (tag == tag_max ? -infinity : infinity);
+	
+	std::queue<int> que;
+	que.emplace(source);
+	dist[source] = 0;
+	flow[source] = infinity;
+	
+	while (que.size()) {
+		int x = que.front();
+		que.pop();
+		inque[x] = false;
+		
+		std::cerr << "Expanding queue by " << x << "\n";
+		
+		for (edges *e : graph[x]) {
+			int y = e->to;
+			std::cerr << ">>> Trying expanding " << y << " into the queue\n";
+			std::cerr << ">>> Using edge of maximum flow " << e->flow << "\n";
+			if (e->flow <= 0) continue;
+			bool flag = (tag == tag_max ? dist[y] < dist[x] + e->cost : dist[y] > dist[x] + e->cost);
+			if (flag) {
+				dist[y] = dist[x] + e->cost;
+				flow[y] = std::min(flow[x], e->flow);
+				prev[y] = e;
+				
+				if (!inque[y]) {
+					std::cerr << ">>> Successfully expanded " << y << " into the queue\n";
+					
+					inque[y] = true;
+					que.emplace(y);
+				}
+			}
+		}
+	}
+	
+	std::cerr << "The maximum path to thrink is " << dist[thrink] << std::endl;
+	return std::abs(dist[thrink]) != infinity;
+}
+
+int update() {
+	int x = thrink;
+	std::cerr << "Found an augumenting path!\n";
+	while (x != source) {
+		prev[x]->flow -= flow[thrink];
+		prev[x]->reverse->flow += flow[thrink];
+		std::cerr << x << " ";
+		x = prev[x]->from;
+	}
+	std::cerr << "with cost of " << dist[thrink];
+	return dist[thrink] * flow[thrink];
+}
+
+void makedge(int f, int t, int flow, int cost) {
+	std::cerr << "Made edge from " << f << " to " << t << " with cost " << cost << " ";
+	std::cerr << "with maximum flow of " << flow << "\n";
+	
+	edges *adge = new edges(f, t, flow, cost);
+	edges *bdge = new edges(t, f,    0, -cost);
+	adge->reverse = bdge, bdge->reverse = adge;
+	graph[f].push_back(adge), graph[t].push_back(bdge);
+}
+
+signed main() {
+	freopen("山本.out", "w", stderr);
+	
+	std::cin >> m >> n;
+	source = m + n + 1;
+	thrink = m + n + 2;
+	
+	for (int i = 1; i <= m; i++) std::cin >> a[i];
+	for (int i = 1; i <= n; i++) std::cin >> b[i];
+	
+	for (int i = 1; i <= m; i++)
+		for (int j = 1; j <= n; j++)
+			std::cin >> cost[i][j];
+	
+	for (int i = 1; i <= m; i++) makedge(source, i, a[i], 0);
+	for (int i = 1; i <= n; i++) makedge(i + m, thrink, b[i], 0);
+	
+	for (int i = 1; i <= m; i++)
+		for (int j = 1; j <= n; j++)
+			makedge(i, j + m, infinity, cost[i][j]);
+		
+	int maxcost = 0;
+	while (spfa(tag_max)) maxcost += update();
+	
+	std::cerr << "Cleared the graph!\n";
+	
+	for (int i = 1; i <= n + m + 2; i++) graph[i].clear();
+	
+	for (int i = 1; i <= m; i++) makedge(source, i, a[i], 0);
+	for (int i = 1; i <= n; i++) makedge(i + m, thrink, b[i], 0);
+	
+	for (int i = 1; i <= m; i++)
+		for (int j = 1; j <= n; j++)
+			makedge(i, j + m, infinity, cost[i][j]);
+	
+	int mincost = 0;
+	while (spfa(tag_min)) mincost += update();
+	
+	std::cout << mincost << std::endl << maxcost << std::endl; 
+	return 0;
+}
+```
