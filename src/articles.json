@@ -56,11 +56,11 @@
         "time": [2025, 8, 5]
     },
     {
-        "name": "CSP20250807 模拟赛比赛记录",
+        "name": "CSP20250807 比赛记录",
         "description": "2025 年 08 月 06 日，OI 比赛，记之。",
         "id": "20250806oi-nfls",
         "tags": ["oi", "contest", "problemset", "training", "notes", "csp", "nfls"],
-        "categories": ["oi", "contests", "training", "nfls", "noi"],
+        "categories": ["oi", "contests", "training", "nfls", "csp"],
         "time": [2025, 8, 7]
     },
     {
@@ -72,16 +72,16 @@
         "time": [2025, 8, 8]
     },
     {
-        "name": "网络流学习笔记（来自我的洛谷博客）",
-        "description": "烂尾 网络流学习笔记。",
+        "name": "网络流学习笔记",
+        "description": "烂尾 网络流学习笔记。（来自我的洛谷博客）",
         "id": "maxflow",
         "tags": ["oi", "notes", "algorithm", "graph", "from-luogu"],
         "categories": ["oi", "algorithm", "graph"],
         "time": [2025, 8, 8]
     },
     {
-        "name": "CSP-S 2022 游记（昔日余晖）",
-        "description": "CSP-S 2022 六年级游记，致不存在的辉煌。",
+        "name": "CSP-S 2022 游记",
+        "description": "CSP-S 2022 六年级游记，致不存在的辉煌。昔日余晖",
         "id": "csps2022trip",
         "tags": ["ccf", "contest", "csp", "from-luogu"],
         "categories": ["oi", "contests", "ccf"],
@@ -115,8 +115,16 @@
         "name": "【模板】高精度",
         "description": "来自我的洛谷博客。",
         "id": "bitinteger",
-        "tags": ["oi", "template", "project", "algorithm", "from-luogu"],
+        "tags": ["oi", "template", "project", "algorithm", "from-luogu", "code-cpp"],
         "categories": ["oi", "template"],
         "time": [2025, 8, 14]
+    },
+    {
+        "name": "CSP20250819 比赛记录",
+        "description": "NFLS OI 赛制比赛，2025/08/19 辉煌时刻！",
+        "id": "20250819oi-nfls",
+        "tags": ["oi", "contest", "problemset", "training", "notes", "csp", "nfls"],
+        "categories": ["oi", "contests", "training", "nfls", "csp"],
+        "time": [2025, 8, 19]
     }
 ]

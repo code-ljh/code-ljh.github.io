@@ -31,8 +31,15 @@
 ##### 2025-08-15
 
 - Markdown 加入新功能：支持放大、缩小。
+- 模板加入新功能：Articles List 复活。
+- 加入新标签页 Articles-Simplified。
 - Some minor fixes.
 
 ##### 2025-08-16
 
-- Github Pushed.
+- Github Pushed. 
+- 现在 KaTeX 编辑器也支持代码块优化了！
+
+##### 2025-08-18
+
+- 加入新功能：支持在 article/show 显示标签 和 分类。

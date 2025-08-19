@@ -4,60 +4,130 @@
 
 1. 送钱人
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/5qs9b0ud.png)
+```c
+int main()
+{
+    freopen("transmit.in", "r", stdin);
+    freopen("transmit.out", "w", stdout);
+    cout << "I LOVE CCF. I WILL GIVE YOU ALL OF MY MONEY."
+    return 0;
+}
+```
 
 2. 文明人
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/fiy6r9zd.png)
+```c
+int dis[maxn]; bool flag[maxn];
+struct shit {int x, dis; };
+bool operator<(shit a, shit b)
+{
+    return a.dis > b.dis;
+}
+priority_queue<shit> q;
 
-（小编没有找到 `fuck`）
+// 编者注：没有 fuck，可见今年考生的素质大幅提升！！！
+```
 
 3. Love CCF 人
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/ls503gwi.png)
+```c
+freopen("galaxy.in", "r", stdin);
+freopen("galaxy.out", "w", stdout);
 
-（这人的考号 333）
+cout << "It's too difficult, I'm not clever enough to do that" << endl;
+cout << "I love ccf"
+
+// 考号 333，奇人异事。
+```
 
 4. 抱灵人 I
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/w291db94.png)
+```c
+//freopen()
+// 喜闻乐见的 //freopen 环节。
+```
 
 5. 抱灵人 II
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/716jn9in.png)
+```plain
+v-game.cpp-------------------
+freopen("game.ans", "w", stdout);
+
+v-game.cpp-------------------
+//freopen("game.ans", "w", stdout);
+
+v-game.cpp-------------------
+freopen("game.ans", "w", stdout);
+
+v-game.cpp-------------------
+freopen("game.ans", "w", stdout);
+```
 
 6. 抱灵人 III
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/hmubqqfu.png)
+```plain
+v-game.cpp--------------------
+freopen("game.in.txt", "r", stdin);
+```
 
 7. 抱灵人 IV
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/q12v40q8.png)
+```plain
+策略游戏（game）
+- 策略游戏（game）.cpp
+
+假期计划（holiday）
+- 假期计划（holiday）.cpp
+
+数据传输（transmit）
+
+星战（galaxy）
+- 星战（galaxy）.cpp
+```
 
 8. 抱灵人 V（未命名人）
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/nhjscy8j.png)
-
-9. 抱灵人 VI （看不懂人，ta 的四个代码都是这种）
-
-![](https://cdn.luogu.com.cn/upload/image_hosting/cxp5aakh.png)
+```plain
+v holiday
+- 未命名1.cpp
+```
 
 10. 三重代码人
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/lluyenlt.png)
+```plain
+v galaxy
+- galaxy.1.cpp
+- galaxy.cpp
+- galaxy1.cpp
+```
 
-11. 看不懂人 II
+11. 看不懂人
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/q8wxsdnu.png)
+```plain
+NULNULNULNULNULNULNULNULNULNULNUL....
+// 编者注：大概率是把 .exe 强制变成 .cpp 导致的。
+```
 
 12. 求蓝勾人~~（其实就是小编）~~
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/clcxracc.png)
+```c
+// OH MY GOD!
+// Please give me 100pts! I wanna blue correct.
+```
 
 13. 三重代码人 II
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/71ez5az2.png)
+```plain
+v game
+- backup.cpp
+- cmp.cpp
+- game.cpp
+```
 
 14. 副本人
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/w66t34pj.png)
+```plain
+v transmit
+- transmit-副本.cpp
+- transmit.cpp
+```

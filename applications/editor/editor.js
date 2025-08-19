@@ -65,29 +65,15 @@ setTimeout(
         };
         
         dis = document.getElementById("display");
-        var mode = "normal";
-        dis.onclick = () => {
-            var left = document.getElementById("leftpart");
-            var right = document.getElementById("rightpart");
-
-            if (mode == "normal") {
-                left.opacity = "0";
-                setTimeout(() => {
-                    left.parentNode.style.display = "none";
-                }, 0);
-                mode = "display";
-                right.parentNode.style.left = "5%";
-                right.style.fontSize = "16px";
-                right.style.width = "70vw";
+        dis.onclick = (evt) => {
+            var i = document.getElementById("left");
+            var j = document.getElementById("right");
+            if (i.style.display == "flex") {
+                i.style.display = "none";
+                j.style.flexBasis = "100%";
             } else {
-                left.opacity = "1";
-                setTimeout(() => {
-                    left.parentNode.style.display = "block";
-                }, 0);
-                mode = "normal";
-                right.parentNode.style.left = "47.5%";
-                right.style.fontSize = "10px";
-                right.style.width = "40vw";
+                i.style.display = "flex";
+                j.style.flexBasis = "60%";
             }
         };
 
@@ -105,34 +91,32 @@ setTimeout(
         }
 
         main.style.height = "100vh";
-        main.style.overflow = "hidden";
+        main.style.width = "100%";
+        document.body.style.overflow = "hidden";
         main.innerHTML = `
-            <div style="position:absolute;left:0;right:50%;top:0;bottom:0; transition: all 0.3s;">
-                <textarea id="leftpart" class="modern-textarea" style="width:32.5vw;height:95vh;transition: all 0.3s;margin: 5px; padding: 10px">${k}</textarea>
+            <div id="left" style="display: flex; justify-content:space-around; flex-shrink:0; flex-basis:40%;">
+                <textarea id="leftpart" class="modern-textarea" style="padding:10px;flex:1;font-size:8.5px;overflow:auto">${k}</textarea>
             </div>
-            <div style="position:absolute;left:45%;right:0;top:0;bottom:0; transition: all 0.3s;">
-                <div id="rightpart" style="width:40vw;height:95vh; padding: 5px; margin: 7px; overflow:auto; font-size: 10px; border:2px solid #00000030">
+            <div id="right" style="display: flex; justify-content:space-around; flex-shrink:0; flex-basis:60%;overflow:auto">
+                <div id="rightpart" style="overflow:auto; font-size: 8.5px; border:2px solid #03020230;padding:10px;flex:1;overflow-x:hidden">
                 
                 </div>
             </div>
         `;
+        main.style.display = "flex";
+        main.style.flexDirection = "row";
+        main.style.justifyContent = "space-around";
 
+        var ori = document.getElementById("leftpart").value;
+        Text(ori, document.getElementById("rightpart"));
         setInterval(
             () => {
                 var left = document.getElementById("leftpart");
                 var right = document.getElementById("rightpart");
-                right.innerHTML = marked.parse(left.value);
-                renderMathInElement(
-                    main, 
-                    {
-                        throwOnError: false,
-                        delimiters: [
-                            { left: '$$', right: '$$', display: true },
-                            { left: '$', right: '$', display: false }
-                        ]
-                    }
-                );
-                hljs.highlightAll();
+                if (left.value !== ori) {
+                    Text(left.value, right);
+                    ori = left.value;
+                }
             }, 500
         );
     }, 1000

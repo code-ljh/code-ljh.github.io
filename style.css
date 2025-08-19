@@ -1,3 +1,8 @@
+body {
+    margin:0;
+    padding:0;
+}
+
 p,
 h1,
 h2,
@@ -89,7 +94,8 @@ a {
     box-shadow: 2px 2px 2px #00000011;
     margin: 5px;
     padding: 15px;
-    background: linear-gradient(135deg, #dddddd, #eeeeee);
+    background: linear-gradient(135deg, #dddddd88, #bbbbbb88);
+    transform: translateY(-3px);
 }
 
 *::-webkit-scrollbar {
@@ -232,6 +238,19 @@ th>p {
 
 .blue>*>* {
     color: rgba(61, 153, 240, 0.743);
+}
+
+
+.green {
+    color: #009879;
+}
+
+.green>* {
+    color: #009879;
+}
+
+.green>*>* {
+    color: #009879;
 }
 
 .red>* {

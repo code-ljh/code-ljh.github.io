@@ -1,4 +1,4 @@
-function addshowcard(i, type="article") {
+function addshowcard(i, type = "article") {
     var parent = document.getElementById("main");
     var articlecard = document.createElement("a");
     parent.appendChild(articlecard);
@@ -37,11 +37,11 @@ function addshowcard(i, type="article") {
     tagsbar.style.display = "flex";
     tagsbar.style.flexDirection = "row";
     var ttt = document.createElement("a");
-        ttt.classList.add("card");
-        ttt.classList.add("centered");
-        ttt.classList.add("up");
-        ttt.style.padding = "5px";
-        ttt.style.borderRadius = "10px";
+    ttt.classList.add("card");
+    ttt.classList.add("centered");
+    ttt.classList.add("up");
+    ttt.style.padding = "5px";
+    ttt.style.borderRadius = "10px";
     var p = document.createElement("p");
     p.style.fontSize = "12px";
     p.style.margin = "0";
@@ -49,26 +49,12 @@ function addshowcard(i, type="article") {
     p.innerText = ":>>>";
     ttt.appendChild(p);
     ttt.style.backgroundColor = "#00ff0007";
-    ttt.href = (type == "article" ? 
-        `/articles/show.html?${i["id"]}` : 
+    ttt.href = (type == "article" ?
+        `/articles/show.html?${i["id"]}` :
         `/applications/${i["id"]}/main.html`);
     tagsbar.appendChild(ttt);
     for (var j of i["tags"]) {
-        var tag = document.createElement("a");
-        tag.classList.add("card");
-        tag.classList.add("centered");
-        tag.classList.add("up");
-        tag.style.padding = "5px";
-        tag.style.borderRadius = "10px";
-        tag.innerHTML = `<img src="/asset/tag.svg" style="margin:2px" width="15" height="15">`;
-        var p = document.createElement("p");
-        p.style.fontSize = "12px";
-        p.style.margin = "0";
-        p.style.padding = "0";
-        p.innerText = j;
-        tag.appendChild(p);
-        tag.href = `/tags.html?${j}`;
-        tag.style.backgroundColor = "#ffffff00";
+        var tag = Tag(j);
         tagsbar.appendChild(tag);
     }
     articlecard.appendChild(titlebar);
@@ -76,8 +62,8 @@ function addshowcard(i, type="article") {
     articlecard.appendChild(catebar);
     articlecard.appendChild(tagsbar);
     articlecard.style.transition = "background-color 0.3s";
-    articlecard.href = (type == "article" ? 
-        `/articles/show.html?${i["id"]}` : 
+    articlecard.href = (type == "article" ?
+        `/articles/show.html?${i["id"]}` :
         `/applications/${i["id"]}/main.html`);
 }
 
@@ -86,7 +72,7 @@ function loadapplications(data) {
         var parent = document.getElementById("main");
         parent.style.flexDirection = "column";
         for (var i of data)
-            addshowcard(i, "application");        
+            addshowcard(i, "application");
     }
 }
 
@@ -109,7 +95,7 @@ function loadarticles(data) {
     } else if (articlesname == "__simplified_list__") {
         var p = document.getElementById("main");
         p.innerHTML = `
-        <div class="card" style="display:flex;flex-direction:row;margin: 12px;">
+        <div class="card" style="display:flex;flex-direction:row;margin:12px;">
             <div class="centered" style="flex:1">
                 <a href="/articles-simplified.html" style="color:lightsteelblue"> Simplified List </a>
             </div>
@@ -122,7 +108,6 @@ function loadarticles(data) {
         <table id="myTable">
             <thead>
                 <tr>
-                    <th style="text-align:left">ID</th>
                     <th style="text-align:left">Name</th>
                     <th style="text-align:left">Tags</th>
                     <th>Time</th>
@@ -134,7 +119,7 @@ function loadarticles(data) {
         `;
 
         function Char(string, length) {
-            if (string.length > length) 
+            if (string.length > length)
                 return string.slice(0, length - 3) + '...';
             return string;
         }
@@ -143,9 +128,8 @@ function loadarticles(data) {
         for (var i of data) {
             tb.innerHTML += `
             <tr>
-                <th class="blue" style="text-align:left"> <a href="/articles/show.html?${i["id"]}">${i["id"] + '.arc'}</a> </th>
-                <th style="text-align:left"> ${i["name"]} </th>
-                <th style="text-align:left"> ${Char("(" + i["tags"].length + ")" + i["tags"].join("|"), 20)} </th>
+                <th style="text-align:left"> <a href="/articles/show.html?${i["id"]}">${i["name"]}</a> </th>
+                <th style="text-align:left"> ${Char("(" + i["tags"].length + ")" + i["tags"].join("|"), 140)} </th>
                 <th> ${i["time"].join('/')} </th>
             </tr>
             `;
@@ -158,7 +142,7 @@ function loadarticles(data) {
                 break;
             }
         document.title = `${found["name"]} | code-ljh 的小站`;
-        
+
         var main = document.getElementById("main");
         var miin = document.getElementById("miin");
         var maincard = document.createElement("div");
@@ -184,30 +168,55 @@ function loadarticles(data) {
                 setTimeout(
                     () => {
                         miin.innerHTML += `<p style="margin:15px">本文大小 ${(txt.length)} 字节。</p>`;
-                        maincard.innerHTML = marked.parse(txt);
+                        Text(txt, maincard);
                         maincard.style.margin = "15px";
                         maincard.style.padding = "21px";
-                        renderMathInElement(
-                            maincard, {
-                            throwOnError: false,
-                            delimiters: [
-                                { left: '$$', right: '$$', display: true },
-                                { left: '$', right: '$', display: false }
-                            ]
-                        }
-                        );
-                        hljs.highlightAll();
 
                         var parent = document.getElementById("main");
+
+                        var categorycard = document.createElement("div");
+                        categorycard.innerHTML = `
+                            <p class="green">
+                                Posted under /${found["categories"].join("/")}/${found["id"]}.arc
+                            </p>
+                            <p class="blue">
+                                Posted in ${found["time"][0]}/${found["time"][1]}/${found["time"][2]};
+                            </p>
+                        `;
+                        categorycard.classList.add("card");
+                        categorycard.style.margin = "15px";
+                        categorycard.style.padding = "21px";
+
+                        var tagsbar = document.createElement("div");
+                        tagsbar.style.display = "flex";
+                        tagsbar.style.flexDirection = "row";
+
+                        for (var j of i["tags"]) {
+                            var tag = document.createElement("a");
+                            tag.classList.add("card");
+                            tag.classList.add("centered");
+                            tag.classList.add("up");
+                            tag.style.padding = "5px";
+                            tag.style.borderRadius = "10px";
+                            tag.innerHTML = `<img src="/asset/images-svg/tag.svg" style="margin:2px" width="15" height="15">`;
+                            var p = document.createElement("p");
+                            p.style.fontSize = "12px";
+                            p.style.margin = "0";
+                            p.style.padding = "0";
+                            p.innerText = j;
+                            tag.appendChild(p);
+                            tag.href = `/tags.html?${j}`;
+                            tag.style.backgroundColor = "#ffffff00";
+                            tagsbar.appendChild(tag);
+                        }
+
                         var articlecard = document.createElement("div");
                         parent.style.flexDirection = "column";
                         articlecard.style.margin = "15px";
-                        // articlecard.style.backgroundColor = "#00000005";
 
                         articlecard.style.display = "flex";
                         articlecard.style.padding = "0px";
 
-                        x = "";
                         var tag = document.createElement("a");
                         tag.classList.add("card");
                         tag.classList.add("centered");
@@ -237,77 +246,9 @@ function loadarticles(data) {
                             }, 1000);
                         };
                         articlecard.appendChild(tag);
-                        parent.appendChild(articlecard);
-
-                        var lis = document.getElementsByClassName("language-cpp");
-                        var index = 0;
-                        var eee = [];
-                        while (lis.length) {
-                            var ele = lis[0];
-                            var par = ele.parentNode;
-                            var inner = par.children[0].innerHTML;
-                            var newpar = document.createElement("div");
-                            par.replaceWith(newpar);
-                            newpar.innerHTML = `
-                            <div class="target-header card" style="background-color:#00000002;padding:12px;border:2px solid #eeeeee;display:flex;flex-direction:column">
-                                <div style="font-size:30px;margin:0px; padding:5px;display:flex;border-bottom:2px solid #00000010"> 
-                                    <p class="card" style="margin:2px;border:2px solid #00000030;padding:2px;text-align:center;padding-left: 7px; padding-right:7px">Code C++</p>
-                                    <img class="fold-button-img up" src="/asset/categories.svg" width="30" height="30" style="border:2px solid #eee;padding:2px;margin:2px">
-                                    <img class="copy-button-img up" src="/asset/copy.svg" width="30" height="30" style="border:2px solid #eee;padding:2px;margin:2px">
-                                    <img class="plus-button-img up" src="/asset/plus.svg" width="30" height="30" style="border:2px solid #eee;padding:2px;margin:2px">
-                                    <img class="minus-button-img up" src="/asset/minus.svg" width="30" height="30" style="border:2px solid #eee;padding:2px;margin:2px"> 
-                                </div>
-                            </div>
-                            `;
-                            newpar.children[0].id = index;
-                            index += 1;
-                            eee.push(`<pre style="border:2px solid #00000010; margin:5px; padding:15px; overflow:auto"><code>${inner}</code></pre>`);
-                            newpar.onclick = (evt)=>{
-                                var tar = evt.srcElement;
-                                if (tar.tagName === "P") tar = tar.parentNode;
-                                if (tar.tagName === "B") tar = tar.parentNode;
-                                // console.log(tar.classList);
-                                // console.log(tar);
-                                if (tar.tagName === "IMG") {
-                                    try {
-                                        var e = tar.parentNode.parentNode;
-                                        e = e.children[1].children[0];
-                                    } catch {}
-                                    if (tar.classList.contains("copy-button-img")) {
-                                        navigator.clipboard.writeText(e.innerText);
-                                        tar.src = "/asset/tick.svg";
-                                        setTimeout(() => {
-                                            tar.src = "/asset/copy.svg";
-                                        }, 500);
-                                    } else if (tar.classList.contains("plus-button-img")) {
-                                        e = e.parentNode;
-                                        var p = parseFloat(e.style.fontSize.slice(0, -2));
-                                        p += 1;
-                                        e.style.fontSize = `${p}px`;
-                                    } else if (tar.classList.contains("minus-button-img")) {
-                                        e = e.parentNode;
-                                        var p = parseFloat(e.style.fontSize.slice(0, -2));
-                                        p -= 1;
-                                        e.style.fontSize = `${p}px`;
-                                    } else {
-                                        var oritar = tar;
-                                        console.log(tar);
-                                        tar = tar.parentNode.parentNode;
-                                        console.log(tar);
-                                        if (tar.children.length == 1) {
-                                            tar.innerHTML += eee[tar.id],
-                                            tar.children[1].style.fontSize = "12.5px";
-                                            oritar.src = "/asset/article.svg";
-                                            tar.children[0].children[1].replaceWith(oritar);
-                                            console.log(oritar);
-                                        } else {
-                                            tar.removeChild(tar.children[1]);
-                                            oritar.src = "/asset/categories.svg";
-                                        }
-                                    }       
-                                }
-                            };
-                        }                        
+                        categorycard.appendChild(tagsbar);
+                        categorycard.appendChild(articlecard);
+                        parent.appendChild(categorycard);
                     }, 400
                 );
             });
@@ -359,9 +300,9 @@ function loadtags(data, dtat) {
                 tagsbar.style.flexDirection = "row";
 
                 var index = 0;
-                function tagbox(txt1, txt2, href, type=false) {
+                function tagbox(txt1, txt2, href, type = false) {
                     var ttt = document.createElement("a");
-                    ttt.classList.add(type?"card-active":"card");
+                    ttt.classList.add(type ? "card-active" : "card");
                     ttt.classList.add("centered");
                     ttt.classList.add("hover-box");
                     ttt.classList.add("up");
@@ -369,14 +310,14 @@ function loadtags(data, dtat) {
                     laston = undefined;
                     ttt.style.padding = "10px";
                     ttt.innerHTML = `
-                        <img src="/asset/tag.svg" style="margin:2px;position:absolute" width="15" height="15">
+                        <img src="/asset/images-svg/tag.svg" style="margin:2px;position:absolute" width="15" height="15">
                         <p style="margin:0;padding:0;text-align:center;font-size:14px">
                             ${txt1}
                         </p>
                     `;
                     ttt.innerHTML += `
                         <div class="centered tooltip-text" style="color:#555555;background-color:#00000020;display:flex;position:absolute;transform:translate(0,100%)">
-                            <img src="/asset/article.svg" style="margin:2px" width="15" height="15">
+                            <img src="/asset/images-svg/article.svg" style="margin:2px" width="15" height="15">
                             <p style="color:#555555;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px">
                                 ${txt2}
                             </p>
@@ -390,7 +331,7 @@ function loadtags(data, dtat) {
                 tagbox("articles", data.length, "/articles.html", true);
                 tagbox("apps", dtat.length, "/applications.html", true);
 
-                for (var i of Object.keys(taglist).sort()) 
+                for (var i of Object.keys(taglist).sort())
                     tagbox(i, taglist[i], "/tags.html?" + i);
 
                 parent.appendChild(tagsbar);
@@ -411,8 +352,9 @@ function loadtags(data, dtat) {
         document.title = `标签 ${tagname} | code-ljh 的小站`;
         var elements = document.querySelectorAll("a");
         for (var i of elements)
-            if (i.innerText == tagname) {
+            if (i.innerText == tagname && i.classList.contains("up")) {
                 i.classList.remove("card");
+                i.classList.remove("up");
                 i.classList.add("card-tag-marked");
             }
     }
@@ -451,7 +393,7 @@ function loadcategories(data, dtat) {
     }
 
     parent.appendChild(articlecard);
-            
+
     var main = document.getElementById("main");
     main.innerHTML += `
         <table id="myTable">
@@ -481,7 +423,7 @@ function loadcategories(data, dtat) {
             if (flag)
                 displays.push(i["categories"][prefix.length]);
         } return displays.length;
-    } 
+    }
 
     var displays = [];
     var articles = [];
@@ -509,7 +451,7 @@ function loadcategories(data, dtat) {
             <tr>
                 <th style="text-align:left"> 
                     <p>
-                        <img src="/asset/categories.svg" style="margin:-1px" width="15" height="15">
+                        <img src="/asset/images-svg/categories.svg" style="margin:-1px" width="15" height="15">
                         <a class="green-a" href="/categories.html?${(catename).join(".")}">
                             ${"/" + catename.join("/") + "/"}
                         </a>
@@ -520,7 +462,7 @@ function loadcategories(data, dtat) {
                 <th> <p>folder</p> </th>
                 <th> <p> ${foldersize(i)} </p> </th>
             </tr>
-        `; 
+        `;
     }
 
     for (var i of articles) {
@@ -530,7 +472,7 @@ function loadcategories(data, dtat) {
                 <tr class="red">
                     <th style="text-align:left"> 
                         <p>
-                            <img src="/asset/applications.svg" style="margin:-1px" width="15" height="15">
+                            <img src="/asset/images-svg/applications.svg" style="margin:-1px" width="15" height="15">
                             <a class="red" href="/applications/${i["id"]}/main.html">
                                 ${i["id"] + ".app"}
                             </a>
@@ -547,7 +489,7 @@ function loadcategories(data, dtat) {
                 <tr class="blue">
                     <th style="text-align:left"> 
                         <p>
-                            <img src="/asset/article.svg" style="margin:-1px" width="15" height="15">
+                            <img src="/asset/images-svg/article.svg" style="margin:-1px" width="15" height="15">
                             <a class="blue" href="/articles/show.html?${i["id"]}">
                                 ${i["id"] + ".arc"}
                             </a>
@@ -563,41 +505,45 @@ function loadcategories(data, dtat) {
 }
 
 function loadtemplate(template) {
+    var templatescripts = [
+        "/script/library/text.js",
+        "/script/library/tags.js",
+        "/library/marked.js",
+        "/library/highlight.js",
+        "/library/katex.js"
+    ];
+
+    var templatestyles = [
+        "/library/katex.css",
+        "/library/highlight.css",
+        "/style.css"
+    ];
+
+    for (var i of templatescripts) {
+        var element = document.createElement("script");
+        element.src = i;
+        document.head.appendChild(element);
+    }
+
+    for (var i of templatestyles) {
+        var element = document.createElement("link");
+        element.href = i;
+        element.rel = "stylesheet";
+        document.head.appendChild(element);
+    }
+
+    var favicon = document.createElement("link");
+    favicon.href = "/asset/favicon.svg";
+    favicon.rel = "icon";
+    document.head.appendChild(favicon);
+
     const listid = [
-        "tab-home", 
+        "tab-home",
         "tab-articles",
-        "tab-tags", 
+        "tab-tags",
         "tab-categories",
         "tab-applications"
     ];
-
-    const katexcss = "/library/katex.css";
-    const katexjs = "/library/katex.js";
-    const markedjs = "/library/marked.js";
-    const highlightjs = "/library/highlight.js";
-    const highlightcss = "/library/highlight.css";
-
-    var kjs = document.createElement("script");
-    kjs.src = katexjs;
-    document.head.appendChild(kjs);
-
-    var kcs = document.createElement("link");
-    kcs.rel = "stylesheet";
-    kcs.href = katexcss;
-    document.head.appendChild(kcs);
-
-    var hcs = document.createElement("link");
-    hcs.rel = "stylesheet";
-    hcs.href = highlightcss;
-    document.head.appendChild(hcs);
-
-    var mjs = document.createElement("script");
-    mjs.src = markedjs;
-    document.head.appendChild(mjs);
-
-    var hj = document.createElement("script");
-    hj.src = highlightjs;
-    document.head.appendChild(hj);
 
     document.body.innerHTML += template;
 
@@ -638,7 +584,7 @@ function loadtemplate(template) {
                         if (tabname == "tags")
                             loadtags(data, dtat);
                     });
-            }            
+            }
         }
         );
 }
