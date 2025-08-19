@@ -43,3 +43,8 @@
 ##### 2025-08-18
 
 - 加入新功能：支持在 article/show 显示标签 和 分类。
+
+##### 2025-08-19
+
+- Some minor fixes.
+- Github Pushed.
