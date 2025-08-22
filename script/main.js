@@ -13,7 +13,7 @@ function addshowcard(i, type = "article") {
     articlecard.style.flex = "1";
     articlecard.style.flexDirection = "column";
     var titlebar = document.createElement("h3");
-    titlebar.style.color = "black";
+    titlebar.style.color = "white";
     titlebar.innerText = i["name"];
     if (type == "article")
         titlebar.innerText = `${i["time"][0]}/${i["time"][1]}/${i["time"][2]} ${i["name"]}`;
@@ -25,7 +25,7 @@ function addshowcard(i, type = "article") {
     descrbar.style.paddingTop = "20px";
     descrbar.style.margin = "2px";
     var catebar = document.createElement("div");
-    catebar.innerHTML = `<a style="color:#00000055;margin: 0px;" 
+    catebar.innerHTML = `<a style="margin: 0px;" 
         href="${'/categories.html?' + (i['categories'].join('.'))}">
         ${i["categories"].join("/")}
         </p>`;
@@ -48,7 +48,7 @@ function addshowcard(i, type = "article") {
     p.style.padding = "0";
     p.innerText = ":>>>";
     ttt.appendChild(p);
-    ttt.style.backgroundColor = "#00ff0007";
+    ttt.style.backgroundColor = "#045104e0";
     ttt.href = (type == "article" ?
         `/articles/show.html?${i["id"]}` :
         `/applications/${i["id"]}/main.html`);
@@ -110,7 +110,6 @@ function loadarticles(data) {
                 <tr>
                     <th style="text-align:left">Name</th>
                     <th style="text-align:left">Tags</th>
-                    <th>Time</th>
                 </tr>
             </thead>
             <tbody id="table-body">
@@ -129,10 +128,19 @@ function loadarticles(data) {
             tb.innerHTML += `
             <tr>
                 <th style="text-align:left"> <a href="/articles/show.html?${i["id"]}">${i["name"]}</a> </th>
-                <th style="text-align:left"> ${Char("(" + i["tags"].length + ")" + i["tags"].join("|"), 140)} </th>
-                <th> ${i["time"].join('/')} </th>
+                <th style="text-align:left"> 
+                    <div style="display:flex;flex-direction:row">
+                    </div>
+                </th>
             </tr>
             `;
+            console.log(i);
+            var ttt = tb.children[tb.children.length - 1].children[1]
+                .children[0];
+            for (var j of i["tags"]) {
+                console.log(j);
+                ttt.appendChild(SmallTag(j));
+            }
         }
     } else {
         var found;
@@ -154,7 +162,7 @@ function loadarticles(data) {
 
         miin.style.justifyContent = "stretch";
         miin.style.alignItems = "stretch";
-        miin.innerHTML += `<b style="margin:15px;margin-bottom:0px">文章描述</b><p style="margin:15px;color:#000000cc">${found["description"]}</p>`;
+        miin.innerHTML += `<b style="margin:15px;margin-bottom:0px">文章描述</b><p style="margin:15px;">${found["description"]}</p>`;
 
         function Size(x) {
             if (x < 1000) return `${x}B`;
@@ -206,7 +214,6 @@ function loadarticles(data) {
                             p.innerText = j;
                             tag.appendChild(p);
                             tag.href = `/tags.html?${j}`;
-                            tag.style.backgroundColor = "#ffffff00";
                             tagsbar.appendChild(tag);
                         }
 
@@ -316,9 +323,9 @@ function loadtags(data, dtat) {
                         </p>
                     `;
                     ttt.innerHTML += `
-                        <div class="centered tooltip-text" style="color:#555555;background-color:#00000020;display:flex;position:absolute;transform:translate(0,100%)">
+                        <div class="centered tooltip-text" style="color:#000000;background-color:#ffffff50;display:flex;position:absolute;transform:translate(0,100%)">
                             <img src="/asset/images-svg/article.svg" style="margin:2px" width="15" height="15">
-                            <p style="color:#555555;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px">
+                            <p style="color:#eeeeee;text-align:center;margin: 2.5px;margin-left: 8px; margin-right:8px;font-size:12px">
                                 ${txt2}
                             </p>
                         </div>

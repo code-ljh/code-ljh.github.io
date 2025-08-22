@@ -5,12 +5,5 @@
         "id": "editor",
         "tags": ["technology", "katex", "editor"],
         "categories": ["apps", "tool"]
-    },
-    {
-        "name": "倒计时",
-        "description": "管不住自己的小朋友们你们好啊，Gamer 们你们好啊，我是计时器。",
-        "id": "countdown",
-        "tags": ["countdown", "self-control", "toolkit"],
-        "categories": ["apps", "tool"]
     }
 ]

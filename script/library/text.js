@@ -13,7 +13,18 @@ function Text(txt, maincard) {
 
     x = "";
 
-    var lis = document.getElementsByClassName("language-cpp");
+    var code = document.getElementsByTagName("code");
+    var lis = [];
+
+    for (var element of code) {
+        var newele = document.createElement("code");
+        var flag = element.classList.contains("language-cpp");
+        newele.innerHTML = element.innerHTML;
+        if (flag) newele.classList.add("cplusplus");
+        element.replaceWith(newele);
+    }
+
+    lis = document.getElementsByClassName("cplusplus");
     var index = 0;
     var eee = [];
     while (lis.length) {

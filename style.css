@@ -1,9 +1,12 @@
 body {
     margin:0;
     padding:0;
+    background-color:#2c2c2c;
+    overflow:hidden;
 }
 
 p,
+b,
 h1,
 h2,
 h3,
@@ -13,6 +16,7 @@ h6,
 pre,
 code {
     font-family: 'Fira Code', 'Consolas';
+    color: #ffffffaa;
 }
 
 h1,
@@ -21,6 +25,7 @@ h3,
 h4,
 h5,
 h6 {
+    color: #ffffffaa;
     text-align: center;
 }
 
@@ -40,7 +45,7 @@ a {
 }
 
 .greyed {
-    background: linear-gradient(135deg, #f1f1f1, #dbf7f9);
+    background: linear-gradient(135deg, #6303032e, #0361684c);
     transition: all 0.3s;
     cursor: pointer;
 }
@@ -50,15 +55,15 @@ a {
 }
 
 .greyed:hover {
-    background: linear-gradient(135deg, #fefeec, #e6e0e0);
+    background: linear-gradient(135deg, #7e7e0760, #71050564);
 }
 
 .disgreyed {
-    background: linear-gradient(135deg, #b4cfe976, #b3abe45a);
+    background: linear-gradient(135deg, #06437b76, #14076a5a);
 }
 
 .tab {
-    background: linear-gradient(135deg, #ffffff, #eeeeee);
+    background: linear-gradient(135deg, #ffffff50, #eeeeee50);
 }
 
 .card {
@@ -67,7 +72,7 @@ a {
     box-shadow: 2px 2px 2px #00000011;
     margin: 5px;
     padding: 15px;
-    background: linear-gradient(135deg, #ffffff, #eeeeee);
+    background: linear-gradient(135deg, #55555550, #4e474750);
 }
 
 .card-active {
@@ -76,7 +81,7 @@ a {
     box-shadow: 2px 2px 2px #00000011;
     margin: 5px;
     padding: 15px;
-    background: linear-gradient(135deg, #bdb4f17b, #8eb5e762);
+    background: linear-gradient(135deg, #8a77f57b, #8eb5e762);
 }
 
 .card-app {
@@ -85,7 +90,7 @@ a {
     box-shadow: 2px 2px 2px #00000011;
     margin: 5px;
     padding: 15px;
-    background: linear-gradient(135deg, #fbe0e020, #c4909020);
+    background: linear-gradient(135deg, #78616150, #97707050);
 }
 
 .card-tag-marked {
@@ -94,7 +99,7 @@ a {
     box-shadow: 2px 2px 2px #00000011;
     margin: 5px;
     padding: 15px;
-    background: linear-gradient(135deg, #dddddd88, #bbbbbb88);
+    background: linear-gradient(135deg, #d32f2f88, #c66e6e88);
     transform: translateY(-3px);
 }
 
@@ -130,15 +135,15 @@ blockquote {
 p,
 b,
 div {
-    color: black;
+    color: whitesmoke;
 }
 
 a {
-    color: royalblue;
+    color: rgba(128, 152, 223, 0.885);
 }
 
 a:hover {
-    color: lightskyblue;
+    color: rgba(106, 176, 220, 0.867);
 }
 
 h1,
@@ -176,7 +181,7 @@ code {
 
 table {
     border: 5px;
-    border-color: #6fb8e9;
+    border-color: #094974;
     border-style:outset;
     border-collapse: collapse;
     width: 80%;
@@ -189,11 +194,11 @@ thead tr {
     background-color: #797d7c;
     /* border-radius: 15px; */
     color: #fff;
-    background: linear-gradient(135deg, #2613d3, rgb(43, 170, 215));
+    background: linear-gradient(135deg, #0b025c, rgb(5, 79, 105));
 }
 
 tbody {
-    background: linear-gradient(135deg, #ffffff, #d7d5d5);
+    background: linear-gradient(135deg, #55555550, #4e474750);
 }
 
 th,
@@ -214,7 +219,7 @@ tbody tr {
 }
 
 tbody tr:hover {
-    background-color: #f1f1f1;
+    background: linear-gradient(135deg, #693b3b50, #8b2d2d50);
     color: #009879;
 }
 
@@ -274,7 +279,7 @@ input {
     box-sizing: border-box;
     border: none;
     border: 2px solid #ccc;
-    background-color: #00000005;
+    background-color: #000000;
     font-size: 12px;
     transition: 0.3s;
 }
@@ -286,6 +291,8 @@ input {
 
 .modern-textarea {
     border: 3px outset #00000015;
+    background-color: #00000050;
+    color: #eeeeeeaa;
     transition: 0.3s;
 }
 
@@ -336,7 +343,7 @@ input {
 .tooltip-text {
     visibility: hidden;
     width: 160px;
-    background-color: #555;
+    background-color: #888888;
     color: #fff;
     text-align: center;
     border-radius: 6px;
@@ -353,7 +360,7 @@ input {
 
 .tooltip-container:hover .tooltip-text {
     visibility: visible;
-    opacity: 1;
+    opacity: 0.5;
 }
 
 .cpp-copy-button {

@@ -98,7 +98,7 @@ setTimeout(
                 <textarea id="leftpart" class="modern-textarea" style="padding:10px;flex:1;font-size:8.5px;overflow:auto">${k}</textarea>
             </div>
             <div id="right" style="display: flex; justify-content:space-around; flex-shrink:0; flex-basis:60%;overflow:auto">
-                <div id="rightpart" style="overflow:auto; font-size: 8.5px; border:2px solid #03020230;padding:10px;flex:1;overflow-x:hidden">
+                <div id="rightpart" style="overflow:auto; font-size: 8.5px; border:2px solid #03020230;padding:10px;flex:1;">
                 
                 </div>
             </div>

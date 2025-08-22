@@ -48,3 +48,8 @@
 
 - Some minor fixes.
 - Github Pushed.
+
+##### 2025-08-22
+
+- 更改为暗黑模式！
+- Github Pushed.

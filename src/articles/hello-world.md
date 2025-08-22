@@ -56,6 +56,6 @@ signed main()
 }
 ```
 
-![528472的洛谷用户卡片](https://api.jerryz.com.cn/about?id=528472&card_width=690)
+![528472的洛谷用户卡片](https://api.jerryz.com.cn/practice?id=528472&dark_mode=true&card_width=970&disable_cache=true)
 
-![528472的洛谷用户卡片](https://api.jerryz.com.cn/practice?id=528472&card_width=690)
+![528472的洛谷用户卡片](https://api.jerryz.com.cn/about?id=528472&dark_mode=true&card_width=970&disable_cache=true)
