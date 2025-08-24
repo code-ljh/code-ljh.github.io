@@ -1,40 +1,39 @@
-<div style="margin:0px;width:100vw;height:100vh;position:absolute; display:flex;flex-direction:row;padding:0;overflow:hidden">
-    <div style="flex:1;box-shadow:1px 0 5px white; display:flex;flex-direction:column;margin:0;padding:0;background-color:#ffffff22"">
-        <div style="flex:1;  border-bottom:2px solid white;display:flex;flex-direction:column;justify-content:center">        
-            <div style="margin: 4px;display:flex;justify-content:center;align-items:center;">
-                <img src="/asset/images-svg/github.svg" style="width:12vh;height:12vh;border-radius:50%;border:2px solid white">
-            </div>
+<div class="template-main">
+    <div class="template-leftbar">
+        <div class="template-faviconbar">
+            <img class="template-favicon" src="/asset/images-svg/github.svg">
         </div>
 
-        <div style="flex:4;  display:flex;justify-content: center;flex-direction: column;">
-            <a id="tab-home" href="/" class="centered" style="padding:0;flex:3; border-bottom:2px solid #00000020;"> 
-                <img src="/asset/images-svg/house.svg" style="margin:2px" width="15" height="15">
-                <p style="font-size:12px"> Homepage </p>
+        <div class="template-navbar">
+            <a class="template-navbar-item template-navitem" id="tab-home" href="/">
+                <img src="/asset/images-svg/house.svg" class="template-navimage">
+                <p> Homepage </p>
             </a>
-            <a id="tab-articles" href="/articles.html" class="centered" style="padding:0;flex:3; border-bottom:2px solid #00000020;"> 
-                <img src="/asset/images-svg/article.svg" style="margin:2px" width="15" height="15">
-                <p style="font-size:12px"> Articles </p>
+            <a class="template-navbar-item template-navitem" id="tab-articles" href="/articles.html">
+                <img src="/asset/images-svg/article.svg" class="template-navimage">
+                <p> Articles </p>
             </a>
-            <a id="tab-categories" href="/categories.html" class="centered" style="padding:0;flex:3; border-bottom:2px solid #00000020;"> 
-                <img src="/asset/images-svg/categories.svg" style="margin:2px" width="15" height="15">
-                <p style="font-size:12px"> Categories </p>
+            <a class="template-navbar-item template-navitem" id="tab-categories" href="/categories.html">
+                <img src="/asset/images-svg/categories.svg" class="template-navimage">
+                <p> Categories </p>
             </a>
-            <a id="tab-tags" href="/tags.html" class="centered" style="padding:0;flex:3; border-bottom:2px solid #00000020;"> 
-                <img src="/asset/images-svg/tag.svg" style="margin:2px">
-                <p style="font-size:12px"> Tags </p>
+            <a class="template-navbar-item template-navitem" id="tab-tags" href="/tags.html">
+                <img src="/asset/images-svg/tag.svg" class="template-navimage">
+                <p> Tags </p>
             </a>
-            <a id="tab-applications" href="/applications.html" class="centered" style="padding:0;flex:3; border-bottom:2px solid #00000020;"> 
-                <img src="/asset/images-svg/applications.svg" style="margin:2px" width="15" height="15">
-                <p style="font-size:12px"> Applications </p>
+            <a class="template-navbar-item template-navitem" id="tab-applications" href="/applications.html">
+                <img src="/asset/images-svg/applications.svg" class="template-navimage">
+                <p> Applications </p>
             </a>
+        </div>
 
-            <div id="miin" class="centered" style="flex:100; flex-direction: column;border-top:2px solid white;">
-            </div>
+        <div id="miin" class="template-miinbar">
         </div>
     </div>
 
-    <div style="flex:4;display:flex;flex-direction: column;overflow:auto">
-        <div id="main" style="overflow:auto">
+    <div class="template-rightpart">
+        <div class="template-rightmain" id="main">
+
         </div>
     </div>
 </div>

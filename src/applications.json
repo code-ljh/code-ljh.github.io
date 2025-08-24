@@ -4,6 +4,34 @@
         "description": "是的，又一个在线 Katex 编辑器！但是，这是不一样的编辑器！是有 myster1ous 特色的编辑器（滑稽）",
         "id": "editor",
         "tags": ["technology", "katex", "editor"],
+        "categories": ["apps", "tool", "editor"]
+    },
+    {
+        "name": "设置",
+        "description": "各种设置。",
+        "id": "settings",
+        "tags": ["website", "localstorage"],
+        "categories": ["apps", "system"]
+    },
+    {
+        "name": "图论编辑器",
+        "description": "用于替代 csacademy.com/app/graph_editor.",
+        "id": "graph-editor",
+        "tags": ["oi", "editor", "graph"],
+        "categories": ["apps", "tool", "editor"]
+    },
+    {
+        "name": "计时器",
+        "description": "计时器！remake",
+        "id": "countdown",
+        "tags": ["time", "countdown"],
         "categories": ["apps", "tool"]
+    },
+    {
+        "name": "C++ 编辑器",
+        "description": "显然是不可能在线 IDE 的（",
+        "id": "cpp-editor",
+        "tags": ["cpp", "code", "oi"],
+        "categories": ["apps", "tool", "editor"]
     }
 ]

@@ -1,0 +1,44 @@
+*::selection {
+    background-color: var(--color-selection);
+}
+
+p,
+b,
+div,
+input {
+    font-family: 'Fira Code', 'Consolas';
+    color: var(--color-text);
+}
+
+pre,
+code {
+    font-family: 'Fira Code', 'Consolas';
+    color: var(--color-text);
+    tab-size: 4;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-link);
+    transition: color 0.15s ease-in-out;
+}
+
+a:hover {
+    color: var(--color-link-hover);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Fira Code', 'Consolas';
+    color: #eeeeeeaa;
+    text-align: center;
+    border: 2px solid var(--color-title-border);
+    padding: 8px;
+    margin: 8px;
+    padding-top: 12px;
+    border-radius: 5px;
+}

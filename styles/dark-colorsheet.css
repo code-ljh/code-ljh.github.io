@@ -1,0 +1,33 @@
+:root {
+    --color-body: #000000;
+    --color-leftbar-shadow: #eeeeeeaa;
+    --color-leftbar-background: #333333aa;
+    --color-template-border: #eeeeeeaa;
+    --color-navitem-border: #aaaaaa33;
+    --color-favicon-border: #aaaaaaaa;
+    --color-navitem-chosen: #12286a61;
+    --color-navitem-hover: #aaaaaa22;
+    --color-navitem-chosen-hover: #061656;
+    --color-text: #eeeeeeaa;
+    --color-link: #7a87d1;
+    --color-link-hover: #b8c3e8;
+    --color-title-border: #aaaaaa55;
+    --color-selection: #219399;
+    --color-table-shadow: #eeeeee55;
+    --color-table: #66480c9c;
+    --color-table-border: #eeeeeeaa;
+    --color-table-body: #171717aa;
+    --color-table-hover: #555555aa;
+    --color-table-border: #777777ee;
+    --color-card-border: #333333;
+    --color-card-shadow: #eeeeee22;
+    --color-card: #333333aa;
+    --color-markdown-blockquote: #00000050;
+    --color-markdown-blockquote-saying: #113285;
+    --color-tag-active: #063d5f;
+    --color-tag-active-border: #294b9a;
+    --color-cpp-border: #333333aa;
+    --color-input: #eeeeeeaa;
+    --color-background-color: #000000;
+    --color-input-say: #1d98e5;
+}

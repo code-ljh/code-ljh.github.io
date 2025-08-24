@@ -126,5 +126,13 @@
         "tags": ["oi", "contest", "problemset", "training", "notes", "csp", "nfls"],
         "categories": ["oi", "contests", "training", "nfls", "csp"],
         "time": [2025, 8, 19]
+    },
+    {
+        "name": "CSP20250823 比赛记录",
+        "description": "NFLS OI 赛制比赛，2025/08/23 完结撒花！！",
+        "id": "20250823oi-nfls",
+        "tags": ["oi", "contest", "problemset", "training", "notes", "csp", "nfls"],
+        "categories": ["oi", "contests", "training", "nfls", "csp"],
+        "time": [2025, 8, 24]
     }
 ]

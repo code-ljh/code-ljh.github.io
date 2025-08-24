@@ -1,0 +1,42 @@
+.cpp-header {
+    padding: 12px;
+    display: flex;
+    flex-direction: column
+}
+
+.cpp-headline {
+    font-size: 25px;
+    margin: 0px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid var(--color-cpp-border)
+}
+
+.cpp-headparagraph {
+    margin: 2px;
+    border: 2px solid var(--color-cpp-border);
+    padding: 2px;
+    text-align: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cpp-imagebuttons {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--color-cpp-border);
+    padding: 5px;
+    margin: 2px
+
+}
+
+.cpp-codepre {
+    border: 2px solid var(--color-cpp-border);
+    margin: 5px;
+    padding: 15px;
+    overflow: auto
+}

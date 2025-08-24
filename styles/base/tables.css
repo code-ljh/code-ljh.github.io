@@ -1,0 +1,33 @@
+.modern-table {
+    border: 2px;
+    border-color: var(--color-table-border);
+    border-style: solid;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 3px 3px 2px var(--color-table-shadow);
+}
+
+.modern-table tr {
+    background-color: var(--color-table);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.modern-table thead {
+    font-size: 16px;
+}
+
+.modern-table th,
+.modern-table td {
+    padding: 5px 12px;
+}
+
+.modern-table tbody tr {
+    border: 1px solid var(--color-table-border);
+    font-size: 12px;
+    background-color: var(--color-table-body);
+}
+
+.modern-table tbody tr:hover {
+    background-color: var(--color-table-hover);
+}

@@ -1,0 +1,17 @@
+.articles-showcard {
+    display: flex;
+    flex-direction: column;
+    margin: 12px;
+}
+
+.articles-showcard > p {
+    margin: 5px 12px;
+}
+
+.simplified-table-headline {
+    text-align: left;
+}
+
+.simplified-table-bodyline {
+    text-align: left;
+}

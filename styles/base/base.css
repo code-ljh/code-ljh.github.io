@@ -1,0 +1,15 @@
+body {
+    overflow: hidden;
+}
+
+.hover-translate {
+    transition: transform 0.3s ease-out;
+}
+
+.hover-translate:hover {
+    transform: translateY(-3px);
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}

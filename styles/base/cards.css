@@ -1,0 +1,25 @@
+.card {
+    border-radius: 15px;
+    border: 3px solid var(--color-card-border);
+    box-shadow: 2px 2px 2px var(--color-card-shadow);
+    margin: 5px;
+    padding: 25px;
+    background-color: var(--color-card);
+}
+
+.markdown-card p {
+    margin: 5px;
+    padding: 8px;
+}
+
+.markdown-card ul,
+.markdown-card li,
+.markdown-card ol {
+    margin: 4px 12px;
+}
+
+.markdown-card blockquote {
+    background-color: var(--color-markdown-blockquote);
+    padding: 12px 25px;
+    border-left: 12px solid var(--color-markdown-blockquote-saying);
+}

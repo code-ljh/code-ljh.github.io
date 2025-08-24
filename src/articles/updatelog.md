@@ -53,3 +53,12 @@
 
 - 更改为暗黑模式！
 - Github Pushed.
+
+##### 2025-08-23
+
+- 重构全部代码。
+- 现已重构完成：`styles.css`, `articles`, `applications`, `dark-mode-sheet`；
+
+##### 2025-08-24
+
+- 重构完成 `categories`, `tagslist`；

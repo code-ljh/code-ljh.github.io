@@ -1,0 +1,17 @@
+.modern-input {
+    background-color: var(--color-background-input);
+    color: var(--color-input);
+    padding: 3px 5px;
+    width: 120px;
+}
+
+.modern-input:focus {
+    border-bottom: 2px solid var(--color-input-say);
+    outline: none;
+}
+
+.modern-input::-webkit-outer-spin-button,
+.modern-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

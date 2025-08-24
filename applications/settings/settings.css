@@ -1,0 +1,12 @@
+.setting-table-name {
+    text-align: left;
+}
+
+.setting-taglist {
+    display: flex;
+    flex-direction: row;
+}
+
+.setting-table-value {
+    text-align: left;
+}

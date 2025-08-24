@@ -1,0 +1,32 @@
+.categories-table-head {
+    text-align: left;
+}
+
+.categories-table-body {
+    text-align: left;
+}
+
+.categories-table-folder,
+.categories-table-folder a {
+    color: #0b6e3e;
+}
+
+.categories-table-folder a:hover {
+    color: #12b064;
+}
+
+.categories-table-articles,
+.categories-table-articles a {
+    color: #5b71b2;
+}
+
+.categories-table-applications,
+.categories-table-applications a {
+    color: #b85656;
+}
+
+.categories-table-image {
+    width: 15px;
+    height: 15px;
+    margin-right: 2px;
+}
