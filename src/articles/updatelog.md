@@ -62,3 +62,5 @@
 ##### 2025-08-24
 
 - 重构完成 `categories`, `tagslist`；
+- 完全重构完成。
+- Github Pushed；
